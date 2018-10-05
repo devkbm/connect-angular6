@@ -4,7 +4,12 @@ import { CommonModule } from '@angular/common';
 import { CommonLayoutRoutingModule } from './common-layout-routing.module';
 import { CommonLayoutComponent } from './common-layout.component';
 import { AppAlarmService } from '../service/app-alarm.service';
+import { MenuService } from '../service/menu.service';
+import { ProgramService } from '../service/program.service';
+
 import { MainComponent } from './main/main.component';
+import { HeaderComponent } from './header/header.component';
+
 
 /*import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -20,17 +25,17 @@ import { MenuTreeNodeComponent } from './sidebar/menu-tree-node.component';*/
   ],
   declarations: [
     CommonLayoutComponent,
-    MainComponent
-    /*HeaderComponent,
     MainComponent,
+    HeaderComponent
+    /*MainComponent,
     SidebarComponent,
     MenuTreeComponent,
     MenuTreeNodeComponent*/
   ],
   providers: [
-    AppAlarmService
-    /*MenuService,
-    ProgramService*/
+    AppAlarmService,
+    MenuService,
+    ProgramService
   ],
   exports: [CommonLayoutComponent]
 })
