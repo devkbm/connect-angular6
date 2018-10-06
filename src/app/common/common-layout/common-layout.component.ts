@@ -8,6 +8,8 @@ import { AppAlarmService } from '../service/app-alarm.service';
 })
 export class CommonLayoutComponent implements OnInit {
 
+  isCollapsed: Boolean = false;
+  selectedValue: string;
   message: string;
   menuGroupCode: string;
 

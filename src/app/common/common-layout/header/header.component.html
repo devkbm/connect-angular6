@@ -1,53 +1,13 @@
-<header class="header-1">
-  <div class="branding">
-    <a class="nav-link" routerLink="../login">
-      <clr-icon shape="shield"></clr-icon>
-      <span class="title">{{title}}</span>
-    </a>
-  </div>
-  <div class="header-nav">
-    <a class="active nav-link nav-icon" routerLink="test" routerLinkActive="active">
-      <clr-icon shape="home"></clr-icon>
-    </a>
-    <a class="nav-link nav-icon" routerLink="test2" routerLinkActive="active">
-      <clr-icon shape="cog"></clr-icon>
-    </a>    
-  </div>
-  <form class="search">
-    <label for="search_input">
-      <input id="search_input" type="text" placeholder="Search for keywords...">
-    </label>
-  </form>
-  <div class="header-actions">
-    <clr-dropdown class="dropdown bottom-right">
-      <button class="nav-icon" clrDropdownToggle>
-        <clr-icon shape="user"></clr-icon>
-        <clr-icon shape="caret down"></clr-icon>
-      </button>
-      <div class="dropdown-menu">
-        <a clrDropdownItem>About</a>
-        <a clrDropdownItem>Preferences</a>
-        <a clrDropdownItem>Log out</a>
-      </div>
-    </clr-dropdown>
-  </div>
-</header>
-<nav class="subnav">
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Dashboard</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Projects</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Reports</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Users</a>
-    </li>
-    <li class="nav-item" *ngFor="let menuGroup of menuGroupList">
-      <a class="nav-link" (click)="getMenuList(menuGroup.menuGroupCode)">{{menuGroup.menuGroupName}}</a>
+<nz-header>
+  <!--<a class="nav-link" routerLink="../login">
+  </a>-->
+  <div class="logo">{{title}}</div>
+  <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
+    <li nz-menu-item>nav 1</li>
+    <li nz-menu-item>nav 2</li>
+    <li nz-menu-item>nav 3</li>
+    <li nz-menu-item *ngFor="let menuGroup of menuGroupList">
+        <a (click)="getMenuList(menuGroup.menuGroupCode)">{{menuGroup.menuGroupName}}</a>
     </li>    
   </ul>
-</nav>
+</nz-header>
