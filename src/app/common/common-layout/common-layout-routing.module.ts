@@ -13,6 +13,7 @@ const layoutroutes: Routes = [
     path: 'home', component: CommonLayoutComponent,
     children: [
       {path: 'boardForm',     component: BoardFormComponent},
+      {path: 'menuForm',     component: BoardFormComponent},
       // {path: 'boardTree',     component: BoardTreeComponent},
       {path: 'articleForm',   component: ArticleFormComponent}
     ]
