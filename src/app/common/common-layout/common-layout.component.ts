@@ -72,7 +72,7 @@ export class CommonLayoutComponent implements OnInit {
   }
 
   selectMenu(event: NzFormatEmitEvent): void {
-    //console.log(event, event.selectedKeys, event.keys, event.nodes);
+    // console.log(event, event.selectedKeys, event.keys, event.nodes);
     console.log(event.nodes[0].origin.url);
     // console.log(event.keys[0]);
      this.router.navigate(['/home/' + event.nodes[0].origin.url]);
