@@ -1,4 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { UserService } from '../service/user.service';
 
@@ -18,30 +24,38 @@ export class UserFormComponent implements OnInit {
 
   user: User;
   passwordConfirm: String;
-  private isValidPassword: boolean;
-  private isPasswordEmpty: boolean;
-  private isPasswordConfirmEmpty: boolean;
+
+  validateForm: FormGroup;
 
   popup: boolean;
 
   @Output() messageChanged: EventEmitter<string> = new EventEmitter();
 
-  constructor(private userService: UserService,
+  constructor(private fb: FormBuilder,
+              private userService: UserService,
               private appAlarmService: AppAlarmService) { }
 
   ngOnInit() {
     this.user = new User();
+
+    this.validateForm = this.fb.group({
+      userId          : [ null, [ Validators.required ] ],
+      name            : [ null, [ Validators.required ] ],
+      enabled         : [ true ],
+      password        : [ null, [ Validators.required ] ]
+    });
+
   }
 
   private getUser() {
     this.userService
-      .getUser(this.user.userId)
+      .getUser(this.validateForm.get('userId').value)
       .subscribe(
         (model: ResponseObject<User>) => {
           if (model.total > 0) {
-            this.user = model.data;
+            this.validateForm.patchValue(model.data);
           } else {
-            this.user = new User();
+            this.validateForm.reset();
           }
           this.appAlarmService.changeMessage(model.message);
         },
@@ -124,19 +138,4 @@ export class UserFormComponent implements OnInit {
 
   }
 
-  private checkEmptyPassword() {
-    this.user.password === '' ? this.isPasswordEmpty = true : this.isPasswordEmpty = false;
-  }
-
-  private checkEmptyPasswordConfirm() {
-    this.passwordConfirm === '' ? this.isPasswordConfirmEmpty = true : this.isPasswordConfirmEmpty = false;
-  }
-
-  private onClick(name) {
-    console.log(name);
-  }
-
-  onValueChange(event) {
-    console.log(event);
-  }
 }

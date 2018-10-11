@@ -13,6 +13,8 @@ import { LoginService } from './login/login.service';
 import { BoardFormComponent } from '../board/component/board-form.component';
 import { BoardModule } from '../board/board.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { UserFormComponent } from './user/user-form.component';
+import { UserService } from './service/user.service';
 
 @NgModule({
   imports: [
@@ -26,14 +28,17 @@ import { AppRoutingModule } from '../app-routing.module';
     BoardModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    UserFormComponent
   ],
   exports: [
-    LoginComponent
+    LoginComponent,
+    UserFormComponent
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    LoginService
+    LoginService,
+    UserService
   ]
 })
 export class CommonFuncModule { }
