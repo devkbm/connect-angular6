@@ -6,11 +6,15 @@ import {
   Validators
 } from '@angular/forms';
 
-import { MenuService } from '../../common-service/menu.service';
-import { AppAlarmService } from '../../common-service/app-alarm.service';
-import { MenuGroup } from '../../common-service/menu-group';
-import { ResponseObject } from '../../common-service/model/response-object';
-import { Menu } from '../../common-service/menu';
+import { MenuService } from '../service/menu.service';
+import { ProgramService } from '../service/program.service';
+import { AppAlarmService } from '../service/app-alarm.service';
+
+import { ResponseList } from '../model/response-list';
+import { ResponseObject } from '../model/response-object';
+import { MenuGroup } from '../model/menu-group';
+import { Menu } from '../model/menu';
+import { Program } from '../model/Program';
 
 @Component({
   selector: 'app-menu-form',
@@ -24,28 +28,40 @@ export class MenuFormComponent implements OnInit {
 
   menu: Menu;
 
-  validateForm: FormGroup;
+  menuForm: FormGroup;
+  programList;
 
-  constructor(private menuService: MenuService,
+
+  constructor(private fb: FormBuilder,
+              private menuService: MenuService,
+              private programService: ProgramService,
               private appAlarmService: AppAlarmService) { }
 
   ngOnInit() {
-    this.menu = new Menu();
-    this.menu.menuGroupCode = this.menuGroupCode;
-    console.log('MenuFormComponent init');
+
+    this.menuForm = this.fb.group({
+      menuGroupCode     : [ null, [ Validators.required ] ],
+      menuCode          : [ null, [ Validators.required ] ],
+      menuName          : [ null, [ Validators.required ] ],
+      parentMenuCode    : [ null],
+      sequence          : [ null],
+      program           : [ null]
+    });
+
+    this.getProgramList();
+
   }
 
   private getMenu() {
     this.menuService
-      .getMenu(this.menu)
+      .getMenu(this.menuForm.value)
       .subscribe(
         (model: ResponseObject<Menu>) => {
           console.log(model);
           if ( model.total > 0 ) {
-            this.menu = model.data;
+            this.menuForm.patchValue(model.data);
           } else {
-            this.menu = new Menu();
-            this.menu.menuGroupCode = this.menuGroupCode;
+            this.menuForm.reset();
           }
         },
         (err) => {
@@ -59,7 +75,7 @@ export class MenuFormComponent implements OnInit {
 
   private submitMenu() {
     this.menuService
-      .registerMenu(this.menu)
+      .registerMenu(this.menuForm.value)
       .subscribe(
         (model: ResponseObject<Menu>) => {
           console.log(model);
@@ -73,8 +89,23 @@ export class MenuFormComponent implements OnInit {
       );
   }
 
-  private onValueChange(value) {
-    console.log(value);
+  private getProgramList() {
+    this.programService
+      .getProgramList()
+      .subscribe(
+        (model: ResponseList<Program>) => {
+          console.log(model.data);
+          if (model.total > 0) {
+            this.programList = model.data;
+          }
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          console.log('프로그램 조회 완료');
+        }
+      );
   }
 
 }

@@ -30,12 +30,6 @@ export class UserFormComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  listOfOption = [
-                  {label: '11', value: '111'}
-                , {label: '22', value: '222'}
-                , {label: '33', value: '333'}
-                ];  
-
   passwordConfirm: String;
   popup: boolean;
 

@@ -15,6 +15,8 @@ import { BoardModule } from '../board/board.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { UserFormComponent } from './user/user-form.component';
 import { UserService } from './service/user.service';
+import { MenuFormComponent } from './menu/menu-form.component';
+import { AuthorityFormComponent } from './user/authority-form.component';
 
 @NgModule({
   imports: [
@@ -29,11 +31,15 @@ import { UserService } from './service/user.service';
   ],
   declarations: [
     LoginComponent,
-    UserFormComponent
+    UserFormComponent,
+    MenuFormComponent,
+    AuthorityFormComponent
   ],
   exports: [
     LoginComponent,
-    UserFormComponent
+    UserFormComponent,
+    MenuFormComponent,
+    AuthorityFormComponent
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

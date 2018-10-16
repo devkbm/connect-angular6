@@ -1,30 +1,22 @@
-<form>
-    {{auth | json}}
-    <section class="form-block">
-        <label>권한 등록</label>      
-        <div class="form-group" >
-            <label for="authority_name" class="required">권한</label>
-            <label for="authority_name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md" [class.invalid]="auth_name.invalid && (auth_name.dirty || auth_name.touched)">
-                <input  [(ngModel)]="auth.authority" [ngModelOptions]="{standalone: true}"
-                    type="text" 
-                    id="authority_name" 
-                    placeholder="권한명을 입력해주세요." 
-                    size="20"
-                    #auth_name="ngModel" 
-                    required 
-                    >
-                <span class="tooltip-content">
-                    This field cannot be empty!
-                </span>
-            </label>            
-        </div>        
-        <div class="form-group">
-            <label for="cmt">비고</label>
-            <textarea id="cmt" rows="5" [(ngModel)]="auth.description" [ngModelOptions]="{standalone: true}"></textarea>
-        </div>
+<form nz-form [formGroup]="authorityForm">
+    {{authorityForm.value | json}}
+    <nz-form-item>
+        <nz-form-label nzFor="authority" nzRequired [nzSm]="6" [nzXs]="24">권한</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="authority" formControlName="authority" placeholder="권한코드를 입력해주세요.">             
+            <nz-form-explain *ngIf="authorityForm.get('authority').dirty && authorityForm.get('authority').errors">The input is Required!</nz-form-explain>
+        </nz-form-control>        
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label nzFor="description" [nzSm]="6" [nzXs]="24">비고</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="description" formControlName="description" placeholder="비고를 입력해주세요.">             
+            <nz-form-explain *ngIf="authorityForm.get('description').dirty && authorityForm.get('description').errors">The input is Required!</nz-form-explain>
+        </nz-form-control>        
+    </nz-form-item>    
         
-        <button class="btn btn-primary" (click)="getAuthority()">조회</button>
-        <button type="submit" class="btn btn-primary" (click)="registerAuthority()">등록</button>
-        <!--<button class="btn btn-primary" (click)="deleteUser()">삭제</button>-->
-    </section>
+    <button class="btn btn-primary" (click)="getAuthority()">조회</button>
+    <button type="submit" class="btn btn-primary" (click)="registerAuthority()">등록</button>
+    <!--<button class="btn btn-primary" (click)="deleteUser()">삭제</button>-->    
 </form>

@@ -1,4 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { UserService } from '../service/user.service';
 import { AppAlarmService } from '../service/app-alarm.service';
@@ -14,24 +20,30 @@ import { Authority } from '../model/authority';
 })
 export class AuthorityFormComponent implements OnInit {
 
+  authorityForm: FormGroup;
+
   auth: Authority;
 
-  constructor(private userService: UserService,
+  constructor(private fb: FormBuilder,
+              private userService: UserService,
               private appAlarmService: AppAlarmService) { }
 
   ngOnInit() {
-    this.auth = new Authority();
+    this.authorityForm = this.fb.group({
+      authority     : [ null, [ Validators.required ] ],
+      description   : [ null]
+    });
   }
 
   private getAuthority() {
     this.userService
-      .getAuthority(this.auth.authority)
+      .getAuthority(this.authorityForm.get('authority').value)
       .subscribe(
         (model: ResponseObject<Authority>) => {
           if (model.total > 0) {
-            this.auth = model.data;
+            this.authorityForm.patchValue(model.data);
           } else {
-            this.auth = new Authority();
+            this.authorityForm.reset();
           }
           this.appAlarmService.changeMessage(model.message);
         },
@@ -46,7 +58,7 @@ export class AuthorityFormComponent implements OnInit {
 
   private registerAuthority() {
     this.userService
-      .registerAuthority(this.auth)
+      .registerAuthority(this.authorityForm.value)
       .subscribe(
         (model: ResponseObject<Authority>) => {
           console.log(model);
