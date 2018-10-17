@@ -8,6 +8,8 @@ import { ArticleFormComponent } from '../../board/component/article-form.compone
 import { UserFormComponent } from '../user/user-form.component';
 import { MenuFormComponent } from '../menu/menu-form.component';
 import { AuthorityFormComponent } from '../user/authority-form.component';
+import { MenuGroupFormComponent } from '../menu/menu-group-form.component';
+import { ProgramFormComponent } from '../menu/program-form.component';
 
 const layoutroutes: Routes = [
   {
@@ -17,6 +19,8 @@ const layoutroutes: Routes = [
       {path: 'articleForm',   component: ArticleFormComponent},
       {path: 'userForm',      component: UserFormComponent},
       {path: 'menuForm',      component: MenuFormComponent},
+      {path: 'menuGroupForm', component: MenuGroupFormComponent},
+      {path: 'programForm',   component: ProgramFormComponent},
       {path: 'authForm',      component: AuthorityFormComponent}
     ]
   }

@@ -17,6 +17,8 @@ import { UserFormComponent } from './user/user-form.component';
 import { UserService } from './service/user.service';
 import { MenuFormComponent } from './menu/menu-form.component';
 import { AuthorityFormComponent } from './user/authority-form.component';
+import { MenuGroupFormComponent } from './menu/menu-group-form.component';
+import { ProgramFormComponent } from './menu/program-form.component';
 
 @NgModule({
   imports: [
@@ -33,12 +35,16 @@ import { AuthorityFormComponent } from './user/authority-form.component';
     LoginComponent,
     UserFormComponent,
     MenuFormComponent,
+    MenuGroupFormComponent,
+    ProgramFormComponent,
     AuthorityFormComponent
   ],
   exports: [
     LoginComponent,
     UserFormComponent,
     MenuFormComponent,
+    MenuGroupFormComponent,
+    ProgramFormComponent,
     AuthorityFormComponent
   ],
   providers: [

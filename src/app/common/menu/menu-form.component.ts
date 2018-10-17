@@ -12,7 +12,6 @@ import { AppAlarmService } from '../service/app-alarm.service';
 
 import { ResponseList } from '../model/response-list';
 import { ResponseObject } from '../model/response-object';
-import { MenuGroup } from '../model/menu-group';
 import { Menu } from '../model/menu';
 import { Program } from '../model/Program';
 
@@ -26,11 +25,8 @@ export class MenuFormComponent implements OnInit {
   @Input()
   menuGroupCode: string;
 
-  menu: Menu;
-
   menuForm: FormGroup;
   programList;
-
 
   constructor(private fb: FormBuilder,
               private menuService: MenuService,
@@ -68,7 +64,7 @@ export class MenuFormComponent implements OnInit {
           console.log(err);
         },
         () => {
-          console.log('완료');
+          console.log('메뉴 조회 완료');
         }
       );
   }
@@ -84,7 +80,7 @@ export class MenuFormComponent implements OnInit {
           console.log(err);
         },
         () => {
-          console.log('완료');
+          console.log('메뉴 등록 완료');
         }
       );
   }

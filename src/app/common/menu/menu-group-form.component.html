@@ -1,0 +1,31 @@
+<form nz-form [formGroup]="menuGroupForm">
+    {{menuGroupForm.value | json}} 
+
+    <nz-form-item>
+        <nz-form-label nzFor="menuGroupCode" nzRequired [nzSm]="6" [nzXs]="24">메뉴그룹코드</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요.">             
+            <nz-form-explain *ngIf="menuGroupForm.get('menuGroupCode').dirty && menuGroupForm.get('menuGroupCode').errors">The input is Required!</nz-form-explain>
+        </nz-form-control>        
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label nzFor="menuGroupName" nzRequired [nzSm]="6" [nzXs]="24">메뉴그룹명</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="menuGroupName" formControlName="menuGroupName" placeholder="메뉴그룹명을 입력해주세요.">             
+            <nz-form-explain *ngIf="menuGroupForm.get('menuGroupName').dirty && menuGroupForm.get('menuGroupName').errors">The input is Required!</nz-form-explain>
+        </nz-form-control>        
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label nzFor="description" [nzSm]="6" [nzXs]="24">비고</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <textarea nz-input id="description" formControlName="description" placeholder="비고를 입력해주세요." [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>                     
+        </nz-form-control>        
+    </nz-form-item>
+
+    <button class="btn btn-primary" (click)="getMenuGroup(menuGroupForm.get('menuGroupCode').value)">조회</button>
+    <button type="submit" class="btn btn-primary" (click)="submitMenuGroup()">등록</button>
+      <!--<button class="btn btn-primary" (click)="popup = true">삭제</button> -->
+</form>
