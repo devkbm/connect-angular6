@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 
 import { BoardService } from './service/board.service';
-import { FormsModule } from '@angular/forms';
+
 import { BoardTreeComponent } from './component/board-tree.component';
 import { BoardFormComponent } from './component/board-form.component';
 import { ArticleFormComponent } from './component/article-form.component';
@@ -10,7 +12,9 @@ import { ArticleFormComponent } from './component/article-form.component';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgZorroAntdModule
   ],
   declarations: [
     BoardTreeComponent,

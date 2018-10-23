@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { BoardService } from '.././service/board.service';
 
@@ -14,14 +20,26 @@ export class ArticleFormComponent implements OnInit {
 
   article: Article;
 
-  constructor(private boardService: BoardService) { }
+  articleForm: FormGroup;
+
+  constructor(private fb: FormBuilder,
+              private boardService: BoardService) { }
 
   ngOnInit() {
     this.article = new Article();
+
+  this.articleForm = this.fb.group({
+      fkBoard       : [ null, [ Validators.required ] ],
+      pkArticle     : [ null, [ Validators.required ] ],
+      ppkArticle    : [ null],
+      title         : [ null],
+      contents      : [ null],
+      attachFile    : [ null]
+    });
   }
 
   getArticle(id: number) {
-    this.boardService.getArticle(this.article.pkArticle)
+    this.boardService.getArticle(this.articleForm.get('pkArticle').value)
       .subscribe(
         (model: ResponseObject<Article>) => {
           if (model.data) {
@@ -38,7 +56,7 @@ export class ArticleFormComponent implements OnInit {
   private saveBoard(f) {
 
     this.boardService
-      .saveArticle(this.article)
+      .saveArticle(this.articleForm.value)
       .subscribe(
         (model: ResponseObject<Article>) => {
           console.log(model);

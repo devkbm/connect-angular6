@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { BoardService } from '.././service/board.service';
 
@@ -12,12 +18,25 @@ import { Board } from '.././model/board';
 })
 export class BoardFormComponent implements OnInit {
 
+  boardForm: FormGroup;
+
   board: Board;
 
-  constructor(private boardService: BoardService) { }
+  constructor(private fb: FormBuilder,
+              private boardService: BoardService) { }
 
   ngOnInit() {
     this.board = new Board();
+    
+    this.boardForm = this.fb.group({
+      menuGroupCode     : [ null, [ Validators.required ] ],
+      menuCode          : [ null, [ Validators.required ] ],
+      menuName          : [ null, [ Validators.required ] ],
+      parentMenuCode    : [ null],
+      sequence          : [ null],
+      program           : [ null]
+    });
+
   }
 
   getBoard(id: number) {
