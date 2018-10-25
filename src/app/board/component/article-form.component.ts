@@ -38,14 +38,14 @@ export class ArticleFormComponent implements OnInit {
     });
   }
 
-  getArticle(id: number) {
+  getArticle() {
     this.boardService.getArticle(this.articleForm.get('pkArticle').value)
       .subscribe(
         (model: ResponseObject<Article>) => {
           if (model.data) {
-            this.article = model.data;
+            this.articleForm.patchValue(model.data);
           } else {
-            this.article = new Article();
+            this.articleForm.reset();
           }
         },
         (err) => {},
@@ -53,7 +53,7 @@ export class ArticleFormComponent implements OnInit {
     );
   }
 
-  private saveBoard(f) {
+  private saveBoard() {
 
     this.boardService
       .saveArticle(this.articleForm.value)

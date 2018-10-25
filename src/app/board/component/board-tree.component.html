@@ -1,10 +1,8 @@
 <button (click)="getboardHierarchy()">
     조회
 </button>
-<!--<div *ngFor="let item of items; index as i">    
-    <app-board-node
-        [item]="item"    
-        [selected]="item.selected"
-        (itemClicked)="selectItem($event)">    
-    </app-board-node>     
-</div>-->
+<nz-tree
+    #treeCom
+    [nzData]="boardItems"
+    (nzClick)="nzClick($event)">        
+</nz-tree>

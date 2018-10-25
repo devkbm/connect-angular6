@@ -14,10 +14,8 @@ export class BoardTreeComponent implements OnInit {
 
   @ViewChild('treeCom') treeCom;
 
-  items: BoardHierarchy[];
-
-  item: NzTreeNodeOptions[];
-
+  boardItems: BoardHierarchy[];
+  
   constructor(private boardService: BoardService) { }
 
   ngOnInit() {
@@ -30,9 +28,9 @@ export class BoardTreeComponent implements OnInit {
       .subscribe(
         (model: ResponseList<BoardHierarchy>) => {
             if ( model.total > 0 ) {
-              this.items = model.data;
+              this.boardItems = model.data;
             } else {
-              this.items = null;
+              this.boardItems = null;
             }
 
             // title 노드 텍스트 
@@ -50,7 +48,8 @@ export class BoardTreeComponent implements OnInit {
   }
 
   nzClick(event: NzFormatEmitEvent): void {
-    console.log(event, event.selectedKeys, event.keys, event.nodes);
-  }
+    //console.log(event, event.selectedKeys, event.keys, event.nodes);
+    //console.log(event.nodes[0].origin.url);
+  }  
 
 }

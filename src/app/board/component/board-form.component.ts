@@ -10,6 +10,8 @@ import { BoardService } from '.././service/board.service';
 
 import { ResponseObject } from '../../common/model/response-object';
 import { Board } from '.././model/board';
+import { BoardHierarchy } from '../model/board-hierarchy';
+import { ResponseList } from 'src/app/common/model/response-list';
 
 @Component({
   selector: 'app-board',
@@ -20,33 +22,35 @@ export class BoardFormComponent implements OnInit {
 
   boardForm: FormGroup;
 
-  board: Board;
+  parentBoardItems: BoardHierarchy[];
 
   constructor(private fb: FormBuilder,
               private boardService: BoardService) { }
 
-  ngOnInit() {
-    this.board = new Board();
+  ngOnInit() {    
     
     this.boardForm = this.fb.group({
-      menuGroupCode     : [ null, [ Validators.required ] ],
-      menuCode          : [ null, [ Validators.required ] ],
-      menuName          : [ null, [ Validators.required ] ],
-      parentMenuCode    : [ null],
-      sequence          : [ null],
-      program           : [ null]
+      pkBoard         : [ null ],
+      ppkBoard        : [ null ],
+      boardName       : [ null, [ Validators.required ] ],
+      boardType       : [ null, [ Validators.required ] ],
+      boardDescription: [ null ],
+      fromDate        : [ new Date() ],
+      toDate          : [ new Date(9999, 11, 31) ]
     });
+
+    this.getboardHierarchy();
 
   }
 
-  getBoard(id: number) {
-    this.boardService.getBoard(this.board.pkBoard)
+  getBoard() {
+    this.boardService.getBoard(this.boardForm.get('pkBoard').value)
       .subscribe(
         (model: ResponseObject<Board>) => {
           if (model.data) {
-            this.board = model.data;
+            this.boardForm.patchValue(model.data);
           } else {
-            this.board = new Board();
+            this.boardForm.reset();
           }
         },
         (err) => {},
@@ -54,10 +58,10 @@ export class BoardFormComponent implements OnInit {
     );
   }
 
-  private saveBoard(f) {
-    console.log(f);
+  private saveBoard() {
+    
     this.boardService
-      .saveBoard(this.board)
+      .saveBoard(this.boardForm.value)
       .subscribe(
         (model: ResponseObject<Board>) => {
           console.log(model);
@@ -73,7 +77,7 @@ export class BoardFormComponent implements OnInit {
 
   private deleteBoard() {
     this.boardService
-      .deleteBoard(this.board)
+      .deleteBoard(this.boardForm.value)
       .subscribe(
         (model: ResponseObject<Board>) => {
           console.log(model);
@@ -85,10 +89,32 @@ export class BoardFormComponent implements OnInit {
           console.log('완료');
         }
       );
-  }
+  }  
 
-  private setParentBoard(ppkBoard) {
-    this.board.ppkBoard = ppkBoard;
+  getboardHierarchy() {
+    this.boardService
+      .getBoardHierarchy()
+      .subscribe(
+        (model: ResponseList<BoardHierarchy>) => {
+            if ( model.total > 0 ) {
+              this.parentBoardItems = model.data;
+              console.log(model.data);
+            } else {
+              this.parentBoardItems = null;
+            }
+
+            // title 노드 텍스트 
+            // key   데이터 키
+            // isLeaf 마지막 노드 여부
+            // checked 체크 여부
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          console.log('완료');
+        }
+      );
   }
 
 }
