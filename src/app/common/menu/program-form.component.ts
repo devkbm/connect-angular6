@@ -15,7 +15,7 @@ import { Program } from '../model/Program';
 @Component({
   selector: 'app-program-form',
   templateUrl: './program-form.component.html',
-  styles: ['']
+  styleUrls: ['./program-form.component.css']
 })
 export class ProgramFormComponent implements OnInit {
 
@@ -40,19 +40,17 @@ export class ProgramFormComponent implements OnInit {
       .getProgram(this.programForm.get('programCode').value)
       .subscribe(
         (model: ResponseObject<Program>) => {
-          console.log(model);
           if ( model.total > 0 ) {
             this.programForm.patchValue(model.data);
           } else {
             this.programForm.reset();
           }
+          this.appAlarmService.changeMessage(model.message);
         },
         (err) => {
           console.log(err);
         },
-        () => {
-          console.log('프로그램 조회 완료');
-        }
+        () => {}
       );
   }
 
@@ -61,14 +59,12 @@ export class ProgramFormComponent implements OnInit {
       .registerProgram(this.programForm.value)
       .subscribe(
         (model: ResponseObject<Program>) => {
-          console.log(model);
+          this.appAlarmService.changeMessage(model.message);
         },
         (err) => {
           console.log(err);
         },
-        () => {
-          console.log('프로그램 등록 완료');
-        }
+        () => {}
       );
   }
 

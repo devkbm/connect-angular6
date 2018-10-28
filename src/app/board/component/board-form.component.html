@@ -1,5 +1,30 @@
+{{boardForm.value | json}}
+
+<div class="btn-group">
+    <button 
+        nz-button     
+        (click)="getBoard()">
+        <i nz-icon type="search"></i>
+        조회
+    </button>
+    <button 
+        nz-button 
+        nzType="primary" 
+        (click)="saveBoard()">
+        저장
+    </button>
+    <button 
+        nz-button 
+        nzType="danger" 
+        nz-popconfirm 
+        nzTitle="삭제하시겠습니까?" 
+        (nzOnConfirm)="deleteBoard()" 
+        (nzOnCancel)="false">
+        삭제
+    </button>    
+</div>
+
 <form nz-form [formGroup]="boardForm">
-    {{boardForm.value | json}}
 
     <input type="text" name="pkBoard" formControlName="pkBoard"> <br/>
     <input type="text" name="ppkBoard" formControlName="ppkBoard"> <br/>         
@@ -51,10 +76,6 @@
         <nz-form-control [nzSm]="14" [nzXs]="24">
             <nz-date-picker formControlName="toDate"></nz-date-picker>
         </nz-form-control>        
-    </nz-form-item>
-
-    <button class="btn btn-primary" (click)="getBoard()">조회</button>
-    <button class="btn btn-primary" (click)="saveBoard()">등록</button>
-    <button class="btn btn-primary" (click)="deleteBoard()">삭제</button> 
+    </nz-form-item>    
 
 </form>

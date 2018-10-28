@@ -25,7 +25,8 @@ import { ArticleFormComponent } from './component/article-form.component';
     BoardService
   ],
   exports: [
-    BoardFormComponent
+    BoardFormComponent,
+    BoardTreeComponent
   ]
 })
 export class BoardModule { }

@@ -16,7 +16,7 @@ import { ResponseList } from 'src/app/common/model/response-list';
 @Component({
   selector: 'app-board',
   templateUrl: './board-form.component.html',
-  styles: ['']
+  styleUrls: ['./board-form.component.css']
 })
 export class BoardFormComponent implements OnInit {
 
@@ -27,8 +27,8 @@ export class BoardFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private boardService: BoardService) { }
 
-  ngOnInit() {    
-    
+  ngOnInit() {
+
     this.boardForm = this.fb.group({
       pkBoard         : [ null ],
       ppkBoard        : [ null ],
@@ -59,7 +59,7 @@ export class BoardFormComponent implements OnInit {
   }
 
   private saveBoard() {
-    
+
     this.boardService
       .saveBoard(this.boardForm.value)
       .subscribe(
@@ -89,7 +89,7 @@ export class BoardFormComponent implements OnInit {
           console.log('완료');
         }
       );
-  }  
+  }
 
   getboardHierarchy() {
     this.boardService
@@ -98,12 +98,11 @@ export class BoardFormComponent implements OnInit {
         (model: ResponseList<BoardHierarchy>) => {
             if ( model.total > 0 ) {
               this.parentBoardItems = model.data;
-              console.log(model.data);
             } else {
               this.parentBoardItems = null;
             }
-
-            // title 노드 텍스트 
+            //this.appAlarmService.changeMessage(model.message);
+            // title 노드 텍스트
             // key   데이터 키
             // isLeaf 마지막 노드 여부
             // checked 체크 여부

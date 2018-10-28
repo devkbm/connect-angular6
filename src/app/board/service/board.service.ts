@@ -29,7 +29,7 @@ export class BoardService extends DataService {
 
     getBoard(id: number): Observable<ResponseObject<Board>> {
         const url = `${this.API_URI}/boards/${id}`;
-        console.log(this.getHttpHeaders());
+
         return this.http.get<ResponseObject<Board>>(url, {headers: this.getAuthorizedHttpHeaders()}).pipe(
             map(this.responseMap),
             catchError((err) => Observable.throw(err))
@@ -38,7 +38,7 @@ export class BoardService extends DataService {
 
     getBoardHierarchy(): Observable<ResponseList<BoardHierarchy>> {
         const url = `${this.API_URI}/boardHierarchy`;
-        console.log(this.getHttpHeaders());
+
         return this.http.get<ResponseList<BoardHierarchy>>(url, {headers: this.getAuthorizedHttpHeaders()}).pipe(
             map(this.responseMap),
             catchError((err) => Observable.throw(err))

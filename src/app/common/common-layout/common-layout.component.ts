@@ -31,26 +31,33 @@ export class CommonLayoutComponent implements OnInit {
 
   @ViewChild('treeCom') treeCom;
 
-  constructor(private data: AppAlarmService,
+  constructor(private appAlarmService: AppAlarmService,
               private menuService: MenuService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
-    this.data.currentMessage.subscribe(message => this.message = message);
+    this.appAlarmService.currentMessage.subscribe(message => this.message = message);
 
     const stringMenuGroupList = sessionStorage.getItem('menuGroupList');
     this.menuGroupList = JSON.parse(stringMenuGroupList);
-    console.log(this.menuGroupList);
+
+    console.log('선택된 메뉴그룹' + sessionStorage.getItem('selectedMenuGroup'));
+
+    this.selectedValue = sessionStorage.getItem('selectedMenuGroup');
+
+    if (this.selectedValue != null) {
+      this.selectMenuGroup(this.selectedValue);
+    }
   }
 
   sendMen(mess) {
     this.menuGroupCode = mess;
-    console.log(mess);
   }
 
   selectMenuGroup(value: string): void {
-    console.log(value);
+
+    sessionStorage.setItem('selectedMenuGroup', value);
 
     this.menuService
       .getMenuHierarchy(value)
@@ -61,6 +68,11 @@ export class CommonLayoutComponent implements OnInit {
           } else {
             this.menuItems = null;
           }
+
+          const seledtedMenu = sessionStorage.getItem('selectedMenu');
+          console.log(this.treeCom);
+          this.treeCom.nzSelectedKeys = [seledtedMenu];
+
         },
         (err) => {
           console.log(err);
@@ -73,10 +85,11 @@ export class CommonLayoutComponent implements OnInit {
 
   selectMenu(event: NzFormatEmitEvent): void {
     // console.log(event, event.selectedKeys, event.keys, event.nodes);
-    console.log(event.nodes[0].origin.url);
-    // console.log(event.keys[0]);
-     this.router.navigate(['/home/' + event.nodes[0].origin.url]);
+    // console.log(event.nodes[0].origin);
+    const node = event.nodes[0].origin;
+    sessionStorage.setItem('selectedMenu', node.key);
 
+    this.router.navigate(['/home/' + node.url]);
   }
 
 }

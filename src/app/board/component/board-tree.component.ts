@@ -33,7 +33,7 @@ export class BoardTreeComponent implements OnInit {
               this.boardItems = null;
             }
 
-            // title 노드 텍스트 
+            // title 노드 텍스트
             // key   데이터 키
             // isLeaf 마지막 노드 여부
             // checked 체크 여부
@@ -48,8 +48,9 @@ export class BoardTreeComponent implements OnInit {
   }
 
   nzClick(event: NzFormatEmitEvent): void {
-    //console.log(event, event.selectedKeys, event.keys, event.nodes);
-    //console.log(event.nodes[0].origin.url);
-  }  
+    const node = event.nodes[0].origin;
+    // console.log(event, event.selectedKeys, event.keys, event.nodes);
+    console.log(node);
+  }
 
 }

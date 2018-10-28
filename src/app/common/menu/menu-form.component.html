@@ -1,55 +1,155 @@
+{{menuForm.value | json}} 
+<div class="btn-group">
+    <button 
+        nz-button     
+        (click)="getMenu()">
+        <i nz-icon type="search"></i>
+        조회
+    </button>
+    <button 
+        nz-button 
+        nzType="primary" 
+        (click)="submitMenu()">
+        저장
+    </button>
+    <button 
+        nz-button 
+        nzType="danger" 
+        nz-popconfirm 
+        nzTitle="삭제하시겠습니까?" 
+        (nzOnConfirm)="deleteMenu()" 
+        (nzOnCancel)="false">
+        삭제
+    </button>    
+</div>
+
 <form nz-form [formGroup]="menuForm">
-    {{menuForm.value | json}} 
+    
     <nz-form-item>
-        <nz-form-label nzFor="menuGroupCode" nzRequired [nzSm]="6" [nzXs]="24">메뉴그룹코드</nz-form-label>
+        <nz-form-label 
+            [nzSm]="6" [nzXs]="24" 
+            nzRequired 
+            nzFor="menuGroupCode">메뉴그룹코드</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요.">             
-            <nz-form-explain *ngIf="menuForm.get('menuGroupCode').dirty && menuForm.get('menuGroupCode').errors">The input is Required!</nz-form-explain>
+            <nz-select 
+                id="menuGroupCode"
+                formControlName="menuGroupCode" 
+                nzShowSearch
+                [nzSize]="'default'"                         
+                nzPlaceHolder="Please select"                 
+                (ngModelChange)="selectMenuGroup($event)">
+                <nz-option 
+                    *ngFor="let option of menuGroupList" 
+                    [nzLabel]="option.menuGroupName" 
+                    [nzValue]="option.menuGroupCode">
+                </nz-option>
+            </nz-select>
+            <nz-form-explain 
+                *ngIf="menuForm.get('menuGroupCode').dirty && menuForm.get('menuGroupCode').errors">
+                The input is Required!
+            </nz-form-explain>
+        </nz-form-control>        
+    </nz-form-item>    
+
+    <nz-form-item>
+        <nz-form-label 
+            nzFor="menuCode" 
+            nzRequired 
+            [nzSm]="6" [nzXs]="24">메뉴코드
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input 
+                nz-input 
+                id="menuCode" 
+                formControlName="menuCode" 
+                placeholder="메뉴코드를 입력해주세요.">             
+            <nz-form-explain 
+                *ngIf="menuForm.get('menuCode').dirty && menuForm.get('menuCode').errors">
+                The input is Required!
+            </nz-form-explain>
         </nz-form-control>        
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label nzFor="menuCode" nzRequired [nzSm]="6" [nzXs]="24">메뉴코드</nz-form-label>
+        <nz-form-label 
+            nzFor="menuName" 
+            nzRequired 
+            [nzSm]="6" [nzXs]="24">메뉴명</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input id="menuCode" formControlName="menuCode" placeholder="메뉴코드를 입력해주세요.">             
-            <nz-form-explain *ngIf="menuForm.get('menuCode').dirty && menuForm.get('menuCode').errors">The input is Required!</nz-form-explain>
+            <input 
+                nz-input 
+                id="menuName" 
+                formControlName="menuName" 
+                placeholder="메뉴명을 입력해주세요.">             
+            <nz-form-explain 
+                *ngIf="menuForm.get('menuName').dirty && menuForm.get('menuName').errors">
+                The input is Required!
+            </nz-form-explain>
         </nz-form-control>        
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label nzFor="menuName" nzRequired [nzSm]="6" [nzXs]="24">메뉴명</nz-form-label>
+        <nz-form-label 
+            nzFor="parentMenuCode" 
+            [nzSm]="6" 
+            [nzXs]="24">
+            상위 메뉴코드
+        </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input id="menuName" formControlName="menuName" placeholder="메뉴명을 입력해주세요.">             
-            <nz-form-explain *ngIf="menuForm.get('menuName').dirty && menuForm.get('menuName').errors">The input is Required!</nz-form-explain>
+            <nz-tree-select 
+                id="parentMenuCode"
+                [nzNodes]="menuHiererachy"
+                [nzAllowClear]="true"
+                formControlName="parentMenuCode">
+            </nz-tree-select>                        
         </nz-form-control>        
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label nzFor="parentMenuCode" nzRequired [nzSm]="6" [nzXs]="24">상위메뉴코드</nz-form-label>
+        <nz-form-label 
+            nzFor="sequence" 
+            nzRequired 
+            [nzSm]="6" [nzXs]="24">
+            순번
+        </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input id="parentMenuCode" formControlName="parentMenuCode" placeholder="상위메뉴코드를 입력해주세요.">             
-            <nz-form-explain *ngIf="menuForm.get('parentMenuCode').dirty && menuForm.get('parentMenuCode').errors">The input is Required!</nz-form-explain>
+            <nz-input-number 
+                id="sequence" 
+                formControlName="sequence" 
+                placeholder="순번을 입력해주세요." 
+                [nzMin]="1" 
+                [nzMax]="9999" 
+                [nzStep]="1">
+            </nz-input-number>
+            <nz-form-explain 
+                *ngIf="menuForm.get('sequence').dirty && menuForm.get('sequence').errors">
+                The input is Required!
+            </nz-form-explain>
         </nz-form-control>        
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label nzFor="sequence" nzRequired [nzSm]="6" [nzXs]="24">순번</nz-form-label>
+        <nz-form-label 
+            [nzSm]="6" 
+            [nzXs]="24" 
+            nzFor="program">
+            프로그램
+        </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input id="sequence" formControlName="sequence" placeholder="순번을 입력해주세요.">             
-            <nz-form-explain *ngIf="menuForm.get('sequence').dirty && menuForm.get('sequence').errors">The input is Required!</nz-form-explain>
-        </nz-form-control>        
+            <nz-select 
+                id="program" 
+                formControlName="program" 
+                [nzSize]="'default'" 
+                nzShowSearch 
+                nzAllowClear 
+                nzPlaceHolder="프로그램을 선택해주세요.">
+                    <nz-option 
+                        *ngFor="let option of programList" 
+                        [nzLabel]="option.programName" 
+                        [nzValue]="option.programCode">
+                    </nz-option>
+            </nz-select>
+        </nz-form-control>
     </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="enabled">프로그램</nz-form-label>
-        <nz-select formControlName="program" [nzSize]="'default'" nzShowSearch nzAllowClear nzPlaceHolder="Please select" style="width: 50%">
-            <nz-option *ngFor="let option of programList" [nzLabel]="option.programName" [nzValue]="option.programCode"></nz-option>
-         </nz-select>
-    </nz-form-item>
-                                 
-        
-    <button nz-button nzType="primary" (click)="getMenu()">조회</button>
-    <button nz-button nzType="primary" (click)="submitMenu()">등록</button>
-      <!--<button class="btn btn-primary" (click)="popup = true">삭제</button> -->
-
+                                         
 </form>

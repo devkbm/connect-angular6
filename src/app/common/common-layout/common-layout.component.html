@@ -13,32 +13,29 @@
   
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'"  style="background:#fff">
       <div class="logo">Connect</div>
-      <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a Menu Group" [(ngModel)]="selectedValue" (ngModelChange)="selectMenuGroup($event)">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option *ngFor="let menuGroup of menuGroupList" [nzValue]="menuGroup.menuGroupCode" [nzLabel]="menuGroup.menuGroupName"></nz-option>          
+      <nz-select 
+        style="width: 200px;" 
+        nzShowSearch 
+        nzAllowClear 
+        nzPlaceHolder="Select a Menu Group" 
+        [(ngModel)]="selectedValue" 
+        (ngModelChange)="selectMenuGroup($event)">
+          <nz-option 
+            *ngFor="let menuGroup of menuGroupList" 
+            [nzValue]="menuGroup.menuGroupCode" 
+            [nzLabel]="menuGroup.menuGroupName">
+          </nz-option>          
       </nz-select>
       <nz-tree
         #treeCom
         [nzData]="menuItems"
         (nzClick)="selectMenu($event)">        
-      </nz-tree>
-      <!--<ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
-        <li nz-menu-item><span><i class="anticon anticon-user"></i><span class="nav-text">nav 1</span></span></li>
-        <li nz-menu-item><span><i class="anticon anticon-video-camera"></i><span class="nav-text">nav 2</span></span></li>
-        <li nz-menu-item><span><i class="anticon anticon-upload"></i><span class="nav-text">nav 3</span></span></li>
-        <li nz-menu-item><span><i class="anticon anticon-user"></i><span class="nav-text">nav 4</span></span></li>
-        <li nz-menu-item *ngFor="let menu of menuItems">
-            <a>{{menu.menuName}}</a>
-        </li>
-      </ul>-->
+      </nz-tree>      
     </nz-sider>
-  <!--<app-sidebar></app-sidebar>-->
-  <!--<app-header (menuChanged)="sendMen($event)"></app-header>-->
+
   <nz-layout>    
       <nz-header>
-          <!--<a class="nav-link" routerLink="../login">
-          </a>-->                    
+    
           <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
             <li nz-menu-item>nav 1</li>
             <li nz-menu-item>nav 2</li>

@@ -92,6 +92,16 @@ export class UserService extends DataService {
       );
   }
 
+  deleteAuthority(id: string): Observable<ResponseObject<Authority>> {
+    const url = `${this.AUTHORITY_API_URI}/${id}`;
+
+    return this.http
+      .delete<ResponseObject<Authority>>(url, {headers: this.getAuthorizedHttpHeaders()})
+      .pipe(
+        catchError((err) => Observable.throw(err))
+      );
+  }
+
   getMenuGroupList(): Observable<ResponseList<MenuGroup>> {
     const url = `${this.MENU_GROUP_API_URI}`;
     return this.http

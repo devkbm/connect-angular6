@@ -21,7 +21,7 @@ import { MenuGroup } from '../model/menu-group';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styles: ['']
+  styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
 

@@ -1,6 +1,31 @@
-<form nz-form [formGroup]="programForm">
-    {{programForm.value | json}} 
+{{programForm.value | json}} 
+<div class="btn-group">
+    <button 
+        nz-button         
+        (click)="getProgram()">
+        <i nz-icon type="search"></i>
+        조회
+    </button>
 
+    <button 
+        nz-button 
+        nzType="primary" 
+        (click)="submitProgram()">
+        저장
+    </button>
+
+    <button 
+        nz-button 
+        nzType="danger" 
+        nz-popconfirm 
+        nzTitle="삭제하시겠습니까?" 
+        (nzOnConfirm)="deleteMenu()" 
+        (nzOnCancel)="false">
+        삭제
+    </button>    
+</div>
+
+<form nz-form [formGroup]="programForm">
     <nz-form-item>
         <nz-form-label nzFor="programCode" nzRequired [nzSm]="6" [nzXs]="24">프로그램코드</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -31,8 +56,5 @@
             <textarea nz-input id="description" formControlName="description" placeholder="프로그램 설명을 입력해주세요." [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>                     
         </nz-form-control>        
     </nz-form-item>
-
-    <button class="btn btn-primary" (click)="getProgram()">조회</button>
-    <button type="submit" class="btn btn-primary" (click)="submitProgram()">등록</button>
-  <!--<button class="btn btn-primary" (click)="popup = true">삭제</button> -->
+            
 </form>

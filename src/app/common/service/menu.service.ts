@@ -16,11 +16,11 @@ import { MenuHierarchy } from '../model/menu-hierarchy';
 export class MenuService extends DataService {
 
   constructor(http: HttpClient) {
-    super('http://localhost:8090/menugroup', http);
+    super('http://localhost:8090', http);
   }
 
   getMenuGroupList(): Observable<ResponseList<MenuGroup>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URI}/menugroup`;
     return this.http
               .get<ResponseList<MenuGroup>>(url, {headers: this.getAuthorizedHttpHeaders()})
               .pipe(
@@ -29,7 +29,8 @@ export class MenuService extends DataService {
   }
 
   getMenuGroup(id: string): Observable<ResponseObject<MenuGroup>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URI}/menugroup/${id}`;
+
     return this.http
               .get<ResponseObject<MenuGroup>>(url, {headers: this.getAuthorizedHttpHeaders()})
               .pipe(
@@ -38,7 +39,8 @@ export class MenuService extends DataService {
   }
 
   registerMenuGroup(menuGroup: MenuGroup): Observable<ResponseObject<MenuGroup>> {
-    const url = this.API_URI + '/' + menuGroup.menuGroupCode;
+    const url = `${this.API_URI}/menugroup/${menuGroup.menuGroupCode}`;
+
     return this.http
               .post<ResponseObject<MenuGroup>>(url, menuGroup, {headers: this.getAuthorizedHttpHeaders()})
               .pipe(
@@ -46,8 +48,17 @@ export class MenuService extends DataService {
               );
   }
 
+  deleteMenuGroup(id: string): Observable<ResponseObject<MenuGroup>> {
+    const url = `${this.API_URI}/menugroup/${id}`;
+    return this.http
+              .delete<ResponseObject<MenuGroup>>(url, {headers: this.getAuthorizedHttpHeaders()})
+              .pipe(
+                catchError((err) => Observable.throw(err))
+              );
+  }
+
   getMenu(menu: Menu): Observable<ResponseObject<Menu>> {
-    const url = `${this.API_URI}/${menu.menuGroupCode}/menu/${menu.menuCode}`;
+    const url = `${this.API_URI}/menugroup/${menu.menuGroupCode}/menu/${menu.menuCode}`;
     return this.http
               .get<ResponseObject<Menu>>(url, {headers: this.getAuthorizedHttpHeaders()})
               .pipe(
@@ -65,9 +76,18 @@ export class MenuService extends DataService {
   }
 
   registerMenu(menu: Menu): Observable<ResponseObject<Menu>> {
-    const url = `${this.API_URI}/${menu.menuGroupCode}/menu/${menu.menuCode}`;
+    const url = `${this.API_URI}/menu/${menu.menuCode}`;
     return this.http
               .post<ResponseObject<Menu>>(url, menu, {headers: this.getAuthorizedHttpHeaders()})
+              .pipe(
+                catchError((err) => Observable.throw(err))
+              );
+  }
+
+  deleteMenu(menu: Menu): Observable<ResponseObject<Menu>> {
+    const url = `${this.API_URI}/menu/${menu.menuCode}`;
+    return this.http
+              .delete<ResponseObject<Menu>>(url, {headers: this.getAuthorizedHttpHeaders()})
               .pipe(
                 catchError((err) => Observable.throw(err))
               );

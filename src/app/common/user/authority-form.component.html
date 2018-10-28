@@ -1,5 +1,32 @@
+{{authorityForm.value | json}}
+<div class="btn-group">
+    <button 
+        nz-button         
+        (click)="getAuthority()">
+        <i nz-icon type="search"></i>
+        조회
+    </button>
+
+    <button 
+        nz-button 
+        nzType="primary" 
+        (click)="saveAuthority()">
+        저장
+    </button>
+
+    <button 
+        nz-button 
+        nzType="danger" 
+        nz-popconfirm 
+        nzTitle="삭제하시겠습니까?" 
+        (nzOnConfirm)="deleteAuthority()" 
+        (nzOnCancel)="false">
+        삭제
+    </button>    
+</div>
+
 <form nz-form [formGroup]="authorityForm">
-    {{authorityForm.value | json}}
+
     <nz-form-item>
         <nz-form-label nzFor="authority" nzRequired [nzSm]="6" [nzXs]="24">권한</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -15,8 +42,5 @@
             <nz-form-explain *ngIf="authorityForm.get('description').dirty && authorityForm.get('description').errors">The input is Required!</nz-form-explain>
         </nz-form-control>        
     </nz-form-item>    
-        
-    <button class="btn btn-primary" (click)="getAuthority()">조회</button>
-    <button type="submit" class="btn btn-primary" (click)="registerAuthority()">등록</button>
-    <!--<button class="btn btn-primary" (click)="deleteUser()">삭제</button>-->    
+            
 </form>

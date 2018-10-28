@@ -16,7 +16,7 @@ import { Authority } from '../model/authority';
 @Component({
   selector: 'app-authority-form',
   templateUrl: './authority-form.component.html',
-  styles: ['']
+  styleUrls: ['./authority-form.component.css']
 })
 export class AuthorityFormComponent implements OnInit {
 
@@ -31,11 +31,11 @@ export class AuthorityFormComponent implements OnInit {
   ngOnInit() {
     this.authorityForm = this.fb.group({
       authority     : [ null, [ Validators.required ] ],
-      description   : [ null]
+      description   : [ null ]
     });
   }
 
-  private getAuthority() {
+  private getAuthority(): void {
     this.userService
       .getAuthority(this.authorityForm.get('authority').value)
       .subscribe(
@@ -50,25 +50,35 @@ export class AuthorityFormComponent implements OnInit {
         (err) => {
           console.log(err);
         },
-        () => {
-          console.log('완료');
-        }
+        () => {}
       );
   }
 
-  private registerAuthority() {
+  private saveAuthority(): void {
     this.userService
       .registerAuthority(this.authorityForm.value)
       .subscribe(
         (model: ResponseObject<Authority>) => {
-          console.log(model);
+          this.appAlarmService.changeMessage(model.message);
         },
         (err) => {
           console.log(err);
         },
-        () => {
-          console.log('완료');
-        }
+        () => {}
+      );
+  }
+
+  private deleteAuthority(): void {
+    this.userService
+      .deleteAuthority(this.authorityForm.get('authority').value)
+      .subscribe(
+        (model: ResponseObject<Authority>) => {
+          this.appAlarmService.changeMessage(model.message);
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {}
       );
   }
 

@@ -8,6 +8,7 @@ import {
 
 import { MenuService } from '../service/menu.service';
 import { AppAlarmService } from '../service/app-alarm.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 import { ResponseObject } from '../model/response-object';
 import { MenuGroup } from '../model/menu-group';
@@ -15,7 +16,7 @@ import { MenuGroup } from '../model/menu-group';
 @Component({
   selector: 'app-menu-group-form',
   templateUrl: './menu-group-form.component.html',
-  styles: ['']
+  styleUrls: ['./menu-group-form.component.css']
 })
 export class MenuGroupFormComponent implements OnInit {
 
@@ -31,7 +32,6 @@ export class MenuGroupFormComponent implements OnInit {
       menuGroupName   : [ null, [ Validators.required ] ],
       description     : [ null]
     });
-
   }
 
   private getMenuGroup(menuGroupCode: string) {
@@ -44,13 +44,12 @@ export class MenuGroupFormComponent implements OnInit {
           } else {
             this.menuGroupForm.reset();
           }
+          this.appAlarmService.changeMessage(model.total + '건의 메뉴그룹이 조회되었습니다.');
         },
         (err) => {
           console.log(err);
         },
-        () => {
-          console.log('완료');
-        }
+        () => { }
       );
   }
 
@@ -60,13 +59,26 @@ export class MenuGroupFormComponent implements OnInit {
       .subscribe(
         (model: ResponseObject<MenuGroup>) => {
           console.log(model);
+          this.appAlarmService.changeMessage(model.total + '건의 메뉴그룹이 저장되었습니다.');
         },
         (err) => {
           console.log(err);
         },
-        () => {
-          console.log('완료');
-        }
+        () => { }
+      );
+  }
+
+  private deleteMenuGroup() {
+    this.menuService
+      .deleteMenuGroup(this.menuGroupForm.get('menuGroupCode').value)
+      .subscribe(
+        (model: ResponseObject<MenuGroup>) => {
+          this.appAlarmService.changeMessage(model.total + '건의 메뉴그룹이 삭제되었습니다.');
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => { }
       );
   }
 

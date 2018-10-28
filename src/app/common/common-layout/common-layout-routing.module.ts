@@ -10,6 +10,7 @@ import { MenuFormComponent } from '../menu/menu-form.component';
 import { AuthorityFormComponent } from '../user/authority-form.component';
 import { MenuGroupFormComponent } from '../menu/menu-group-form.component';
 import { ProgramFormComponent } from '../menu/program-form.component';
+import { BoardTreeComponent } from 'src/app/board/component/board-tree.component';
 
 const layoutroutes: Routes = [
   {
@@ -17,6 +18,7 @@ const layoutroutes: Routes = [
     children: [
       {path: 'boardForm',     component: BoardFormComponent},
       {path: 'articleForm',   component: ArticleFormComponent},
+      {path: 'boardTree',     component: BoardTreeComponent},
       {path: 'userForm',      component: UserFormComponent},
       {path: 'menuForm',      component: MenuFormComponent},
       {path: 'menuGroupForm', component: MenuGroupFormComponent},
