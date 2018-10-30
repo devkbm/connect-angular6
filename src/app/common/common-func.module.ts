@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { AgGridModule } from 'ag-grid-angular';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
@@ -19,6 +20,7 @@ import { MenuFormComponent } from './menu/menu-form.component';
 import { AuthorityFormComponent } from './user/authority-form.component';
 import { MenuGroupFormComponent } from './menu/menu-group-form.component';
 import { ProgramFormComponent } from './menu/program-form.component';
+import { AuthorityGridComponent } from './user/authority-grid.component';
 
 @NgModule({
   imports: [
@@ -28,6 +30,7 @@ import { ProgramFormComponent } from './menu/program-form.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgZorroAntdModule,
+    AgGridModule.withComponents([]),
     AppRoutingModule,
     BoardModule
   ],
@@ -37,7 +40,8 @@ import { ProgramFormComponent } from './menu/program-form.component';
     MenuFormComponent,
     MenuGroupFormComponent,
     ProgramFormComponent,
-    AuthorityFormComponent
+    AuthorityFormComponent,
+    AuthorityGridComponent
   ],
   exports: [
     LoginComponent,
@@ -45,7 +49,8 @@ import { ProgramFormComponent } from './menu/program-form.component';
     MenuFormComponent,
     MenuGroupFormComponent,
     ProgramFormComponent,
-    AuthorityFormComponent
+    AuthorityFormComponent,
+    AuthorityGridComponent
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
