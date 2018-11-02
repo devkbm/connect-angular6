@@ -21,6 +21,7 @@ import { AuthorityFormComponent } from './user/authority-form.component';
 import { MenuGroupFormComponent } from './menu/menu-group-form.component';
 import { ProgramFormComponent } from './menu/program-form.component';
 import { AuthorityGridComponent } from './user/authority-grid.component';
+import { AuthorityComponent } from './user/authority.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { AuthorityGridComponent } from './user/authority-grid.component';
     MenuGroupFormComponent,
     ProgramFormComponent,
     AuthorityFormComponent,
-    AuthorityGridComponent
+    AuthorityGridComponent,
+    AuthorityComponent
   ],
   exports: [
     LoginComponent,
@@ -50,7 +52,8 @@ import { AuthorityGridComponent } from './user/authority-grid.component';
     MenuGroupFormComponent,
     ProgramFormComponent,
     AuthorityFormComponent,
-    AuthorityGridComponent
+    AuthorityGridComponent,
+    AuthorityComponent
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

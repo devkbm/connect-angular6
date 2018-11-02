@@ -12,6 +12,7 @@ import { MenuGroupFormComponent } from '../menu/menu-group-form.component';
 import { ProgramFormComponent } from '../menu/program-form.component';
 import { BoardTreeComponent } from 'src/app/board/component/board-tree.component';
 import { AuthorityGridComponent } from '../user/authority-grid.component';
+import { AuthorityComponent } from '../user/authority.component';
 
 const layoutroutes: Routes = [
   {
@@ -25,7 +26,8 @@ const layoutroutes: Routes = [
       {path: 'menuGroupForm', component: MenuGroupFormComponent},
       {path: 'programForm',   component: ProgramFormComponent},
       {path: 'authForm',      component: AuthorityFormComponent},
-      {path: 'authGrid',      component: AuthorityGridComponent}
+      {path: 'authGrid',      component: AuthorityGridComponent},
+      {path: 'auth',          component: AuthorityComponent}
     ]
   }
 ];

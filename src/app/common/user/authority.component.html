@@ -1,0 +1,33 @@
+<div class="btn-group">
+  <button 
+      nz-button         
+      (click)="true">
+      <i nz-icon type="search"></i>
+      조회
+  </button>
+
+  <button 
+      nz-button 
+      nzType="primary" 
+      (click)="true">
+      저장
+  </button>
+
+  <button 
+      nz-button 
+      nzType="danger" 
+      nz-popconfirm 
+      nzTitle="삭제하시겠습니까?" 
+      (nzOnConfirm)="true" 
+      (nzOnCancel)="false">
+      삭제
+  </button>    
+</div>
+
+<app-authority-grid (rowSelected)="selectedItem($event, authForm.authorityForm)">
+
+</app-authority-grid>
+
+<app-authority-form #authForm>
+
+</app-authority-form>

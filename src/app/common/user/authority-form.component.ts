@@ -22,8 +22,6 @@ export class AuthorityFormComponent implements OnInit {
 
   authorityForm: FormGroup;
 
-  auth: Authority;
-
   constructor(private fb: FormBuilder,
               private userService: UserService,
               private appAlarmService: AppAlarmService) { }
@@ -80,6 +78,10 @@ export class AuthorityFormComponent implements OnInit {
         },
         () => {}
       );
+  }
+
+  public patchValues(values) {
+    this.authorityForm.patchValue(values);
   }
 
 }

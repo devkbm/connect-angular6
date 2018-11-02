@@ -39,12 +39,23 @@ export class CommonLayoutComponent implements OnInit {
   ngOnInit() {
     this.appAlarmService.currentMessage.subscribe(message => this.message = message);
 
+    this.setInitMenuGroup();
+  }
+
+  /**
+   * 초기 메뉴 그룹을 설정한다.
+   */
+  private setInitMenuGroup(): void {
     const stringMenuGroupList = sessionStorage.getItem('menuGroupList');
+    const selectedMenuGroup   = sessionStorage.getItem('selectedMenuGroup');
+
     this.menuGroupList = JSON.parse(stringMenuGroupList);
 
-    console.log('선택된 메뉴그룹' + sessionStorage.getItem('selectedMenuGroup'));
-
-    this.selectedValue = sessionStorage.getItem('selectedMenuGroup');
+    if ( selectedMenuGroup != null ) {
+      this.selectedValue = selectedMenuGroup;
+    } else {
+      this.selectedValue = this.menuGroupList[0].menuGroupCode;
+    }
 
     if (this.selectedValue != null) {
       this.selectMenuGroup(this.selectedValue);
@@ -72,7 +83,6 @@ export class CommonLayoutComponent implements OnInit {
           const seledtedMenu = sessionStorage.getItem('selectedMenu');
           console.log(this.treeCom);
           this.treeCom.nzSelectedKeys = [seledtedMenu];
-
         },
         (err) => {
           console.log(err);

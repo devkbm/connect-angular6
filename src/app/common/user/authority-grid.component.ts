@@ -20,13 +20,23 @@ export class AuthorityGridComponent implements OnInit {
         {headerName: '설명',    field: 'description' }
     ];
 
-    authorityList: Authority[];
-    
+    @Output()
+    rowSelected = new EventEmitter();
+
+    public authorityList: Authority[];
+    private gridApi;
+    private gridColumnApi;
+
     constructor(private userService: UserService,
                 private appAlarmService: AppAlarmService) { }
 
     ngOnInit() {
         this.getAuthority();
+    }
+
+    private onGridReady(params) {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
     }
 
     private getAuthority(): void {
@@ -47,5 +57,11 @@ export class AuthorityGridComponent implements OnInit {
                 () => {}
             );
     }
- 
+
+    private selectionChanged(event) {
+        const selectedRows = this.gridApi.getSelectedRows();
+
+        this.rowSelected.emit(selectedRows[0]);
+    }
+
 }
