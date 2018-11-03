@@ -1,33 +1,46 @@
 <div class="btn-group">
   <button 
       nz-button         
-      (click)="true">
+      (click)="getAuthorityList(authGrid)">
       <i nz-icon type="search"></i>
       조회
   </button>
-
+  <nz-divider nzType="vertical"></nz-divider>  
   <button 
       nz-button 
       nzType="primary" 
-      (click)="true">
+      nz-popconfirm 
+      nzTitle="저장하시겠습니까?" 
+      (nzOnConfirm)="saveAuthority(authForm)"
+      (nzOnCancel)="false">
       저장
   </button>
-
+  <nz-divider nzType="vertical"></nz-divider>
   <button 
       nz-button 
       nzType="danger" 
       nz-popconfirm 
       nzTitle="삭제하시겠습니까?" 
-      (nzOnConfirm)="true" 
+      (nzOnConfirm)="deleteAuthority(authForm)" 
       (nzOnCancel)="false">
       삭제
   </button>    
 </div>
-
-<app-authority-grid (rowSelected)="selectedItem($event, authForm.authorityForm)">
-
-</app-authority-grid>
-
-<app-authority-form #authForm>
-
-</app-authority-form>
+<div nz-row>
+    <div nz-col nzSpan="8" style="height: 500px">
+        <app-authority-grid 
+            id="authGrid"            
+            style="height: fit-content"
+            #authGrid
+            (rowSelected)="selectedItem($event, authForm.authorityForm)">
+        </app-authority-grid>
+    </div>
+    <div nz-col nzSpan="16">
+        <app-authority-form 
+            id="authForm"
+            #authForm
+            (dataSaved)="getAuthorityList(authGrid)"
+            (dataDeleted)="getAuthorityList(authGrid)">
+        </app-authority-form>
+    </div>
+</div>

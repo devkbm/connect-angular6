@@ -16,8 +16,8 @@ import { ResponseList } from '../model/response-list';
 export class AuthorityGridComponent implements OnInit {
 
     columnDefs = [
-        {headerName: '권한',    field: 'authority' },
-        {headerName: '설명',    field: 'description' }
+        {headerName: '권한',    field: 'authority',     width: 100 },
+        {headerName: '설명',    field: 'description',   width: 200 }
     ];
 
     @Output()
@@ -39,7 +39,7 @@ export class AuthorityGridComponent implements OnInit {
         this.gridColumnApi = params.columnApi;
     }
 
-    private getAuthority(): void {
+    public getAuthority(): void {
         this.userService
             .getAuthorityList()
             .subscribe(

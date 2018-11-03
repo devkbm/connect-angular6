@@ -1,49 +1,50 @@
 {{message}} - 1234
 <nz-layout>
-  <!--<clr-alert [clrAlertType]="'alert-danger'" [clrAlertAppLevel]="true">
-      <clr-alert-item>
-          <span class="alert-text">
-            {{message}}
-          </span>
-          <div class="alert-actions">
-              <button class="btn alert-action">Fix</button>
-          </div>
-      </clr-alert-item>            
-  </clr-alert>-->    
-  
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'"  style="background:#fff">
-      <div class="logo">Connect</div>
-      <nz-select 
-        style="width: 200px;" 
-        nzShowSearch 
-        nzAllowClear 
-        nzPlaceHolder="Select a Menu Group" 
-        [(ngModel)]="selectedValue" 
-        (ngModelChange)="selectMenuGroup($event)">
+
+  <nz-sider 
+    class="sidebar"
+    nzCollapsible 
+    [(nzCollapsed)]="isCollapsed" 
+    [nzCollapsedWidth]="0" 
+    [nzBreakpoint]="'md'">
+
+    <div class="logo">Connect</div>
+      
+    <nz-select 
+      class="sidemenugroup"                    
+      nzShowSearch                 
+      [(ngModel)]="selectedValue" 
+      (ngModelChange)="selectMenuGroup($event)">
           <nz-option 
             *ngFor="let menuGroup of menuGroupList" 
             [nzValue]="menuGroup.menuGroupCode" 
             [nzLabel]="menuGroup.menuGroupName">
           </nz-option>          
-      </nz-select>
-      <nz-tree
-        #treeCom
-        [nzData]="menuItems"
-        (nzClick)="selectMenu($event)">        
-      </nz-tree>      
-    </nz-sider>
+    </nz-select>
+
+    <nz-tree
+      #treeCom
+      [nzData]="menuItems"
+      (nzClick)="selectMenu($event)">
+    </nz-tree>      
+
+  </nz-sider>
 
   <nz-layout>    
-      <nz-header>
-    
-          <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
+      <nz-header>    
+          <button (click)="this.isCollapsed = !this.isCollapsed">AA</button>
+          <nz-input-group [nzSuffix]="suffixIconSearch" style="width: 200px">
+            <input type="text" nz-input placeholder="input search text">
+          </nz-input-group>          
+          <ng-template #suffixIconSearch>
+            <i nz-icon type="search"></i>
+          </ng-template>
+
+          <!--<ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
             <li nz-menu-item>nav 1</li>
             <li nz-menu-item>nav 2</li>
-            <li nz-menu-item>nav 3</li>
-            <!--<li nz-menu-item *ngFor="let menuGroup of menuGroupList">
-                <a (click)="getMenuList(menuGroup.menuGroupCode)">{{menuGroup.menuGroupName}}</a>
-            </li>    -->
-          </ul>
+            <li nz-menu-item>nav 3</li>          
+          </ul>-->
         </nz-header>
     <app-main>    
       <ng-content></ng-content>  

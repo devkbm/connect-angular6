@@ -5,3 +5,11 @@
     margin: 16px 28px 16px 0;
     float: left;
 }
+
+.sidebar {
+    background: white;
+}
+
+.sidemenugroup {
+    width: 200px;
+}
