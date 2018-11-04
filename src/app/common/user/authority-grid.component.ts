@@ -16,6 +16,7 @@ import { ResponseList } from '../model/response-list';
 export class AuthorityGridComponent implements OnInit {
 
     columnDefs = [
+        {headerName: '아이디',    field: 'id',     width: 100 },
         {headerName: '권한',    field: 'authority',     width: 100 },
         {headerName: '설명',    field: 'description',   width: 200 }
     ];
@@ -56,6 +57,24 @@ export class AuthorityGridComponent implements OnInit {
                 },
                 () => {}
             );
+    }
+
+    public addRow(newItem: Authority) {
+        const res = this.gridApi.updateRowData({ add: [newItem] });
+        // this.gridApi.setRowData([newItem]);
+    }
+
+    public clearData() {
+        this.gridApi.setRowData([]);
+    }
+
+    public getRowNode(id) {
+        return this.gridApi.getRowNode('1');
+        //return this.gridApi.getDisplayedRowAtIndex(0);
+    }
+
+    public setData(rowNode, colnm, data) {
+        rowNode.setDataValue(colnm, data);
     }
 
     private selectionChanged(event) {

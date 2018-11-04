@@ -33,4 +33,9 @@ export class AuthorityComponent implements OnInit {
     form.deleteAuthority();
   }
 
+  addRow(form: AuthorityFormComponent, grid: AuthorityGridComponent) {
+    // grid.addRow(form.authorityForm.value);
+    console.log(grid.getRowNode('ROLE_TEST'));
+  }
+
 }
