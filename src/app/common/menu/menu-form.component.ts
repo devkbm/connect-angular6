@@ -36,6 +36,7 @@ export class MenuFormComponent implements OnInit {
 
   programList;
   menuGroupList;
+  menuTypeList;
 
   constructor(private fb: FormBuilder,
               private menuService: MenuService,
@@ -48,11 +49,13 @@ export class MenuFormComponent implements OnInit {
       menuGroupCode     : [ null, [ Validators.required ] ],
       menuCode          : [ null, [ Validators.required ] ],
       menuName          : [ null, [ Validators.required ] ],
-      parentMenuCode    : [ null],
-      sequence          : [ null],
-      program           : [ null]
+      menuType          : [ null, [ Validators.required ] ],
+      parentMenuCode    : [ null ],
+      sequence          : [ null ],
+      program           : [ null ]
     });
 
+    this.getMenuTypeList();
     this.getProgramList();
     this.getMenuGroupList();
   }
@@ -152,6 +155,24 @@ export class MenuFormComponent implements OnInit {
             this.menuGroupList = model.data;
           } else {
             this.menuGroupList = null;
+          }
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {}
+      );
+  }
+
+  private getMenuTypeList(): void {
+    this.menuService
+      .getMenuTypeList()
+      .subscribe(
+        (model: ResponseList<any>) => {          
+          if (model.total > 0) {
+            this.menuTypeList = model.data;
+          } else {
+            this.menuTypeList = null;
           }
         },
         (err) => {

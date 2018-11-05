@@ -90,6 +90,30 @@
 
     <nz-form-item>
         <nz-form-label 
+            [nzSm]="6" 
+            [nzXs]="24" 
+            nzFor="menuType">
+            메뉴타입
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select 
+                id="menuType" 
+                formControlName="menuType" 
+                [nzSize]="'default'" 
+                nzShowSearch 
+                nzAllowClear 
+                nzPlaceHolder="메뉴타입을 선택해주세요.">
+                    <nz-option 
+                        *ngFor="let option of menuTypeList" 
+                        [nzLabel]="option.name" 
+                        [nzValue]="option.code">
+                    </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label 
             nzFor="parentMenuCode" 
             [nzSm]="6" 
             [nzXs]="24">
