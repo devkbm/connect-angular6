@@ -22,11 +22,47 @@
           </nz-option>          
     </nz-select>
 
-    <nz-tree
+    <!-- 메뉴를 트리로 구현 -->
+    <!--<nz-tree
       #treeCom
       [nzData]="menuItems"
       (nzClick)="selectMenu($event)">
-    </nz-tree>      
+    </nz-tree>   -->
+    
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" style="width: 200px;">
+      <ul *ngFor="let level1 of menuItems">
+        <li nz-menu-item *ngIf="level1.menuType == 'ITEM'" (click)="selectMenuItem(level1.url)">
+            {{level1.title}}
+        </li>
+        
+        <li nz-submenu *ngIf="level1.menuType == 'SUBMENU'">
+          <span title>{{level1.title}}</span>
+          <ul *ngFor="let level2 of level1.children">
+
+              <li nz-menu-item *ngIf="level2.menuType == 'ITEM'" (click)="selectMenuItem(level2.url)">
+                {{level2.title}}
+              </li>              
+              <li nz-submenu *ngIf="level2.menuType == 'SUBMENU'">
+                  <span title>{{level2.title}}</span>
+                  <ul *ngFor="let level3 of level2.children">
+                    <li nz-menu-item *ngIf="level3.menuType == 'ITEM'" (click)="selectMenuItem(level3.url)">
+                      {{level3.title}}
+                    </li>              
+                  </ul
+                  >
+              </li>
+              <li nz-menu-group *ngIf="level2.menuType == 'GROUP'">
+                <span title>{{level2.title}}</span>
+              </li>
+
+            </ul>
+        </li>
+
+        <li nz-menu-group *ngIf="level1.menuType == 'GROUP'">
+          <span title>{{level1.title}}</span>
+        </li>
+      </ul>      
+    </ul>
 
   </nz-sider>
 

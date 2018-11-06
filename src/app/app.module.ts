@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angular/icons';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { CommonFuncModule } from './common/common-func.module';
@@ -14,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonLayoutModule } from './common/common-layout/common-layout.module';
 
 registerLocaleData(en);
+const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
 
 @NgModule({
   imports: [

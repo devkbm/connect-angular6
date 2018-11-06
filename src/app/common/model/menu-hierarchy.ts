@@ -5,10 +5,13 @@ export class MenuHierarchy {
     createdBy;
     modifiedDt;
     modifiedBy;
+    key: string;
+    title: string;
     menuGroupCode: string;
     menuCode: string;
     menuName: string;
     parentMenuCode: string;
+    menuType: string;
     sequence: number;
     level: number;
     url: string;

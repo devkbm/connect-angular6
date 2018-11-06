@@ -102,4 +102,10 @@ export class CommonLayoutComponent implements OnInit {
     this.router.navigate(['/home/' + node.url]);
   }
 
+  selectMenuItem(url: string): void {
+    sessionStorage.setItem('selectedMenu', url);
+
+    this.router.navigate(['/home/' + url]);
+  }
+
 }

@@ -4,8 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+
 import { AgGridModule } from 'ag-grid-angular';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angular/icons';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
@@ -22,6 +25,8 @@ import { MenuGroupFormComponent } from './menu/menu-group-form.component';
 import { ProgramFormComponent } from './menu/program-form.component';
 import { AuthorityGridComponent } from './user/authority-grid.component';
 import { AuthorityComponent } from './user/authority.component';
+
+const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
 
 @NgModule({
   imports: [
