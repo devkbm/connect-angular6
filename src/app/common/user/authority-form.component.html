@@ -1,10 +1,10 @@
 {{authorityForm.value | json}}
-<form nz-form [formGroup]="authorityForm">
+<form nz-form [formGroup]="authorityForm" [nzLayout]="'inline'">
 
     <nz-form-item>
-        <nz-form-label nzFor="authority" nzRequired [nzSm]="6" [nzXs]="24">권한</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input id="authority" formControlName="authority" placeholder="권한코드를 입력해주세요.">             
+        <nz-form-label nzFor="authority" nzRequired>권한</nz-form-label>
+        <nz-form-control>
+            <input nz-input id="authority" formControlName="authority" placeholder="권한코드를 입력해주세요." nzSize="small">             
             <nz-form-explain *ngIf="authorityForm.get('authority').dirty && authorityForm.get('authority').errors">The input is Required!</nz-form-explain>
         </nz-form-control>        
     </nz-form-item>
@@ -12,7 +12,7 @@
     <nz-form-item>
         <nz-form-label nzFor="description" [nzSm]="6" [nzXs]="24">비고</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input id="description" formControlName="description" placeholder="비고를 입력해주세요.">             
+            <input nz-input id="description" formControlName="description" placeholder="비고를 입력해주세요." nzSize="small">             
             <nz-form-explain *ngIf="authorityForm.get('description').dirty && authorityForm.get('description').errors">The input is Required!</nz-form-explain>
         </nz-form-control>        
     </nz-form-item>    

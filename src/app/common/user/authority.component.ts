@@ -34,8 +34,18 @@ export class AuthorityComponent implements OnInit {
   }
 
   addRow(form: AuthorityFormComponent, grid: AuthorityGridComponent) {
-    // grid.addRow(form.authorityForm.value);
-    console.log(grid.getRowNode('ROLE_TEST'));
+    //grid.addRow(form.authorityForm.value);
+    grid.getRowNode(form.authorityForm.get('authority').value);
+    // console.log(grid.getRowNode('ROLE_TEST'));
+  }
+
+  applyGridSavedData(form: AuthorityFormComponent, grid: AuthorityGridComponent) {
+    let node = grid.getRowNode(form.authorityForm.get('authority').value);
+    if ( node != null ) {
+      grid.setRowData(node, form.authorityForm.value);
+    } else {
+      grid.addRow(form.authorityForm.value);
+    }
   }
 
 }

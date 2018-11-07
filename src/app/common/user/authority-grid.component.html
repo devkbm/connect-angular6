@@ -4,6 +4,7 @@
     [rowSelection]="'single'"
     [rowData]="authorityList" 
     [columnDefs]="columnDefs"
+    [getRowNodeId]="getRowNodeId"
     (gridReady)="onGridReady($event)"    
     (selectionChanged)="selectionChanged($event)">
 </ag-grid-angular>

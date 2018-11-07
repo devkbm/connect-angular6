@@ -1,36 +1,39 @@
-<div class="btn-group">
-    <button 
-        nz-button         
-        (click)="addRow(authForm, authGrid)">
-        <i nz-icon type="search"></i>
-        행추가
-    </button>
-  <button 
-      nz-button         
-      (click)="getAuthorityList(authGrid)">
-      <i nz-icon type="search"></i>
-      조회
-  </button>
-  <nz-divider nzType="vertical"></nz-divider>  
-  <button 
-      nz-button 
-      nzType="primary" 
-      nz-popconfirm 
-      nzTitle="저장하시겠습니까?" 
-      (nzOnConfirm)="saveAuthority(authForm)"
-      (nzOnCancel)="false">
-      저장
-  </button>
-  <nz-divider nzType="vertical"></nz-divider>
-  <button 
-      nz-button 
-      nzType="danger" 
-      nz-popconfirm 
-      nzTitle="삭제하시겠습니까?" 
-      (nzOnConfirm)="deleteAuthority(authForm)" 
-      (nzOnCancel)="false">
-      삭제
-  </button>    
+<div nz-row class="btn-group">    
+    <div nz-col [nzSpan]="24" style="text-align: right;">
+        <button 
+            nz-button         
+            (click)="getAuthorityList(authGrid)">
+            <i nz-icon type="search"></i>
+            조회
+        </button>        
+        <nz-divider nzType="vertical"></nz-divider>  
+        <button 
+            nz-button         
+            (click)="addRow(authForm, authGrid)">
+            <i nz-icon type="search"></i>
+            행추가
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>  
+        <button 
+            nz-button 
+            nzType="primary" 
+            nz-popconfirm 
+            nzTitle="저장하시겠습니까?" 
+            (nzOnConfirm)="saveAuthority(authForm)"
+            (nzOnCancel)="false">
+            저장
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button 
+            nz-button 
+            nzType="danger" 
+            nz-popconfirm 
+            nzTitle="삭제하시겠습니까?" 
+            (nzOnConfirm)="deleteAuthority(authForm)" 
+            (nzOnCancel)="false">
+            삭제
+        </button>    
+    </div>
 </div>
 <div nz-row>
     <div nz-col nzSpan="8" style="height: 500px">
@@ -45,7 +48,7 @@
         <app-authority-form 
             id="authForm"
             #authForm
-            (dataSaved)="getAuthorityList(authGrid)"
+            (dataSaved)="applyGridSavedData(authForm, authGrid)"
             (dataDeleted)="getAuthorityList(authGrid)">
         </app-authority-form>
     </div>

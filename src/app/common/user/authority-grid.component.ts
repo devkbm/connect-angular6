@@ -15,21 +15,28 @@ import { ResponseList } from '../model/response-list';
 })
 export class AuthorityGridComponent implements OnInit {
 
-    columnDefs = [
-        {headerName: '아이디',    field: 'id',     width: 100 },
-        {headerName: '권한',    field: 'authority',     width: 100 },
-        {headerName: '설명',    field: 'description',   width: 200 }
-    ];
-
-    @Output()
-    rowSelected = new EventEmitter();
-
-    public authorityList: Authority[];
+    protected columnDefs;
+    protected getRowNodeId;
     private gridApi;
     private gridColumnApi;
 
+    protected authorityList: Authority[];
+
+    @Output()
+    rowSelected = new EventEmitter();
+        
     constructor(private userService: UserService,
-                private appAlarmService: AppAlarmService) { }
+                private appAlarmService: AppAlarmService) { 
+
+        this.columnDefs = [            
+            {headerName: '권한',    field: 'authority',     width: 100 },
+            {headerName: '설명',    field: 'description',   width: 200 }
+        ];
+
+        this.getRowNodeId = function(data) {
+            return data.authority;
+        };                    
+    }
 
     ngOnInit() {
         this.getAuthority();
@@ -68,13 +75,28 @@ export class AuthorityGridComponent implements OnInit {
         this.gridApi.setRowData([]);
     }
 
-    public getRowNode(id) {
-        return this.gridApi.getRowNode('1');
-        //return this.gridApi.getDisplayedRowAtIndex(0);
+    public getRowNodeByIndex(index: number) {
+        return this.gridApi.getDisplayedRowAtIndex(index); 
+    }
+    public getRowNode(id) {        
+        return this.gridApi.getRowNode(id);        
     }
 
+    /**
+     * @param rowNode
+     * @param colnm
+     * @param data
+     */
     public setData(rowNode, colnm, data) {
         rowNode.setDataValue(colnm, data);
+    }
+
+    /**
+     * @param rowNode
+     * @param data row에 적용될 data(객체)
+     */
+    public setRowData(rowNode, data) {        
+        rowNode.setData(data);
     }
 
     private selectionChanged(event) {

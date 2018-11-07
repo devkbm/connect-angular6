@@ -29,7 +29,7 @@
       (nzClick)="selectMenu($event)">
     </nz-tree>   -->
     
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" style="width: 200px;">
+    <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" style="width: 200px;">
       <ul *ngFor="let level1 of menuItems">
         <li nz-menu-item *ngIf="level1.menuType == 'ITEM'" (click)="selectMenuItem(level1.url)">
             {{level1.title}}

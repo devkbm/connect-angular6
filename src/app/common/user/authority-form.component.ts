@@ -20,7 +20,7 @@ import { Authority } from '../model/authority';
 })
 export class AuthorityFormComponent implements OnInit {
 
-  authorityForm: FormGroup;
+  authorityForm: FormGroup;  
 
   @Output()
   dataSaved = new EventEmitter();
@@ -33,20 +33,20 @@ export class AuthorityFormComponent implements OnInit {
               private userService: UserService,
               private appAlarmService: AppAlarmService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.authorityForm = this.fb.group({
       authority     : [ null, [ Validators.required ] ],
       description   : [ null ]
-    });
+    });    
   }
 
-  private getAuthority(): void {
+  public getAuthority(): void {
     this.userService
       .getAuthority(this.authorityForm.get('authority').value)
       .subscribe(
         (model: ResponseObject<Authority>) => {
           if (model.total > 0) {
-            this.authorityForm.patchValue(model.data);
+            this.authorityForm.patchValue(model.data);            
           } else {
             this.authorityForm.reset();
           }
