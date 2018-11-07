@@ -20,31 +20,47 @@ export class AuthorityGridComponent implements OnInit {
     private gridApi;
     private gridColumnApi;
 
+    protected style = {
+        width: '100%',
+        height: '100%'
+    };
+
     protected authorityList: Authority[];
 
     @Output()
     rowSelected = new EventEmitter();
-        
+
     constructor(private userService: UserService,
                 private appAlarmService: AppAlarmService) { 
 
-        this.columnDefs = [            
+        this.columnDefs = [
             {headerName: '권한',    field: 'authority',     width: 100 },
             {headerName: '설명',    field: 'description',   width: 200 }
         ];
 
         this.getRowNodeId = function(data) {
             return data.authority;
-        };                    
+        };
     }
 
     ngOnInit() {
         this.getAuthority();
+
+        this.setWidthAndHeight('100%', '700px');
+    }
+
+    setWidthAndHeight(width, height) {
+        this.style = {
+            width: width,
+            height: height
+        };
     }
 
     private onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
+
+        // this.gridApi.setDomLayout('autoHeight');
     }
 
     public getAuthority(): void {
@@ -78,11 +94,13 @@ export class AuthorityGridComponent implements OnInit {
     public getRowNodeByIndex(index: number) {
         return this.gridApi.getDisplayedRowAtIndex(index); 
     }
-    public getRowNode(id) {        
-        return this.gridApi.getRowNode(id);        
+
+    public getRowNode(id) {
+        return this.gridApi.getRowNode(id);
     }
 
     /**
+     * @description setDatas
      * @param rowNode
      * @param colnm
      * @param data
@@ -95,7 +113,7 @@ export class AuthorityGridComponent implements OnInit {
      * @param rowNode
      * @param data row에 적용될 data(객체)
      */
-    public setRowData(rowNode, data) {        
+    public setRowData(rowNode, data) {
         rowNode.setData(data);
     }
 

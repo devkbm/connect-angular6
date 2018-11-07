@@ -15,13 +15,10 @@ export class AuthorityComponent implements OnInit {
   }
 
   selectedItem(item, form) {
-    console.log(item);
-    console.log(form);
     form.patchValue(item);
   }
 
   getAuthorityList(grid: AuthorityGridComponent) {
-    console.log(grid);
     grid.getAuthority();
   }
 
@@ -34,13 +31,15 @@ export class AuthorityComponent implements OnInit {
   }
 
   addRow(form: AuthorityFormComponent, grid: AuthorityGridComponent) {
-    //grid.addRow(form.authorityForm.value);
     grid.getRowNode(form.authorityForm.get('authority').value);
-    // console.log(grid.getRowNode('ROLE_TEST'));
+  }
+
+  initForm(form: AuthorityFormComponent) {
+    form.authorityForm.reset();
   }
 
   applyGridSavedData(form: AuthorityFormComponent, grid: AuthorityGridComponent) {
-    let node = grid.getRowNode(form.authorityForm.get('authority').value);
+    const node = grid.getRowNode(form.authorityForm.get('authority').value);
     if ( node != null ) {
       grid.setRowData(node, form.authorityForm.value);
     } else {

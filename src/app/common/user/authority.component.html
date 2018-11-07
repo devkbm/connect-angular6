@@ -9,9 +9,9 @@
         <nz-divider nzType="vertical"></nz-divider>  
         <button 
             nz-button         
-            (click)="addRow(authForm, authGrid)">
+            (click)="initForm(authForm)">
             <i nz-icon type="search"></i>
-            행추가
+            신규
         </button>
         <nz-divider nzType="vertical"></nz-divider>  
         <button 
@@ -36,11 +36,11 @@
     </div>
 </div>
 <div nz-row>
-    <div nz-col nzSpan="8" style="height: 500px">
+    <div nz-col nzSpan="8" style="height: 720px">
+        <h3>권한 목록</h3>
         <app-authority-grid 
-            id="authGrid"            
-            style="height: fit-content"
-            #authGrid
+            id="authGrid"                     
+            #authGrid                  
             (rowSelected)="selectedItem($event, authForm.authorityForm)">
         </app-authority-grid>
     </div>
