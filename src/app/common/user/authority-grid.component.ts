@@ -34,6 +34,7 @@ export class AuthorityGridComponent implements OnInit {
                 private appAlarmService: AppAlarmService) { 
 
         this.columnDefs = [
+            {headerName: "No",      valueGetter: "node.rowIndex + 1", width: 80 },            
             {headerName: '권한',    field: 'authority',     width: 100 },
             {headerName: '설명',    field: 'description',   width: 200 }
         ];
