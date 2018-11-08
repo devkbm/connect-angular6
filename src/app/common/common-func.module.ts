@@ -21,6 +21,7 @@ import { MenuGroupFormComponent } from './menu/menu-group-form.component';
 import { ProgramFormComponent } from './menu/program-form.component';
 import { AuthorityGridComponent } from './user/authority-grid.component';
 import { AuthorityComponent } from './user/authority.component';
+import { UserGridComponent } from './user/user-grid.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { AuthorityComponent } from './user/authority.component';
   declarations: [
     LoginComponent,
     UserFormComponent,
+    UserGridComponent,
     MenuFormComponent,
     MenuGroupFormComponent,
     ProgramFormComponent,
@@ -47,6 +49,7 @@ import { AuthorityComponent } from './user/authority.component';
   exports: [
     LoginComponent,
     UserFormComponent,
+    UserGridComponent,
     MenuFormComponent,
     MenuGroupFormComponent,
     ProgramFormComponent,

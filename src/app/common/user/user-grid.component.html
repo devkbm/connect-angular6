@@ -1,0 +1,10 @@
+<ag-grid-angular      
+    [ngStyle]="style"
+    class="ag-theme-balham"
+    [rowSelection]="'single'"
+    [rowData]="userList" 
+    [columnDefs]="columnDefs"
+    [getRowNodeId]="getRowNodeId"
+    (gridReady)="onGridReady($event)"    
+    (selectionChanged)="selectionChanged($event)">
+</ag-grid-angular>

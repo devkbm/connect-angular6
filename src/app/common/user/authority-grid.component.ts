@@ -3,8 +3,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../service/user.service';
 import { AppAlarmService } from '../service/app-alarm.service';
 
-import { ResponseObject } from '../model/response-object';
-
 import { Authority } from '../model/authority';
 import { ResponseList } from '../model/response-list';
 
@@ -31,10 +29,10 @@ export class AuthorityGridComponent implements OnInit {
     rowSelected = new EventEmitter();
 
     constructor(private userService: UserService,
-                private appAlarmService: AppAlarmService) { 
+                private appAlarmService: AppAlarmService) {
 
         this.columnDefs = [
-            {headerName: "No",      valueGetter: "node.rowIndex + 1", width: 80 },            
+            {headerName: 'No',      valueGetter: 'node.rowIndex + 1', width: 80 },
             {headerName: '권한',    field: 'authority',     width: 100 },
             {headerName: '설명',    field: 'description',   width: 200 }
         ];
@@ -93,7 +91,7 @@ export class AuthorityGridComponent implements OnInit {
     }
 
     public getRowNodeByIndex(index: number) {
-        return this.gridApi.getDisplayedRowAtIndex(index); 
+        return this.gridApi.getDisplayedRowAtIndex(index);
     }
 
     public getRowNode(id) {
