@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { UserService } from '../service/user.service';
-import { AppAlarmService } from '../service/app-alarm.service';
+import { UserService } from '../../service/user.service';
+import { AppAlarmService } from '../../service/app-alarm.service';
 
-import { Authority } from '../model/authority';
-import { ResponseList } from '../model/response-list';
+import { Authority } from '../../model/authority';
+import { ResponseList } from '../../model/response-list';
 
 @Component({
   selector: 'app-authority-grid',

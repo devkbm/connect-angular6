@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   Validators
 } from '@angular/forms';
-import { LoginService } from './login.service';
-import { UserToken } from '../model/user-token';
-import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from '../../service/login.service';
+import { UserToken } from '../../model/user-token';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  validateForm: FormGroup;
+  loginForm: FormGroup;
 
   submitForm(): void {
     // tslint:disable-next-line:forin
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-      this.validateForm.controls[ i ].updateValueAndValidity();
+    for (const i in this.loginForm.controls) {
+      this.loginForm.controls[ i ].markAsDirty();
+      this.loginForm.controls[ i ].updateValueAndValidity();
     }
-    console.log(this.validateForm.get('userName').value);
+    console.log(this.loginForm.get('userName').value);
 
     this.loginService
-      .doLogin(this.validateForm.get('userName').value, this.validateForm.get('password').value)
+      .doLogin(this.loginForm.get('userName').value, this.loginForm.get('password').value)
 
       .subscribe((model: UserToken) => {
         console.log(model);
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
+    this.loginForm = this.fb.group({
       userName: [ null, [ Validators.required ] ],
       password: [ null, [ Validators.required ] ],
       remember: [ true ]

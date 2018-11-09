@@ -6,12 +6,11 @@ import {
   Validators
 } from '@angular/forms';
 
-import { UserService } from '../service/user.service';
-import { AppAlarmService } from '../service/app-alarm.service';
+import { UserService } from '../../service/user.service';
+import { AppAlarmService } from '../../service/app-alarm.service';
 
-import { ResponseObject } from '../model/response-object';
-
-import { Authority } from '../model/authority';
+import { ResponseObject } from '../../model/response-object';
+import { Authority } from '../../model/authority';
 
 @Component({
   selector: 'app-authority-form',

@@ -1,0 +1,60 @@
+<div nz-row class="btn-group">    
+  <div nz-col [nzSpan]="24" style="text-align: right;">
+        <button 
+          nz-button         
+          (click)="test(userForm, userGrid)">          
+          테스트
+        </button>
+      <button 
+          nz-button         
+          (click)="getUserList(userGrid)">
+          <i nz-icon type="search"></i>
+          조회
+      </button>        
+      <nz-divider nzType="vertical"></nz-divider>  
+      <button 
+          nz-button         
+          (click)="initForm(userForm)">
+          <i nz-icon type="search"></i>
+          신규
+      </button>
+      <nz-divider nzType="vertical"></nz-divider>  
+      <button 
+          nz-button 
+          nzType="primary" 
+          nz-popconfirm 
+          nzTitle="저장하시겠습니까?" 
+          (nzOnConfirm)="saveUser(userForm)"
+          (nzOnCancel)="false">
+          저장
+      </button>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button 
+          nz-button 
+          nzType="danger" 
+          nz-popconfirm 
+          nzTitle="삭제하시겠습니까?" 
+          (nzOnConfirm)="deleteUser(userForm)" 
+          (nzOnCancel)="false">
+          삭제
+      </button>    
+  </div>
+</div>
+<div nz-row>
+  <div nz-col nzSpan="8" style="height: 720px">
+    <h3>사용자 목록</h3>      
+    <app-user-grid
+        id="userGrid"                     
+        #userGrid                  
+        (rowSelected)="selectedItem($event, userForm)">
+    </app-user-grid>
+  </div>
+  <div nz-col nzSpan="16">
+    <app-user-form    
+        id="userForm"
+        #userForm
+        (dataSaved)="applyGridSavedData(userForm, userGrid)"
+        (dataDeleted)="getUserList(userGrid)">
+    </app-user-form>
+  </div>
+</div>

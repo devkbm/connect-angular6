@@ -6,17 +6,17 @@ import {
   Validators
 } from '@angular/forms';
 
-import { UserService } from '../service/user.service';
+import { UserService } from '../../service/user.service';
 
-import { AppAlarmService } from '../service/app-alarm.service';
-import { ResponseObject } from '../model/response-object';
-import { User } from '../model/user-info';
+import { AppAlarmService } from '../../service/app-alarm.service';
+import { ResponseObject } from '../../model/response-object';
+import { User } from '../../model/user-info';
 
-import { AppError } from '../error/app-error';
-import { UserNotFoundError } from '../error/user-not-found-error';
-import { ResponseList } from '../model/response-list';
-import { Authority } from '../model/authority';
-import { MenuGroup } from '../model/menu-group';
+import { AppError } from '../../error/app-error';
+import { UserNotFoundError } from '../../error/user-not-found-error';
+import { ResponseList } from '../../model/response-list';
+import { Authority } from '../../model/authority';
+import { MenuGroup } from '../../model/menu-group';
 
 @Component({
   selector: 'app-user-form',
@@ -28,12 +28,16 @@ export class UserFormComponent implements OnInit {
   authList;
   menuGroupList;
 
-  validateForm: FormGroup;
+  public userForm: FormGroup;
 
   passwordConfirm: String;
   popup: boolean;
 
-  @Output() messageChanged: EventEmitter<string> = new EventEmitter();
+  @Output()
+  dataSaved = new EventEmitter();
+
+  @Output()
+  dataDeleted = new EventEmitter();
 
   constructor(private fb: FormBuilder,
               private userService: UserService,
@@ -41,7 +45,7 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.validateForm = this.fb.group({
+    this.userForm = this.fb.group({
       userId          : [ null, [ Validators.required ] ],
       name            : [ null, [ Validators.required ] ],
       enabled         : [ true ],
@@ -55,21 +59,21 @@ export class UserFormComponent implements OnInit {
 
   }
 
-  private getUser() {
+  public getUser(userId: string) {
     this.userService
-      .getUser(this.validateForm.get('userId').value)
+      .getUser(userId)
       .subscribe(
         (model: ResponseObject<User>) => {
           if (model.total > 0) {
-            this.validateForm.patchValue(model.data);
+            this.userForm.patchValue(model.data);
           } else {
-            this.validateForm.reset();
+            this.userForm.reset();
           }
           this.appAlarmService.changeMessage(model.message);
         },
         (err) => {
           console.log(err);
-          this.validateForm.reset();
+          this.userForm.reset();
         },
         () => {
           console.log('완료');
@@ -77,17 +81,17 @@ export class UserFormComponent implements OnInit {
       );
   }
 
-  private registerUser() {
+  public registerUser() {
     /*if ( this.isValidPassword !== true ) {
       return;
     }*/
 
     this.userService
-      .registerUser(this.validateForm.value)
+      .registerUser(this.userForm.value)
       .subscribe(
-        (model: ResponseObject<User>) => {
-          console.log(model);
+        (model: ResponseObject<User>) => {          
           this.appAlarmService.changeMessage(model.message);
+          this.dataSaved.emit(this.userForm.value);
         },
         (err) => {
           console.log(err);
@@ -98,34 +102,31 @@ export class UserFormComponent implements OnInit {
       );
   }
 
-  private deleteUser() {
+  public deleteUser() {
     this.userService
-      .deleteUser(this.validateForm.value)
+      .deleteUser(this.userForm.value)
       .subscribe(
-        (model: ResponseObject<User>) => {
-          console.log(model);
+        (model: ResponseObject<User>) => {          
           this.appAlarmService.changeMessage(model.message);
+          this.dataDeleted.emit(this.userForm.value);
         },
         (err) => {
           console.log(err);
         },
         () => {
-          this.popup = false;
-          console.log('완료');
+          this.popup = false;          
         }
       );
   }
 
-  private checkUser() {
+  protected checkUser() {
     this.userService
-      .checkUser(this.validateForm.get('userId').value)
+      .checkUser(this.userForm.get('userId').value)
       .subscribe(
-        (model: ResponseObject<User>) => {
-          console.log(model);
+        (model: ResponseObject<User>) => {          
           this.appAlarmService.changeMessage(model.message);
         },
-        (err: AppError) => {
-          console.log(err);
+        (err: AppError) => {          
           if (err instanceof UserNotFoundError) {
             console.log('유저정보가 없음');
           }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonLayoutComponent } from './common/common-layout/common-layout.component';
-import { LoginComponent } from './common/login/login.component';
+import { LoginComponent } from './common/component/login/login.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},

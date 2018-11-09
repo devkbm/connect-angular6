@@ -5,25 +5,26 @@ import { CommonLayoutComponent } from './common-layout.component';
 
 import { BoardFormComponent } from '../../board/component/board-form.component';
 import { ArticleFormComponent } from '../../board/component/article-form.component';
-import { UserFormComponent } from '../user/user-form.component';
-import { MenuFormComponent } from '../menu/menu-form.component';
-import { AuthorityFormComponent } from '../user/authority-form.component';
-import { MenuGroupFormComponent } from '../menu/menu-group-form.component';
-import { ProgramFormComponent } from '../menu/program-form.component';
-import { BoardTreeComponent } from 'src/app/board/component/board-tree.component';
-import { AuthorityGridComponent } from '../user/authority-grid.component';
-import { AuthorityComponent } from '../user/authority.component';
-import { UserGridComponent } from '../user/user-grid.component';
+
+import { MenuFormComponent } from '../component/menu/menu-form.component';
+import { MenuGroupFormComponent } from '../component/menu/menu-group-form.component';
+import { ProgramFormComponent } from '../component/menu/program-form.component';
+import { AuthorityFormComponent } from '../component/authority/authority-form.component';
+import { AuthorityGridComponent } from '../component/authority/authority-grid.component';
+import { AuthorityComponent } from '../component/authority/authority.component';
+import { UserFormComponent } from '../component/user/user-form.component';
+import { UserGridComponent } from '../component/user/user-grid.component';
+import { UserComponent } from '../component/user/user.component';
 
 const layoutroutes: Routes = [
   {
     path: 'home', component: CommonLayoutComponent,
     children: [
       {path: 'boardForm',     component: BoardFormComponent},
-      {path: 'articleForm',   component: ArticleFormComponent},
-      {path: 'boardTree',     component: BoardTreeComponent},
+      {path: 'articleForm',   component: ArticleFormComponent},      
       {path: 'userForm',      component: UserFormComponent},
       {path: 'userGrid',      component: UserGridComponent},
+      {path: 'user',          component: UserComponent},
       {path: 'menuForm',      component: MenuFormComponent},
       {path: 'menuGroupForm', component: MenuGroupFormComponent},
       {path: 'programForm',   component: ProgramFormComponent},

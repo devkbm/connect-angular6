@@ -6,12 +6,12 @@ import {
   Validators
 } from '@angular/forms';
 
-import { MenuService } from '../service/menu.service';
-import { AppAlarmService } from '../service/app-alarm.service';
+import { MenuService } from '../../service/menu.service';
+import { AppAlarmService } from '../../service/app-alarm.service';
 import { NzMessageService } from 'ng-zorro-antd';
 
-import { ResponseObject } from '../model/response-object';
-import { MenuGroup } from '../model/menu-group';
+import { ResponseObject } from '../../model/response-object';
+import { MenuGroup } from '../../model/menu-group';
 
 @Component({
   selector: 'app-menu-group-form',

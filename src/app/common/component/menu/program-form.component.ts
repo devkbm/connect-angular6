@@ -6,11 +6,11 @@ import {
   Validators
 } from '@angular/forms';
 
-import { ProgramService } from '../service/program.service';
-import { AppAlarmService } from '../service/app-alarm.service';
+import { ProgramService } from '../../service/program.service';
+import { AppAlarmService } from '../../service/app-alarm.service';
 
-import { ResponseObject } from '../model/response-object';
-import { Program } from '../model/Program';
+import { ResponseObject } from '../../model/response-object';
+import { Program } from '../../model/Program';
 
 @Component({
   selector: 'app-program-form',

@@ -6,16 +6,16 @@ import {
   Validators
 } from '@angular/forms';
 
-import { MenuService } from '../service/menu.service';
-import { ProgramService } from '../service/program.service';
-import { AppAlarmService } from '../service/app-alarm.service';
+import { MenuService } from '../../service/menu.service';
+import { ProgramService } from '../../service/program.service';
+import { AppAlarmService } from '../../service/app-alarm.service';
 
-import { ResponseList } from '../model/response-list';
-import { ResponseObject } from '../model/response-object';
-import { Menu } from '../model/menu';
-import { Program } from '../model/Program';
-import { MenuHierarchy } from '../model/menu-hierarchy';
-import { MenuGroup } from '../model/menu-group';
+import { ResponseList } from '../../model/response-list';
+import { ResponseObject } from '../../model/response-object';
+import { Menu } from '../../model/menu';
+import { Program } from '../../model/Program';
+import { MenuHierarchy } from '../../model/menu-hierarchy';
+import { MenuGroup } from '../../model/menu-group';
 
 @Component({
   selector: 'app-menu-form',

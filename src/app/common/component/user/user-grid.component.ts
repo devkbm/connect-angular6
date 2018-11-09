@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { UserService } from '../service/user.service';
-import { AppAlarmService } from '../service/app-alarm.service';
+import { UserService } from '../../service/user.service';
+import { AppAlarmService } from '../../service/app-alarm.service';
 
-import { User } from '../model/user-info';
-import { ResponseList } from '../model/response-list';
+import { User } from '../../model/user-info';
+import { ResponseList } from '../../model/response-list';
 
 @Component({
   selector: 'app-user-grid',
@@ -33,20 +33,22 @@ export class UserGridComponent implements OnInit {
 
     this.columnDefs = [
       {headerName: 'No',            valueGetter: 'node.rowIndex + 1', width: 80 },
-      {headerName: '아이디',        field: 'userId',  width: 200 },
+      {headerName: '아이디',        field: 'userId',  width: 100 },
       {headerName: '이름',          field: 'name',    width: 100 },
-      {headerName: '계정잠금여부',  field: 'accountNonLocked',      width: 100 },
-      {headerName: '계정만료여부',  field: 'accountNonExpired',     width: 100 },
-      {headerName: '비번만료여부',  field: 'credentialsNonExpired', width: 100 }
+      {headerName: '계정잠금여부',  field: 'accountNonLocked',      width: 120 },
+      {headerName: '계정만료여부',  field: 'accountNonExpired',     width: 120 },
+      {headerName: '비번만료여부',  field: 'credentialsNonExpired', width: 120 }
     ];
 
     this.getRowNodeId = function(data) {
-      return data.authority;
+      return data.userId;
     };
   }
 
   ngOnInit() {
-
+    this.getUserList();
+    
+    this.setWidthAndHeight('100%', '700px');
   }
 
   private onGridReady(params) {
@@ -114,6 +116,18 @@ export class UserGridComponent implements OnInit {
    */
   public setRowData(rowNode, data) {
     rowNode.setData(data);
+  }
+
+  public selectCell(rowIndex: number, colKey: string) {
+    this.gridApi.setFocusedCell(rowIndex, colKey);
+  }
+
+  public selectRow(rowIndex: number) {
+    this.gridApi.forEachNode( (node) => {
+      if (node.rowIndex === rowIndex) {
+          node.setSelected(true);
+      }
+    });
   }
 
   private selectionChanged(event) {
