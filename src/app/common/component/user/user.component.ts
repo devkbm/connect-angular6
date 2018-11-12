@@ -14,8 +14,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectedItem(item, form) {    
-    form.getUser(item.userId);    
+  selectedItem(item, form) {
+    form.getUser(item.userId);
   }
 
   getUserList(grid: UserGridComponent) {
@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
   }
 
   test(form: UserFormComponent, grid: UserGridComponent) {
-    grid.selectCell(1,'userId');
+    grid.selectCell(1, 'userId');
   }
 
 }

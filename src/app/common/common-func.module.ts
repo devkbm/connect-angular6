@@ -18,13 +18,14 @@ import { UserService } from './service/user.service';
 import { LoginComponent } from './component/login/login.component';
 import { MenuFormComponent } from './component/menu/menu-form.component';
 import { MenuGroupFormComponent } from './component/menu/menu-group-form.component';
-import { ProgramFormComponent } from './component/menu/program-form.component';
+import { ProgramFormComponent } from './component/program/program-form.component';
 import { AuthorityFormComponent } from './component/authority/authority-form.component';
 import { AuthorityGridComponent } from './component/authority/authority-grid.component';
 import { AuthorityComponent } from './component/authority/authority.component';
 import { UserGridComponent } from './component/user/user-grid.component';
 import { UserFormComponent } from './component/user/user-form.component';
 import { UserComponent } from './component/user/user.component';
+import { ProgramGridComponent } from './component/program/program-grid.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { UserComponent } from './component/user/user.component';
     MenuFormComponent,
     MenuGroupFormComponent,
     ProgramFormComponent,
+    ProgramGridComponent,
     AuthorityFormComponent,
     AuthorityGridComponent,
     AuthorityComponent
@@ -58,6 +60,7 @@ import { UserComponent } from './component/user/user.component';
     MenuFormComponent,
     MenuGroupFormComponent,
     ProgramFormComponent,
+    ProgramGridComponent,
     AuthorityFormComponent,
     AuthorityGridComponent,
     AuthorityComponent
