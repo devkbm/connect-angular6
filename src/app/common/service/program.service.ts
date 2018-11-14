@@ -38,4 +38,13 @@ export class ProgramService extends DataService {
     );
   }
 
+  deleteProgram(id: string): Observable<ResponseObject<Program>> {
+    const url = `${this.API_URI}/${id}`;
+    return this.http
+              .delete<ResponseObject<Program>>(url, {headers: this.getAuthorizedHttpHeaders()})
+              .pipe(
+                catchError((err) => Observable.throw(err))
+              );
+  }
+
 }

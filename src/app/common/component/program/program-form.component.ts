@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -21,6 +21,12 @@ export class ProgramFormComponent implements OnInit {
 
   programForm: FormGroup;
 
+  @Output()
+  dataSaved = new EventEmitter();
+
+  @Output()
+  dataDeleted = new EventEmitter();
+
   constructor(private fb: FormBuilder,
               private programService: ProgramService,
               private appAlarmService: AppAlarmService) { }
@@ -35,7 +41,7 @@ export class ProgramFormComponent implements OnInit {
     });
   }
 
-  private getProgram() {
+  public getProgram() {
     this.programService
       .getProgram(this.programForm.get('programCode').value)
       .subscribe(
@@ -54,12 +60,28 @@ export class ProgramFormComponent implements OnInit {
       );
   }
 
-  private submitProgram() {
+  public submitProgram() {
     this.programService
-      .registerProgram(this.programForm.value)
+        .registerProgram(this.programForm.value)
+        .subscribe(
+          (model: ResponseObject<Program>) => {
+            this.appAlarmService.changeMessage(model.message);
+            this.dataSaved.emit(this.programForm.value);
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {}
+        );
+  }
+
+  public deleteProgram() {
+    this.programService
+      .deleteProgram(this.programForm.get('programCode').value)
       .subscribe(
-        (model: ResponseObject<Program>) => {
+        (model: ResponseObject<Program>) => {          
           this.appAlarmService.changeMessage(model.message);
+          this.dataDeleted.emit(this.programForm.value);
         },
         (err) => {
           console.log(err);

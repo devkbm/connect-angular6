@@ -16,6 +16,7 @@ import { UserFormComponent } from '../component/user/user-form.component';
 import { UserGridComponent } from '../component/user/user-grid.component';
 import { UserComponent } from '../component/user/user.component';
 import { ProgramGridComponent } from '../component/program/program-grid.component';
+import { ProgramComponent } from '../component/program/program.component';
 
 const layoutroutes: Routes = [
   {
@@ -30,6 +31,7 @@ const layoutroutes: Routes = [
       {path: 'menuGroupForm', component: MenuGroupFormComponent},
       {path: 'programForm',   component: ProgramFormComponent},
       {path: 'programGrid',   component: ProgramGridComponent},
+      {path: 'program',       component: ProgramComponent},
       {path: 'authForm',      component: AuthorityFormComponent},
       {path: 'authGrid',      component: AuthorityGridComponent},
       {path: 'auth',          component: AuthorityComponent}

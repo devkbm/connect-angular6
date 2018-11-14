@@ -68,7 +68,9 @@
 
   <nz-layout>    
       <nz-header>    
-          <button (click)="this.isCollapsed = !this.isCollapsed">AA</button>
+          <button nz-button [nzType]="'primary'" (click)="this.isCollapsed = !this.isCollapsed">
+            <i nz-icon [type]="this.isCollapsed?'menu-unfold':'menu-fold'"></i>
+          </button>
           <nz-input-group [nzSuffix]="suffixIconSearch" style="width: 200px">
             <input type="text" nz-input placeholder="input search text">
           </nz-input-group>          
