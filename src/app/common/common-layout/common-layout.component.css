@@ -1,9 +1,11 @@
 .logo {
-    width: 130px;
-    height: 31px;
+    width: 200px;
+    height: 49px;
     background: rgba(255,255,255,.2);
-    margin: 16px 28px 16px 0;
+    margin: 16px 28px 0px 0;
     float: left;
+    text-align: center;
+    border-bottom: 1px solid rgb(232, 232, 232);
 }
 
 .sidebar {

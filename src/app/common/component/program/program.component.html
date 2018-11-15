@@ -10,7 +10,7 @@
       <button 
           nz-button         
           (click)="initForm(programForm)">
-          <i nz-icon type="search"></i>
+          <i nz-icon type="form" theme="outline"></i>          
           신규
       </button>
       <nz-divider nzType="vertical"></nz-divider>  
@@ -21,6 +21,7 @@
           nzTitle="저장하시겠습니까?" 
           (nzOnConfirm)="saveProgram(programForm)"
           (nzOnCancel)="false">
+          <i nz-icon type="save" theme="outline"></i>
           저장
       </button>
       <nz-divider nzType="vertical"></nz-divider>
@@ -31,6 +32,7 @@
           nzTitle="삭제하시겠습니까?" 
           (nzOnConfirm)="deleteProgram(programForm)" 
           (nzOnCancel)="false">
+          <i nz-icon type="delete" theme="outline"></i>
           삭제
       </button>    
   </div>
@@ -59,8 +61,14 @@
             (dataDeleted)="getProgramList(programGrid)">
         </app-program-form>
         <div class="footer">
-            <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
-            <button type="button" (click)="saveProgram(programForm)" class="ant-btn ant-btn-primary"><span>Submit</span></button>
+            <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;">
+                <i nz-icon type="close" theme="outline"></i>
+                <span>Cancel</span>
+            </button>
+            <button type="button" (click)="saveProgram(programForm)" class="ant-btn ant-btn-primary">
+                <i nz-icon type="save" theme="outline"></i>
+                <span>Submit</span>
+            </button>
         </div>
     </nz-drawer>
   

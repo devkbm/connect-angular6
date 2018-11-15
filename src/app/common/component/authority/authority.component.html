@@ -3,14 +3,14 @@
         <button 
             nz-button         
             (click)="getAuthorityList(authGrid)">
-            <i nz-icon type="search"></i>
+            <i nz-icon type="search" theme="outline"></i>
             조회
         </button>        
         <nz-divider nzType="vertical"></nz-divider>  
         <button 
             nz-button         
             (click)="initForm(authForm)">
-            <i nz-icon type="search"></i>
+            <i nz-icon type="form" theme="outline"></i>
             신규
         </button>
         <nz-divider nzType="vertical"></nz-divider>  
@@ -21,6 +21,7 @@
             nzTitle="저장하시겠습니까?" 
             (nzOnConfirm)="saveAuthority(authForm)"
             (nzOnCancel)="false">
+            <i nz-icon type="save" theme="outline"></i>
             저장
         </button>
         <nz-divider nzType="vertical"></nz-divider>
@@ -31,12 +32,13 @@
             nzTitle="삭제하시겠습니까?" 
             (nzOnConfirm)="deleteAuthority(authForm)" 
             (nzOnCancel)="false">
+            <i nz-icon type="delete" theme="outline"></i>
             삭제
         </button>    
     </div>
 </div>
 <div nz-row>
-    <div nz-col nzSpan="8" style="height: 720px">
+    <div nz-col nzSpan="14" style="height: 720px">
         <h3>권한 목록</h3>
         <app-authority-grid 
             id="authGrid"                     
@@ -44,7 +46,7 @@
             (rowSelected)="selectedItem($event, authForm.authorityForm)">
         </app-authority-grid>
     </div>
-    <div nz-col nzSpan="16">
+    <div nz-col nzSpan="10">
         <app-authority-form 
             id="authForm"
             #authForm
