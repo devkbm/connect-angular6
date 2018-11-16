@@ -37,40 +37,37 @@
       </button>    
   </div>
 </div>
-<div nz-row>
-  <div nz-col nzSpan="24" style="display: grid; width: 100%; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr;" >
-      <h3>프로그램 목록</h3>
-      <app-program-grid 
-          id="programGrid"                               
-          #programGrid         
-          style="grid-row: 1/1; grid-column: 1/1; overflow: hidden;"         
-          (rowSelected)="selectedItem($event, programForm.programForm)">
-      </app-program-grid>
-  </div>
-  
-    <nz-drawer 
-        [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" 
-        [nzMaskClosable]="false" 
-        [nzWidth]="720" 
-        [nzVisible]="visible" 
-        nzTitle="프로그램" 
-        (nzOnClose)="close()">            
-        <app-program-form 
-            id="programForm"
-            #programForm
-            (dataSaved)="applyGridSavedData(programForm, programGrid)"
-            (dataDeleted)="getProgramList(programGrid)">
-        </app-program-form>
-        <div class="footer">
-            <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;">
-                <i nz-icon type="close" theme="outline"></i>
-                <span>Cancel</span>
-            </button>
-            <button type="button" (click)="saveProgram(programForm)" class="ant-btn ant-btn-primary">
-                <i nz-icon type="save" theme="outline"></i>
-                <span>Submit</span>
-            </button>
-        </div>
-    </nz-drawer>
-  
-</div>
+
+<div style="display: grid; grid-template-rows: 30px 78vh;" >
+    <h3>프로그램 목록</h3>
+    <app-program-grid 
+        id="programGrid"                               
+        #programGrid                   
+        (rowSelected)="selectedItem($event, programForm.programForm)">
+    </app-program-grid>      
+</div>  
+
+<nz-drawer 
+    [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" 
+    [nzMaskClosable]="false" 
+    [nzWidth]="720" 
+    [nzVisible]="visible" 
+    nzTitle="프로그램" 
+    (nzOnClose)="close()">            
+    <app-program-form 
+        id="programForm"
+        #programForm
+        (dataSaved)="applyGridSavedData(programForm, programGrid)"
+        (dataDeleted)="getProgramList(programGrid)">
+    </app-program-form>
+    <div class="footer">
+        <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;">
+            <i nz-icon type="close" theme="outline"></i>
+            <span>Cancel</span>
+        </button>
+        <button type="button" (click)="saveProgram(programForm)" class="ant-btn ant-btn-primary">
+            <i nz-icon type="save" theme="outline"></i>
+            <span>Submit</span>
+        </button>
+    </div>
+</nz-drawer>
