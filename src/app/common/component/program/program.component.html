@@ -38,11 +38,12 @@
   </div>
 </div>
 <div nz-row>
-  <div nz-col nzSpan="24" style="height: 'calc(100% - 55px)'">
+  <div nz-col nzSpan="24" style="display: grid; width: 100%; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr;" >
       <h3>프로그램 목록</h3>
       <app-program-grid 
-          id="programGrid"                     
-          #programGrid                  
+          id="programGrid"                               
+          #programGrid         
+          style="grid-row: 1/1; grid-column: 1/1; overflow: hidden;"         
           (rowSelected)="selectedItem($event, programForm.programForm)">
       </app-program-grid>
   </div>

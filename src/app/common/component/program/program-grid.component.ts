@@ -38,7 +38,7 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
   ngOnInit() {
     this.getProgramList();
 
-    this.setWidthAndHeight('100%', '700px');
+    // this.setWidthAndHeight('100%', '700px');
   }
 
   public getProgramList(): void {

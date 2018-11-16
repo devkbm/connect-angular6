@@ -1,17 +1,32 @@
 .logo {
     width: 200px;
-    height: 49px;
-    background: rgba(255,255,255,.2);
-    margin: 16px 28px 0px 0;
+    height: 48px;
+    background-color: rgba(255,255,255,.2);    
     float: left;
-    text-align: center;
+    text-align: center;    
     border-bottom: 1px solid rgb(232, 232, 232);
 }
 
 .sidebar {
     background: white;
+    height: 100vh;    
 }
 
 .sidemenugroup {
     width: 200px;
+}
+
+.header {
+    height: 48px;
+}
+
+.main-content {
+    margin: 24px 16px 0px 16px;     
+    background-color: white;        
+}
+
+.footer {
+    height: 32px;
+    text-align: center; 
+    background-color: green;
 }

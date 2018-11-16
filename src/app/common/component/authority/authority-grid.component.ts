@@ -36,7 +36,7 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
     ngOnInit() {
         this.getAuthority();
 
-        this.setWidthAndHeight('100%', '700px');
+        //this.setWidthAndHeight('100%', '100%');
     }
 
     public getAuthority(): void {

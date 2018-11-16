@@ -38,11 +38,13 @@
     </div>
 </div>
 <div nz-row>
-    <div nz-col nzSpan="14" style="height: 720px">
+    <!-- -->
+    <div nz-col nzSpan="14" style="display: flex; flex-direction: column; height: 100%;">
         <h3>권한 목록</h3>
         <app-authority-grid 
             id="authGrid"                     
-            #authGrid                  
+            #authGrid               
+            style="flex: 1; display:flex; flex-basis: 100%;"                    
             (rowSelected)="selectedItem($event, authForm.authorityForm)">
         </app-authority-grid>
     </div>
