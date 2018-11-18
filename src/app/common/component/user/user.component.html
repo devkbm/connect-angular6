@@ -15,7 +15,7 @@
       <button 
           nz-button         
           (click)="initForm(userForm)">
-          <i nz-icon type="search"></i>
+          <i nz-icon type="form" theme="outline"></i>          
           신규
       </button>
       <nz-divider nzType="vertical"></nz-divider>  
@@ -26,6 +26,7 @@
           nzTitle="저장하시겠습니까?" 
           (nzOnConfirm)="saveUser(userForm)"
           (nzOnCancel)="false">
+          <i nz-icon type="save" theme="outline"></i>
           저장
       </button>
       <nz-divider nzType="vertical"></nz-divider>
@@ -36,25 +37,22 @@
           nzTitle="삭제하시겠습니까?" 
           (nzOnConfirm)="deleteUser(userForm)" 
           (nzOnCancel)="false">
+          <i nz-icon type="delete" theme="outline"></i>
           삭제
       </button>    
   </div>
 </div>
-<div nz-row>
-  <div nz-col nzSpan="8" style="height: 720px">
-    <h3>사용자 목록</h3>      
+<div style="display: grid; grid-template-rows: 30px 76vh;" >  
+    <h3 style="grid-column: span 2">사용자 목록</h3>      
     <app-user-grid
         id="userGrid"                     
         #userGrid                  
         (rowSelected)="selectedItem($event, userForm)">
-    </app-user-grid>
-  </div>
-  <div nz-col nzSpan="16">
+    </app-user-grid>            
     <app-user-form    
         id="userForm"
         #userForm
         (dataSaved)="applyGridSavedData(userForm, userGrid)"
         (dataDeleted)="getUserList(userGrid)">
-    </app-user-form>
-  </div>
+    </app-user-form>  
 </div>

@@ -39,8 +39,6 @@ export class UserGridComponent extends AggridFunction implements OnInit {
 
   ngOnInit() {
     this.getUserList();
-
-    this.setWidthAndHeight('100%', '700px');
   }
 
   public getUserList(): void {
