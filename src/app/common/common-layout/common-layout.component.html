@@ -4,8 +4,8 @@
     class="sidebar"
     nzCollapsible 
     [(nzCollapsed)]="isCollapsed" 
-    [nzCollapsedWidth]="0"
-    [nzWidth]="200"
+    [nzCollapsedWidth]="0"    
+    [nzWidth]="200"    
     [nzBreakpoint]="'lg'">
 
     <div class="logo">Connect</div>
@@ -29,7 +29,7 @@
       (nzClick)="selectMenu($event)">
     </nz-tree>   -->
     
-    <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" style="height: 80vh">
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" style="height: 100%">
       <ul *ngFor="let level1 of menuItems">
         <li nz-menu-item *ngIf="level1.menuType == 'ITEM'" (click)="selectMenuItem(level1.url)">
             {{level1.title}}

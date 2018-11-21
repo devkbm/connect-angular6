@@ -82,14 +82,17 @@ export class UserFormComponent implements OnInit {
   }
 
   public registerUser() {
-    /*if ( this.isValidPassword !== true ) {
-      return;
-    }*/
+
+    // tslint:disable-next-line:forin
+    for (const i in this.userForm.controls) {
+      this.userForm.controls[ i ].markAsDirty();
+      this.userForm.controls[ i ].updateValueAndValidity();
+    }
 
     this.userService
       .registerUser(this.userForm.value)
       .subscribe(
-        (model: ResponseObject<User>) => {          
+        (model: ResponseObject<User>) => {
           this.appAlarmService.changeMessage(model.message);
           this.dataSaved.emit(this.userForm.value);
         },
@@ -106,7 +109,7 @@ export class UserFormComponent implements OnInit {
     this.userService
       .deleteUser(this.userForm.value)
       .subscribe(
-        (model: ResponseObject<User>) => {          
+        (model: ResponseObject<User>) => {
           this.appAlarmService.changeMessage(model.message);
           this.dataDeleted.emit(this.userForm.value);
         },
@@ -114,19 +117,24 @@ export class UserFormComponent implements OnInit {
           console.log(err);
         },
         () => {
-          this.popup = false;          
+          this.popup = false;
         }
       );
   }
 
   protected checkUser() {
+    const userId: string = this.userForm.get('userId').value;
+
+    this.userForm.get('userId').markAsDirty();
+    this.userForm.get('userId').updateValueAndValidity();
+
     this.userService
       .checkUser(this.userForm.get('userId').value)
       .subscribe(
-        (model: ResponseObject<User>) => {          
+        (model: ResponseObject<User>) => {
           this.appAlarmService.changeMessage(model.message);
         },
-        (err: AppError) => {          
+        (err: AppError) => {
           if (err instanceof UserNotFoundError) {
             console.log('유저정보가 없음');
           }

@@ -43,12 +43,8 @@ export class UserComponent implements OnInit {
     if ( node != null ) {
       grid.setRowData(node, form.userForm.value);
     } else {
-      grid.addRow(form.userForm.value);
+      grid.getUserList();
     }
-  }
-
-  test(form: UserFormComponent, grid: UserGridComponent) {
-    grid.selectCell(1, 'userId');
   }
 
 }
