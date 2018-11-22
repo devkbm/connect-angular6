@@ -168,7 +168,7 @@ export class MenuFormComponent implements OnInit {
     this.menuService
       .getMenuTypeList()
       .subscribe(
-        (model: ResponseList<any>) => {          
+        (model: ResponseList<any>) => {
           if (model.total > 0) {
             this.menuTypeList = model.data;
           } else {

@@ -27,6 +27,8 @@ import { UserComponent } from './component/user/user.component';
 import { ProgramFormComponent } from './component/program/program-form.component';
 import { ProgramGridComponent } from './component/program/program-grid.component';
 import { ProgramComponent } from './component/program/program.component';
+import { MenuGroupGridComponent } from './component/menu/menu-group-grid.component';
+import { MenuGridComponent } from './component/menu/menu-grid.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { ProgramComponent } from './component/program/program.component';
     UserGridComponent,
     UserComponent,
     MenuFormComponent,
+    MenuGridComponent,
     MenuGroupFormComponent,
+    MenuGroupGridComponent,
     ProgramFormComponent,
     ProgramGridComponent,
     ProgramComponent,
