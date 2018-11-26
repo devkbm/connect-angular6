@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuGroupGridComponent } from './menu-group-grid.component';
 import { MenuGridComponent } from './menu-grid.component';
+import { MenuFormComponent } from './menu-form.component';
 
 @Component({
   selector: 'app-menu',
@@ -9,8 +10,8 @@ import { MenuGridComponent } from './menu-grid.component';
 })
 export class MenuComponent implements OnInit {
 
-  menuGroupFormVisible = false;
-  menuFormVisible;
+  protected menuGroupFormVisible = false;
+  protected menuFormVisible = false;
 
   constructor() { }
 
@@ -23,6 +24,16 @@ export class MenuComponent implements OnInit {
 
   menuGroupFormClose(): void {
     this.menuGroupFormVisible = false;
+  }
+
+  menuFormOpen(item, form: MenuFormComponent): void {
+    this.menuFormVisible = true;
+
+    form.getMenu(item.menuGroup.menuGroupCode, item.menuCode);
+  }
+
+  menuFormClose(): void {
+    this.menuFormVisible = false;
   }
 
   getMenuGroupList(grid: MenuGroupGridComponent): void {

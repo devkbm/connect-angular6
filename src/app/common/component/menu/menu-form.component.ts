@@ -27,7 +27,7 @@ export class MenuFormComponent implements OnInit {
   @Input()
   menuGroupCode: string;
 
-  menuForm: FormGroup;
+  protected menuForm: FormGroup;
 
   /**
    * 상위 메뉴 트리
@@ -60,9 +60,10 @@ export class MenuFormComponent implements OnInit {
     this.getMenuGroupList();
   }
 
-  private getMenu() {
+  public getMenu(menuGroupCode: string, menuCode: string) {
+
     this.menuService
-      .getMenu(this.menuForm.value)
+      .getMenu(menuGroupCode, menuCode)
       .subscribe(
         (model: ResponseObject<Menu>) => {
           console.log(model);
