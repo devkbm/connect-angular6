@@ -67,7 +67,7 @@ export class MenuService extends DataService {
   }
 
   getMenuList(menuGroupCode: String): Observable<ResponseList<Menu>> {
-    const url = `${this.API_URI}/${menuGroupCode}/menu`;
+    const url = `${this.API_URI}/menugroup/${menuGroupCode}/menu`;
     return this.http
               .get<ResponseList<Menu>>(url, {headers: this.getAuthorizedHttpHeaders()})
               .pipe(

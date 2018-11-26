@@ -1,0 +1,57 @@
+<div nz-row class="btn-group">    
+  <div nz-col [nzSpan]="24" style="text-align: right;">
+      <button 
+          nz-button         
+          (click)="getMenuGroupList(menuGroupGrid)">
+          <i nz-icon type="search"></i>
+          조회
+      </button>        
+      <nz-divider nzType="vertical"></nz-divider>  
+  </div>
+</div>
+
+<div style="display: grid; grid-template-rows: 30px 79vh; grid-template-columns: 1fr 1fr">  
+  <div><h3>메뉴 그룹 목록</h3></div>
+  <div><h3>메뉴 목록</h3></div>
+  <div>        
+    <app-menu-group-grid 
+      #menuGroupGrid                   
+      id="menuGroupGrid"                                       
+      (rowSelected)="selectMenuGroup($event, menuGrid)">
+    </app-menu-group-grid>      
+  </div>  
+  
+  <div>    
+    <app-menu-grid 
+      id="menuGrid"                               
+      #menuGrid                   
+      (rowSelected)="menuGroupFormOpen()">
+    </app-menu-grid>      
+  </div>
+</div>  
+
+
+<nz-drawer 
+    [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" 
+    [nzMaskClosable]="false" 
+    [nzWidth]="720" 
+    [nzVisible]="menuGroupFormVisible" 
+    nzTitle="메뉴그룹" 
+    (nzOnClose)="menuGroupFormClose()">            
+    <app-menu-group-form 
+        id="programForm"
+        #programForm
+        (dataSaved)="applyGridSavedData(programForm, programGrid)"
+        (dataDeleted)="getProgramList(programGrid)">
+    </app-menu-group-form>
+    <div class="footer">
+        <button type="button" (click)="menuGroupFormClose()" class="ant-btn" style="margin-right: 8px;">
+            <i nz-icon type="close" theme="outline"></i>
+            <span>Cancel</span>
+        </button>
+        <button type="button" (click)="saveProgram(programForm)" class="ant-btn ant-btn-primary">
+            <i nz-icon type="save" theme="outline"></i>
+            <span>Submit</span>
+        </button>
+    </div>
+</nz-drawer>

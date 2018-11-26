@@ -27,13 +27,13 @@ export class MenuGridComponent extends AggridFunction implements OnInit {
     private appAlarmService: AppAlarmService) {
       super([
         {headerName: 'No',            valueGetter: 'node.rowIndex + 1', width: 80 },
-        {headerName: '메뉴그룹코드',  field: 'menuGroupCode',     width: 150 },
-        {headerName: '메뉴코드',      field: 'menuCode',          width: 200 },
-        {headerName: '메뉴명',        field: 'menuName',          width: 200 },
-        {headerName: '메뉴타입',      field: 'menuType',          width: 200 },
-        {headerName: '상위메뉴',      field: 'parentMenuCode',    width: 200 },
-        {headerName: '순번',          field: 'sequence',          width: 200 },
-        {headerName: '프로그램',      field: 'program',           width: 300 }
+        {headerName: '메뉴그룹코드',  field: 'menuGroup.menuGroupCode', width: 80 },
+        {headerName: '메뉴코드',      field: 'menuCode',                width: 100 },
+        {headerName: '메뉴명',        field: 'menuName',                width: 150 },
+        {headerName: '메뉴타입',      field: 'menuType.name',           width: 100 },
+        {headerName: '상위메뉴',      field: 'parent.menuCode',         width: 100 },
+        {headerName: '순번',          field: 'sequence',                width: 80 },
+        {headerName: '프로그램',      field: 'program.programCode',     width: 100 }
       ]);
 
       this.getRowNodeId = function(data) {
@@ -42,6 +42,7 @@ export class MenuGridComponent extends AggridFunction implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   public getMenuList() {

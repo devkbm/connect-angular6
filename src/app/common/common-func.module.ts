@@ -29,6 +29,7 @@ import { ProgramGridComponent } from './component/program/program-grid.component
 import { ProgramComponent } from './component/program/program.component';
 import { MenuGroupGridComponent } from './component/menu/menu-group-grid.component';
 import { MenuGridComponent } from './component/menu/menu-grid.component';
+import { MenuComponent } from './component/menu/menu.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { MenuGridComponent } from './component/menu/menu-grid.component';
     MenuGridComponent,
     MenuGroupFormComponent,
     MenuGroupGridComponent,
+    MenuComponent,
     ProgramFormComponent,
     ProgramGridComponent,
     ProgramComponent,

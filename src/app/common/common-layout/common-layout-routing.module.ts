@@ -17,6 +17,9 @@ import { UserGridComponent } from '../component/user/user-grid.component';
 import { UserComponent } from '../component/user/user.component';
 import { ProgramGridComponent } from '../component/program/program-grid.component';
 import { ProgramComponent } from '../component/program/program.component';
+import { MenuGridComponent } from '../component/menu/menu-grid.component';
+import { MenuGroupGridComponent } from '../component/menu/menu-group-grid.component';
+import { MenuComponent } from '../component/menu/menu.component';
 
 const layoutroutes: Routes = [
   {
@@ -27,8 +30,11 @@ const layoutroutes: Routes = [
       {path: 'userForm',      component: UserFormComponent},
       {path: 'userGrid',      component: UserGridComponent},
       {path: 'user',          component: UserComponent},
+      {path: 'menu',          component: MenuComponent},
       {path: 'menuForm',      component: MenuFormComponent},
+      {path: 'menuList',      component: MenuGridComponent},
       {path: 'menuGroupForm', component: MenuGroupFormComponent},
+      {path: 'menuGroupList', component: MenuGroupGridComponent},
       {path: 'programForm',   component: ProgramFormComponent},
       {path: 'programGrid',   component: ProgramGridComponent},
       {path: 'program',       component: ProgramComponent},

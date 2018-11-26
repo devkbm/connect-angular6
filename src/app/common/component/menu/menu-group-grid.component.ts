@@ -34,6 +34,7 @@ export class MenuGroupGridComponent extends AggridFunction implements OnInit {
   }
 
   ngOnInit() {
+    this.getMenuGroupList();    
   }
 
   public getMenuGroupList(): void {
