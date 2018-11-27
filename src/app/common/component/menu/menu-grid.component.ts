@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 
-import { AggridFunction } from '../aggrid-function';
+import { AggridFunction } from '../../grid/aggrid-function';
 
 import { MenuService } from '../../service/menu.service';
 import { AppAlarmService } from '../../service/app-alarm.service';

@@ -5,7 +5,7 @@ import { AppAlarmService } from '../../service/app-alarm.service';
 
 import { Authority } from '../../model/authority';
 import { ResponseList } from '../../model/response-list';
-import { AggridFunction } from '../aggrid-function';
+import { AggridFunction } from '../../grid/aggrid-function';
 
 @Component({
   selector: 'app-authority-grid',

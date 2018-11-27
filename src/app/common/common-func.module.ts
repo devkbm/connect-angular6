@@ -30,6 +30,7 @@ import { ProgramComponent } from './component/program/program.component';
 import { MenuGroupGridComponent } from './component/menu/menu-group-grid.component';
 import { MenuGridComponent } from './component/menu/menu-grid.component';
 import { MenuComponent } from './component/menu/menu.component';
+import { ButtonRendererComponent } from './grid/renderer/button-renderer.component';
 
 
 @NgModule({
@@ -40,12 +41,13 @@ import { MenuComponent } from './component/menu/menu.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgZorroAntdModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([ButtonRendererComponent]),
     AppRoutingModule,
     BoardModule
   ],
   declarations: [
     LoginComponent,
+    ButtonRendererComponent,
     UserFormComponent,
     UserGridComponent,
     UserComponent,

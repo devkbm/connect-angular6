@@ -5,7 +5,7 @@ import { AppAlarmService } from '../../service/app-alarm.service';
 
 import { ResponseList } from '../../model/response-list';
 import { Program } from '../../model/Program';
-import { AggridFunction } from '../aggrid-function';
+import { AggridFunction } from '../../grid/aggrid-function';
 
 @Component({
   selector: 'app-program-grid',

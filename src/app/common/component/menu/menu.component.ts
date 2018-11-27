@@ -44,8 +44,7 @@ export class MenuComponent implements OnInit {
     grid.getMenuList();
   }
 
-  selectMenuGroup(item, grid: MenuGridComponent): void {
-    console.log(item);
+  selectMenuGroup(item, grid: MenuGridComponent): void {    
     grid.menuGroupCode = item.menuGroupCode;
     grid.getMenuList();
   }

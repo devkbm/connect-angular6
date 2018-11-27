@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AggridFunction } from '../aggrid-function';
+import { AggridFunction } from '../../grid/aggrid-function';
 
 import { UserService } from '../../service/user.service';
 import { AppAlarmService } from '../../service/app-alarm.service';

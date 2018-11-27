@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ButtonRendererComponent } from './renderer/button-renderer.component';
 
 @Injectable()
 export class AggridFunction {
@@ -6,13 +7,18 @@ export class AggridFunction {
     protected getRowNodeId;
     protected gridApi;
     protected gridColumnApi;
+    protected frameworkComponents: any;
 
     protected style = {
         width: '100%',
         height: '100%'
     };
 
-    constructor(protected columnDefs: object[]) { }
+    constructor(protected columnDefs: object[]) { 
+        this.frameworkComponents = {
+            buttonRenderer: ButtonRendererComponent
+            };
+    }
 
     protected onGridReady(params) {
         this.gridApi = params.api;
