@@ -1,3 +1,4 @@
+import { MenuGroupFormComponent } from './menu-group-form.component';
 import { Component, OnInit } from '@angular/core';
 import { MenuGroupGridComponent } from './menu-group-grid.component';
 import { MenuGridComponent } from './menu-grid.component';
@@ -18,8 +19,10 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  menuGroupFormOpen(): void {
+  menuGroupFormOpen(item, form: MenuGroupFormComponent): void {
     this.menuGroupFormVisible = true;
+
+    form.menuGroupForm.patchValue(item);
   }
 
   menuGroupFormClose(): void {
@@ -37,6 +40,7 @@ export class MenuComponent implements OnInit {
   }
 
   getMenuGroupList(grid: MenuGroupGridComponent): void {
+    this.menuGroupFormClose();
     grid.getMenuGroupList();
   }
 
@@ -44,7 +48,7 @@ export class MenuComponent implements OnInit {
     grid.getMenuList();
   }
 
-  selectMenuGroup(item, grid: MenuGridComponent): void {    
+  selectMenuGroup(item, grid: MenuGridComponent): void {
     grid.menuGroupCode = item.menuGroupCode;
     grid.getMenuList();
   }

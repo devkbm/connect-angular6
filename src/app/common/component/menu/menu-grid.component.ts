@@ -15,18 +15,40 @@ import { Menu } from '../../model/menu';
 })
 export class MenuGridComponent extends AggridFunction implements OnInit {
 
+  protected menuList: Menu[];
+
   @Output()
   rowSelected = new EventEmitter();
+
+  @Output()
+  editButtonClicked = new EventEmitter();
 
   @Input()
   menuGroupCode: string;
 
-  protected menuList: Menu[];
-
   constructor(private menuService: MenuService,
-    private appAlarmService: AppAlarmService) {
-      super([
-        {headerName: 'No',            valueGetter: 'node.rowIndex + 1', width: 80 },
+              private appAlarmService: AppAlarmService) {
+
+      super([]);
+
+      this.columnDefs = [
+        {
+          headerName: '',
+          width: 34,
+          cellStyle: {'text-align': 'center', 'padding': '0px'},
+          cellRenderer: 'buttonRenderer',
+          cellRendererParams: {
+            onClick: this.onEditButtonClick.bind(this),
+            label: '',
+            iconType: 'form'
+          }
+        },
+        {
+          headerName: 'No',
+          valueGetter: 'node.rowIndex + 1',
+          width: 70,
+          cellStyle: {'text-align': 'center'}
+        },
         {headerName: '메뉴그룹코드',  field: 'menuGroup.menuGroupCode', width: 80 },
         {headerName: '메뉴코드',      field: 'menuCode',                width: 100 },
         {headerName: '메뉴명',        field: 'menuName',                width: 150 },
@@ -34,7 +56,7 @@ export class MenuGridComponent extends AggridFunction implements OnInit {
         {headerName: '상위메뉴',      field: 'parent.menuCode',         width: 100 },
         {headerName: '순번',          field: 'sequence',                width: 80 },
         {headerName: '프로그램',      field: 'program.programCode',     width: 100 }
-      ]);
+      ];
 
       this.getRowNodeId = function(data) {
           return data.menuCode;
@@ -42,7 +64,10 @@ export class MenuGridComponent extends AggridFunction implements OnInit {
   }
 
   ngOnInit() {
+  }
 
+  private onEditButtonClick(e) {
+    this.editButtonClicked.emit(e.rowData);
   }
 
   public getMenuList() {

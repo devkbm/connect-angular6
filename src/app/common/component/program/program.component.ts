@@ -12,24 +12,13 @@ export class ProgramComponent implements OnInit {
 
   visible = false;
 
-  constructor(private drawerService: NzDrawerService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   open(): void {
-    // this.visible = true;
-
-    const drawerRef: NzDrawerRef = this.drawerService.create<ProgramFormComponent, { value: string }, string>({
-      nzTitle: 'Component',
-      nzContent: ProgramFormComponent,
-      nzContentParams: {
-        value: 'text'
-      }
-    });
-
-    //drawerRef.open();
-
+    this.visible = true;
   }
 
   close(): void {
@@ -37,6 +26,7 @@ export class ProgramComponent implements OnInit {
   }
 
   getProgramList(grid: ProgramGridComponent) {
+    this.close();
     grid.getProgramList();
   }
 

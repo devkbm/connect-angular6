@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -21,6 +21,15 @@ import { MenuGroup } from '../../model/menu-group';
 export class MenuGroupFormComponent implements OnInit {
 
   menuGroupForm: FormGroup;
+
+  @Output()
+  formSaved = new EventEmitter();
+
+  @Output()
+  formDeleted = new EventEmitter();
+
+  @Output()
+  formClosed = new EventEmitter();
 
   constructor(private fb: FormBuilder,
               private menuService: MenuService,
@@ -58,7 +67,7 @@ export class MenuGroupFormComponent implements OnInit {
       .registerMenuGroup(this.menuGroupForm.value)
       .subscribe(
         (model: ResponseObject<MenuGroup>) => {
-          console.log(model);
+          this.formSaved.emit(this.menuGroupForm.value);
           this.appAlarmService.changeMessage(model.total + '건의 메뉴그룹이 저장되었습니다.');
         },
         (err) => {
@@ -73,6 +82,7 @@ export class MenuGroupFormComponent implements OnInit {
       .deleteMenuGroup(this.menuGroupForm.get('menuGroupCode').value)
       .subscribe(
         (model: ResponseObject<MenuGroup>) => {
+          this.formDeleted.emit(this.menuGroupForm.value);
           this.appAlarmService.changeMessage(model.total + '건의 메뉴그룹이 삭제되었습니다.');
         },
         (err) => {
@@ -80,6 +90,10 @@ export class MenuGroupFormComponent implements OnInit {
         },
         () => { }
       );
+  }
+
+  public closeForm() {
+    this.formClosed.emit(this.menuGroupForm.value);
   }
 
 }

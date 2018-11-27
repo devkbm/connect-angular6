@@ -14,21 +14,42 @@ import { AggridFunction } from '../../grid/aggrid-function';
 })
 export class ProgramGridComponent extends AggridFunction implements OnInit {
 
+  protected programList: Program[];
+
   @Output()
   rowSelected = new EventEmitter();
 
-  protected programList: Program[];
+  @Output()
+  editButtonClicked = new EventEmitter();
 
   constructor(private programService: ProgramService,
               private appAlarmService: AppAlarmService) {
 
-    super([
-      {headerName: 'No',            valueGetter: 'node.rowIndex + 1', width: 80 },
-      {headerName: '프로그램코드',  field: 'programCode',     width: 150 },
-      {headerName: '프로그램명',    field: 'programName',     width: 200 },
+    super([]);
+
+    this.columnDefs = [
+      {
+        headerName: 'No',
+        valueGetter: 'node.rowIndex + 1',
+        width: 70,
+        cellStyle: {'text-align': 'center'}
+      },
+      {
+        headerName: '',
+        width: 34,
+        cellStyle: {'text-align': 'center', 'padding': '0px'},
+        cellRenderer: 'buttonRenderer',
+        cellRendererParams: {
+          onClick: this.onEditButtonClick.bind(this),
+          label: '',
+          iconType: 'form'
+        }
+      },
+      {headerName: '프로그램코드',   field: 'programCode',     width: 150 },
+      {headerName: '프로그램명',     field: 'programName',     width: 200 },
       {headerName: 'Url',           field: 'url',             width: 200 },
       {headerName: '설명',          field: 'description',     width: 300 }
-    ]);
+    ];
 
     this.getRowNodeId = function(data) {
         return data.programCode;
@@ -37,8 +58,10 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
 
   ngOnInit() {
     this.getProgramList();
+  }
 
-    // this.setWidthAndHeight('100%', '700px');
+  private onEditButtonClick(e) {
+    this.editButtonClicked.emit(e.rowData);
   }
 
   public getProgramList(): void {

@@ -14,34 +14,53 @@ import { ResponseList } from '../../model/response-list';
 })
 export class MenuGroupGridComponent extends AggridFunction implements OnInit {
 
+  protected menuGroupList: MenuGroup[];
+
   @Output()
   rowSelected = new EventEmitter();
-  
+
   @Output()
   editButtonClicked = new EventEmitter();
 
-  protected menuGroupList: MenuGroup[];
-
   constructor(private menuService: MenuService,
-              private appAlarmService: AppAlarmService) {    
+              private appAlarmService: AppAlarmService) {
 
-    super([]);    
+    super([]);
 
     this.columnDefs = [
-      {headerName: 'No',            valueGetter: 'node.rowIndex + 1', width: 80, headerClass: 'text-center' },
-      {headerName: '메뉴그룹코드',  field: 'menuGroupCode',     width: 150, cellStyle: {'text-align': 'center'} },
-      {headerName: '메뉴그룹명',    field: 'menuGroupName',     width: 200 },
-      {headerName: '설명',          field: 'description',       width: 300, headerClass: 'text-center' },
       {
-        headerName: 'action',     
-        width: 50, 
-        cellStyle: {'text-align': 'center'},
+        headerName: '',
+        width: 34,
+        cellStyle: {'text-align': 'center', 'padding': '0px'},
         cellRenderer: 'buttonRenderer',
         cellRendererParams: {
-          onClick: this.onBtnClick1.bind(this),
+          onClick: this.onEditButtonClick.bind(this),
           label: '',
           iconType: 'form'
         }
+      },
+      {
+        headerName: 'No',
+        valueGetter: 'node.rowIndex + 1',
+        width: 70,
+        cellStyle: {'text-align': 'center'}
+      },
+      {
+        headerName: '메뉴그룹코드',
+        field: 'menuGroupCode',
+        width: 120,
+        cellStyle: {'text-align': 'center'}
+      },
+      {
+        headerName: '메뉴그룹명',
+        field: 'menuGroupName',
+        width: 150
+      },
+      {
+        headerName: '설명',
+        field: 'description',
+        width: 300,
+        headerClass: 'text-center'
       }
     ];
 
@@ -50,13 +69,12 @@ export class MenuGroupGridComponent extends AggridFunction implements OnInit {
     };
   }
 
-  onBtnClick1(e) {
-    console.log(e.rowData);
+  private onEditButtonClick(e) {
     this.editButtonClicked.emit(e.rowData);
   }
 
   ngOnInit() {
-    this.getMenuGroupList();    
+    this.getMenuGroupList();
   }
 
   public getMenuGroupList(): void {

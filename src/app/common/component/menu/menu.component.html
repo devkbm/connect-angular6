@@ -17,7 +17,8 @@
     <app-menu-group-grid
       #menuGroupGrid
       id="menuGroupGrid"
-      (rowSelected)="selectMenuGroup($event, menuGrid)">
+      (rowSelected)="selectMenuGroup($event, menuGrid)"
+      (editButtonClicked)="menuGroupFormOpen($event, menuGroupForm)">
     </app-menu-group-grid>
   </div>
 
@@ -25,7 +26,8 @@
     <app-menu-grid
       id="menuGrid"
       #menuGrid
-      (rowSelected)="menuFormOpen($event, menuForm)">
+      (rowSelected)="true"
+      (editButtonClicked)="menuFormOpen($event, menuForm)">
     </app-menu-grid>
   </div>
 </div>
@@ -41,19 +43,10 @@
     <app-menu-group-form
         id="menuGroupForm"
         #menuGroupForm
-        (dataSaved)="applyGridSavedData(programForm, programGrid)"
-        (dataDeleted)="getProgramList(programGrid)">
+        (formSaved)="getMenuGroupList(menuGroupGrid)"
+        (formDeleted)="getMenuGroupList(menuGroupGrid)"
+        (formClosed)="true">
     </app-menu-group-form>
-    <div class="footer">
-        <button type="button" (click)="menuGroupFormClose()" class="ant-btn" style="margin-right: 8px;">
-            <i nz-icon type="close" theme="outline"></i>
-            <span>Cancel</span>
-        </button>
-        <button type="button" (click)="saveProgram(programForm)" class="ant-btn ant-btn-primary">
-            <i nz-icon type="save" theme="outline"></i>
-            <span>Submit</span>
-        </button>
-    </div>
 </nz-drawer>
 
 <nz-drawer
@@ -69,14 +62,4 @@
         (dataSaved)="applyGridSavedData(programForm, programGrid)"
         (dataDeleted)="getProgramList(programGrid)">
     </app-menu-form>
-    <div class="footer">
-        <button type="button" (click)="menuFormClose()" class="ant-btn" style="margin-right: 8px;">
-            <i nz-icon type="close" theme="outline"></i>
-            <span>Cancel</span>
-        </button>
-        <button type="button" (click)="saveProgram(programForm)" class="ant-btn ant-btn-primary">
-            <i nz-icon type="save" theme="outline"></i>
-            <span>Submit</span>
-        </button>
-    </div>
 </nz-drawer>

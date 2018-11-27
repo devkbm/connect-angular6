@@ -1,10 +1,12 @@
-<ag-grid-angular      
+<ag-grid-angular
     [ngStyle]="style"
     class="ag-theme-balham"
     [rowSelection]="'single'"
-    [rowData]="programList" 
+    [rowData]="programList"
     [columnDefs]="columnDefs"
     [getRowNodeId]="getRowNodeId"
-    (gridReady)="onGridReady($event)"    
+    [enableSorting]="true"
+    [frameworkComponents]="frameworkComponents"
+    (gridReady)="onGridReady($event)"
     (selectionChanged)="selectionChanged($event)">
 </ag-grid-angular>

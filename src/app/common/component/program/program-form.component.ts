@@ -22,10 +22,13 @@ export class ProgramFormComponent implements OnInit {
   programForm: FormGroup;
 
   @Output()
-  dataSaved = new EventEmitter();
+  formSaved = new EventEmitter();
 
   @Output()
-  dataDeleted = new EventEmitter();
+  formDeleted = new EventEmitter();
+
+  @Output()
+  formClosed = new EventEmitter();
 
   constructor(private fb: FormBuilder,
               private programService: ProgramService,
@@ -66,7 +69,7 @@ export class ProgramFormComponent implements OnInit {
         .subscribe(
           (model: ResponseObject<Program>) => {
             this.appAlarmService.changeMessage(model.message);
-            this.dataSaved.emit(this.programForm.value);
+            this.formSaved.emit(this.programForm.value);
           },
           (err) => {
             console.log(err);
@@ -79,15 +82,19 @@ export class ProgramFormComponent implements OnInit {
     this.programService
       .deleteProgram(this.programForm.get('programCode').value)
       .subscribe(
-        (model: ResponseObject<Program>) => {          
+        (model: ResponseObject<Program>) => {
           this.appAlarmService.changeMessage(model.message);
-          this.dataDeleted.emit(this.programForm.value);
+          this.formDeleted.emit(this.programForm.value);
         },
         (err) => {
           console.log(err);
         },
         () => {}
       );
+  }
+
+  public closeForm() {
+    this.formClosed.emit(this.programForm.value);
   }
 
 }

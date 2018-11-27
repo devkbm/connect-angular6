@@ -4,7 +4,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 @Component({
   selector: 'app-button-renderer',
   template: `
-    <button nz-button (click)="onClick($event)">
+    <button nz-button nzSize='small' (click)="onClick($event)">
       <i nz-icon [type]="iconType"></i>
       {{label}}
     </button>
@@ -12,7 +12,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
   styles: []
 })
 export class ButtonRendererComponent implements ICellRendererAngularComp {
-  
+
   params;
   label: string;
   iconType: string;
@@ -26,17 +26,18 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
   refresh(params: any): boolean {
     return true;
   }
-  
+
   onClick($event) {
     if (this.params.onClick instanceof Function) {
       // put anything into params u want pass into parents component
       const params = {
         event: $event,
-        rowData: this.params.node.data        
-      }
+        rowData: this.params.node.data
+      };
+
       this.params.onClick(params);
     }
   }
 
-  
+
 }

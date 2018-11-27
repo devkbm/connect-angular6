@@ -14,7 +14,7 @@ export class AggridFunction {
         height: '100%'
     };
 
-    constructor(protected columnDefs: object[]) { 
+    constructor(protected columnDefs: object[]) {
         this.frameworkComponents = {
             buttonRenderer: ButtonRendererComponent
             };
