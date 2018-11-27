@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramGridComponent } from './program-grid.component';
 import { ProgramFormComponent } from './program-form.component';
+import { NzDrawerService, NzDrawerRef } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-program',
@@ -11,13 +12,24 @@ export class ProgramComponent implements OnInit {
 
   visible = false;
 
-  constructor() { }
+  constructor(private drawerService: NzDrawerService) { }
 
   ngOnInit() {
   }
 
   open(): void {
-    this.visible = true;
+    // this.visible = true;
+
+    const drawerRef: NzDrawerRef = this.drawerService.create<ProgramFormComponent, { value: string }, string>({
+      nzTitle: 'Component',
+      nzContent: ProgramFormComponent,
+      nzContentParams: {
+        value: 'text'
+      }
+    });
+
+    //drawerRef.open();
+
   }
 
   close(): void {
