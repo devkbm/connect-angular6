@@ -21,10 +21,11 @@
     padding:0;
 }
 
-.main-content {    
+.main-content {
     margin: 24px 16px 0px 16px;
     background-color: white;
-    height: calc(100vh - 141px);    
+    height: calc(100vh - 141px);
+    overflow-y: auto;
 }
 
 .footer {

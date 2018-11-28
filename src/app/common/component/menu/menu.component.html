@@ -10,28 +10,35 @@
   </div>
 </div>
 
-<div style="display: grid; grid-template-rows: 30px 79vh; grid-template-columns: 1fr 1fr">
-  <div><h3>메뉴 그룹 목록</h3></div>
-  <div><h3>메뉴 목록</h3></div>
-  <div>
+<div class="content">
+  <h3>메뉴 그룹 목록1</h3>
+  <h3>메뉴 목록</h3>
     <app-menu-group-grid
       #menuGroupGrid
       id="menuGroupGrid"
       (rowSelected)="selectMenuGroup($event, menuGrid)"
       (editButtonClicked)="menuGroupFormOpen($event, menuGroupForm)">
     </app-menu-group-grid>
-  </div>
-
-  <div>
     <app-menu-grid
-      id="menuGrid"
-      #menuGrid
-      (rowSelected)="true"
-      (editButtonClicked)="menuFormOpen($event, menuForm)">
-    </app-menu-grid>
-  </div>
+    id="menuGrid"
+    #menuGrid
+    (rowSelected)="true"
+    (editButtonClicked)="menuFormOpen($event, menuForm)">
+  </app-menu-grid>
 </div>
 
+
+<!--
+<h3>메뉴 목록</h3>
+<div class="grid-wrapper">
+  <app-menu-grid
+    id="menuGrid"
+    #menuGrid
+    (rowSelected)="true"
+    (editButtonClicked)="menuFormOpen($event, menuForm)">
+  </app-menu-grid>
+</div>
+-->
 
 <nz-drawer
     [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"

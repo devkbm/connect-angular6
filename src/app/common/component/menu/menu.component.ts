@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   protected menuGroupFormVisible = false;
   protected menuFormVisible = false;
 
-  protected selectedMenuGroupCode:string = null;
+  protected selectedMenuGroupCode: string = null;
 
   constructor() { }
 
@@ -41,8 +41,8 @@ export class MenuComponent implements OnInit {
     this.menuFormVisible = false;
   }
 
-  getMenuGroupList(grid: MenuGroupGridComponent): void {    
-    this.menuGroupFormClose();    
+  getMenuGroupList(grid: MenuGroupGridComponent): void {
+    this.menuGroupFormClose();
     grid.getMenuGroupList();
   }
 
@@ -52,7 +52,7 @@ export class MenuComponent implements OnInit {
   }
 
   selectMenuGroup(item, grid: MenuGridComponent): void {
-    this.selectedMenuGroupCode = item.menuGroupCode;    
+    this.selectedMenuGroupCode = item.menuGroupCode;
     this.getMenuList(grid);
   }
 
