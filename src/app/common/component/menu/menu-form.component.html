@@ -1,27 +1,4 @@
 {{menuForm.value | json}}
-<div class="btn-group">
-    <button
-        nz-button
-        (click)="getMenu(menuForm.get('menuGroupCode').value, menuForm.get('menuCode').value)">
-        <i nz-icon type="search"></i>
-        조회
-    </button>
-    <button
-        nz-button
-        nzType="primary"
-        (click)="submitMenu()">
-        저장
-    </button>
-    <button
-        nz-button
-        nzType="danger"
-        nz-popconfirm
-        nzTitle="삭제하시겠습니까?"
-        (nzOnConfirm)="deleteMenu()"
-        (nzOnCancel)="false">
-        삭제
-    </button>
-</div>
 
 <form nz-form [formGroup]="menuForm">
 
@@ -177,3 +154,34 @@
     </nz-form-item>
 
 </form>
+
+<div class="footer">
+    <button
+        nz-button
+        (click)="closeForm()">
+        <i nz-icon type="form" theme="outline"></i>
+        닫기
+    </button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <button
+        nz-button
+        nzType="primary"
+        nz-popconfirm
+        nzTitle="저장하시겠습니까?"
+        (nzOnConfirm)="submitMenu()"
+        (nzOnCancel)="false">
+        <i nz-icon type="save" theme="outline"></i>
+        저장
+    </button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <button
+        nz-button
+        nzType="danger"
+        nz-popconfirm
+        nzTitle="삭제하시겠습니까?"
+        (nzOnConfirm)="deleteMenu()"
+        (nzOnCancel)="false">
+        <i nz-icon type="delete" theme="outline"></i>
+        삭제
+    </button>
+</div>

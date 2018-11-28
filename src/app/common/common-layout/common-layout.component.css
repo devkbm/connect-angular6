@@ -9,7 +9,7 @@
 
 .sidebar {
     background: white;
-    height: 87.8vh;
+    height: calc(100vh - 80px);
 }
 
 .sidemenugroup {
@@ -21,9 +21,10 @@
     padding:0;
 }
 
-.main-content {
+.main-content {    
     margin: 24px 16px 0px 16px;
     background-color: white;
+    height: calc(100vh - 141px);    
 }
 
 .footer {

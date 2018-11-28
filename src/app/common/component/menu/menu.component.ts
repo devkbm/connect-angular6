@@ -14,6 +14,8 @@ export class MenuComponent implements OnInit {
   protected menuGroupFormVisible = false;
   protected menuFormVisible = false;
 
+  protected selectedMenuGroupCode:string = null;
+
   constructor() { }
 
   ngOnInit() {
@@ -39,18 +41,19 @@ export class MenuComponent implements OnInit {
     this.menuFormVisible = false;
   }
 
-  getMenuGroupList(grid: MenuGroupGridComponent): void {
-    this.menuGroupFormClose();
+  getMenuGroupList(grid: MenuGroupGridComponent): void {    
+    this.menuGroupFormClose();    
     grid.getMenuGroupList();
   }
 
   getMenuList(grid: MenuGridComponent): void {
-    grid.getMenuList();
+    this.menuFormClose();
+    grid.getMenuList(this.selectedMenuGroupCode);
   }
 
   selectMenuGroup(item, grid: MenuGridComponent): void {
-    grid.menuGroupCode = item.menuGroupCode;
-    grid.getMenuList();
+    this.selectedMenuGroupCode = item.menuGroupCode;    
+    this.getMenuList(grid);
   }
 
 

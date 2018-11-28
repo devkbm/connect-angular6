@@ -19,14 +19,47 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
     @Output()
     rowSelected = new EventEmitter();
 
+    @Output()
+    rowDoubleClicked = new EventEmitter();
+
+    @Output()
+    editButtonClicked = new EventEmitter();
+
     constructor(private userService: UserService,
                 private appAlarmService: AppAlarmService) {
 
-        super([
-            {headerName: 'No',      valueGetter: 'node.rowIndex + 1', width: 80 },
-            {headerName: '권한',    field: 'authority',     width: 100 },
-            {headerName: '설명',    field: 'description',   width: 200 }
-          ]);
+        super([]);
+
+        this.columnDefs = [
+            {
+                headerName: '',
+                width: 34,
+                cellStyle: {'text-align': 'center', 'padding': '0px'},
+                cellRenderer: 'buttonRenderer',
+                cellRendererParams: {
+                  onClick: this.onEditButtonClick.bind(this),
+                  label: '',
+                  iconType: 'form'
+                }
+            },
+            {
+                headerName: 'No',
+                valueGetter: 'node.rowIndex + 1',
+                width: 70,
+                cellStyle: {'text-align': 'center'}
+            },            
+            {
+                headerName: '권한',    
+                field: 'authority',     
+                width: 100 
+            },
+            {
+                headerName: '설명',    
+                field: 'description',   
+                width: 500,
+                autoHeight: true 
+            }
+        ];
 
         this.getRowNodeId = function(data) {
             return data.authority;
@@ -34,9 +67,11 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
     }
 
     ngOnInit() {
-        this.getAuthority();
+        this.getAuthority();       
+    }
 
-        //this.setWidthAndHeight('100%', '100%');
+    private onEditButtonClick(e) {
+        this.editButtonClicked.emit(e.rowData);
     }
 
     public getAuthority(): void {
@@ -62,6 +97,10 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
         const selectedRows = this.gridApi.getSelectedRows();
 
         this.rowSelected.emit(selectedRows[0]);
+    }
+
+    private rowDbClicked(event) {    
+        this.rowDoubleClicked.emit(event.data);
     }
 
 }

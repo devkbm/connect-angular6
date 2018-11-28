@@ -20,6 +20,9 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
   rowSelected = new EventEmitter();
 
   @Output()
+  rowDoubleClicked = new EventEmitter();
+
+  @Output()
   editButtonClicked = new EventEmitter();
 
   constructor(private programService: ProgramService,
@@ -28,12 +31,6 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
     super([]);
 
     this.columnDefs = [
-      {
-        headerName: 'No',
-        valueGetter: 'node.rowIndex + 1',
-        width: 70,
-        cellStyle: {'text-align': 'center'}
-      },
       {
         headerName: '',
         width: 34,
@@ -45,6 +42,12 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
           iconType: 'form'
         }
       },
+      {
+        headerName: 'No',
+        valueGetter: 'node.rowIndex + 1',
+        width: 70,
+        cellStyle: {'text-align': 'center'}
+      },      
       {headerName: '프로그램코드',   field: 'programCode',     width: 150 },
       {headerName: '프로그램명',     field: 'programName',     width: 200 },
       {headerName: 'Url',           field: 'url',             width: 200 },
@@ -83,10 +86,14 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
         );
   }
 
-  private selectionChanged(event) {
+  private selectionChanged(event) {    
     const selectedRows = this.gridApi.getSelectedRows();
 
     this.rowSelected.emit(selectedRows[0]);
+  }
+
+  private rowDbClicked(event) {    
+    this.rowDoubleClicked.emit(event.data);
   }
 
 }

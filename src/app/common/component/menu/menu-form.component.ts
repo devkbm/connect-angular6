@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -24,19 +24,27 @@ import { MenuGroup } from '../../model/menu-group';
 })
 export class MenuFormComponent implements OnInit {
 
-  @Input()
-  menuGroupCode: string;
-
   protected menuForm: FormGroup;
+  protected programList;
+  protected menuGroupList;
+  protected menuTypeList;
 
   /**
    * 상위 메뉴 트리
-   */
+  */
   menuHiererachy: MenuHierarchy[];
 
-  programList;
-  menuGroupList;
-  menuTypeList;
+  @Input()
+  menuGroupCode: string;
+
+  @Output()
+  formSaved = new EventEmitter();
+
+  @Output()
+  formDeleted = new EventEmitter();
+
+  @Output()
+  formClosed = new EventEmitter();  
 
   constructor(private fb: FormBuilder,
               private menuService: MenuService,
@@ -86,6 +94,7 @@ export class MenuFormComponent implements OnInit {
       .registerMenu(this.menuForm.value)
       .subscribe(
         (model: ResponseObject<Menu>) => {
+          this.formSaved.emit(this.menuForm.value);
           this.appAlarmService.changeMessage(model.message);
         },
         (err) => {
@@ -100,6 +109,7 @@ export class MenuFormComponent implements OnInit {
       .deleteMenu(this.menuForm.value)
       .subscribe(
         (model: ResponseObject<Menu>) => {
+          this.formDeleted.emit(this.menuForm.value);
           this.appAlarmService.changeMessage(model.message);
         },
         (err) => {
@@ -107,6 +117,10 @@ export class MenuFormComponent implements OnInit {
         },
         () => { }
       );
+  }
+
+  public closeForm() {
+    this.formClosed.emit(this.menuForm.value);
   }
 
   private getMenuHierarchy(menuGroupCode: string): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthorityGridComponent } from './authority-grid.component';
 import { AuthorityFormComponent } from './authority-form.component';
 
@@ -9,42 +9,48 @@ import { AuthorityFormComponent } from './authority-form.component';
 })
 export class AuthorityComponent implements OnInit {
 
+  drawerVisible = false;
+
+  @ViewChild('authGrid')
+  grid: AuthorityGridComponent;
+
+  @ViewChild('authForm')
+  form: AuthorityFormComponent;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  selectedItem(item, form) {
-    form.patchValue(item);
+  closeDrawer() {
+    this.drawerVisible = false;
   }
 
-  getAuthorityList(grid: AuthorityGridComponent) {
-    grid.getAuthority();
+  openDrawer() {
+    this.drawerVisible = true;
   }
 
-  saveAuthority(form: AuthorityFormComponent) {
-    form.saveAuthority();
+  selectedItem(item) {
+    this.form.authorityForm.patchValue(item);    
   }
 
-  deleteAuthority(form: AuthorityFormComponent) {
-    form.deleteAuthority();
+  editDrawOpen(item) {
+    this.form.authorityForm.patchValue(item);
+    this.openDrawer();
   }
 
-  addRow(form: AuthorityFormComponent, grid: AuthorityGridComponent) {
-    grid.getRowNode(form.authorityForm.get('authority').value);
+  getAuthorityList() {
+    this.closeDrawer();
+    this.grid.getAuthority();
   }
 
-  initForm(form: AuthorityFormComponent) {
-    form.authorityForm.reset();
-  }
+  deleteAuthority() {
+    this.form.deleteAuthority();
+  }  
 
-  applyGridSavedData(form: AuthorityFormComponent, grid: AuthorityGridComponent) {
-    const node = grid.getRowNode(form.authorityForm.get('authority').value);
-    if ( node != null ) {
-      grid.setRowData(node, form.authorityForm.value);
-    } else {
-      grid.addRow(form.authorityForm.value);
-    }
-  }
+  initForm() {
+    this.form.authorityForm.reset();
+    this.openDrawer();
+  }  
 
 }

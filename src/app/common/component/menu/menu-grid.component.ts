@@ -70,10 +70,10 @@ export class MenuGridComponent extends AggridFunction implements OnInit {
     this.editButtonClicked.emit(e.rowData);
   }
 
-  public getMenuList() {
+  public getMenuList(menuGroupCode: string) {
 
     this.menuService
-        .getMenuList(this.menuGroupCode)
+        .getMenuList(menuGroupCode)
         .subscribe(
           (model: ResponseList<Menu>) => {
               if (model.total > 0) {

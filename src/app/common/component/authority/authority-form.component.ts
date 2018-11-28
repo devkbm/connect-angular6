@@ -22,10 +22,13 @@ export class AuthorityFormComponent implements OnInit {
   authorityForm: FormGroup;  
 
   @Output()
-  dataSaved = new EventEmitter();
+  formSaved = new EventEmitter();
 
   @Output()
-  dataDeleted = new EventEmitter();
+  formDeleted = new EventEmitter();
+
+  @Output()
+  formClosed = new EventEmitter();
 
 
   constructor(private fb: FormBuilder,
@@ -64,7 +67,7 @@ export class AuthorityFormComponent implements OnInit {
       .subscribe(
         (model: ResponseObject<Authority>) => {
           this.appAlarmService.changeMessage(model.message);
-          this.dataSaved.emit(this.authorityForm.value);
+          this.formSaved.emit(this.authorityForm.value);
         },
         (err) => {
           console.log(err);
@@ -79,7 +82,7 @@ export class AuthorityFormComponent implements OnInit {
       .subscribe(
         (model: ResponseObject<Authority>) => {
           this.appAlarmService.changeMessage(model.message);
-          this.dataDeleted.emit(this.authorityForm.value);
+          this.formDeleted.emit(this.authorityForm.value);
         },
         (err) => {
           console.log(err);
@@ -90,6 +93,10 @@ export class AuthorityFormComponent implements OnInit {
 
   public patchValues(values) {
     this.authorityForm.patchValue(values);
+  }
+
+  public closeForm() {
+    this.formClosed.emit(this.authorityForm.value);
   }
 
 }

@@ -1,8 +1,0 @@
-<!-- -->
-<div *ngFor="let item of items; index as i">    
-    <app-menu-tree-node
-        [item]="item"    
-        [selected]="item.selected">    
-    </app-menu-tree-node>     
-</div>
-{{items | json}} 

@@ -9,17 +9,6 @@ import { AppAlarmService } from '../service/app-alarm.service';
 import { MenuService } from '../service/menu.service';
 import { ProgramService } from '../service/program.service';
 
-import { MainComponent } from './main/main.component';
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-
-/*import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { MenuService } from '../common-service/menu.service';
-import { ProgramService } from '../common-service/program.service';
-import { MenuTreeComponent } from './sidebar/menu-tree.component';
-import { MenuTreeNodeComponent } from './sidebar/menu-tree-node.component';*/
-
 @NgModule({
   imports: [
     CommonModule,
@@ -28,14 +17,7 @@ import { MenuTreeNodeComponent } from './sidebar/menu-tree-node.component';*/
     FormsModule
   ],
   declarations: [
-    CommonLayoutComponent,
-    MainComponent,
-    HeaderComponent,
-    SidebarComponent
-    /*MainComponent,
-    SidebarComponent,
-    MenuTreeComponent,
-    MenuTreeNodeComponent*/
+    CommonLayoutComponent
   ],
   providers: [
     AppAlarmService,

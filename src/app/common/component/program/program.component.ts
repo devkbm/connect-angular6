@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProgramGridComponent } from './program-grid.component';
 import { ProgramFormComponent } from './program-form.component';
 import { NzDrawerService, NzDrawerRef } from 'ng-zorro-antd';
@@ -10,52 +10,52 @@ import { NzDrawerService, NzDrawerRef } from 'ng-zorro-antd';
 })
 export class ProgramComponent implements OnInit {
 
-  visible = false;
+  drawerVisible = false;
+
+  @ViewChild('programGrid')
+  grid: ProgramGridComponent;
+
+  @ViewChild('programForm')
+  form: ProgramFormComponent;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  open(): void {
-    this.visible = true;
+  openDrawer(): void {
+    this.drawerVisible = true;
   }
 
-  close(): void {
-    this.visible = false;
+  closeDrawer(): void {
+    this.drawerVisible = false;
   }
 
-  getProgramList(grid: ProgramGridComponent) {
-    this.close();
-    grid.getProgramList();
+  getProgramList() {
+    this.closeDrawer();
+    this.grid.getProgramList();
   }
 
-  initForm(form: ProgramFormComponent) {
-    form.programForm.reset();
-    this.open();
+  initForm() {
+    this.form.programForm.reset();
+    this.openDrawer();
   }
 
-  saveProgram(form: ProgramFormComponent) {
-    form.submitProgram();
+  saveProgram() {
+    this.form.submitProgram();
   }
 
-  deleteProgram(form: ProgramFormComponent) {
-    form.deleteProgram();
+  deleteProgram() {
+    this.form.deleteProgram();
   }
 
-  selectedItem(item, form) {
-    this.open();
-    form.patchValue(item);
-  }
+  selectedItem(item) {
+    this.form.programForm.patchValue(item);     
+  }  
 
-  applyGridSavedData(form: ProgramFormComponent, grid: ProgramGridComponent) {
-    this.close();
-    const node = grid.getRowNode(form.programForm.get('programCode').value);
-    if ( node != null ) {
-      grid.setRowData(node, form.programForm.value);
-    } else {
-      grid.addRow(form.programForm.value);
-    }
+  editDrawerOpen(item) {
+    this.form.programForm.patchValue(item);  
+    this.openDrawer();   
   }
 
 }

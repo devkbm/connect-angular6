@@ -11,9 +11,6 @@
     padding-right: 5;
 }
 
-.content {
-    background-color: #AA0000;
-    flex: 1;
-    display:flex;
-    flex-direction: column;
-  }
+.grid-wrapper {
+    height: calc(100% - 80px)
+}

@@ -45,7 +45,7 @@
         #menuGroupForm
         (formSaved)="getMenuGroupList(menuGroupGrid)"
         (formDeleted)="getMenuGroupList(menuGroupGrid)"
-        (formClosed)="true">
+        (formClosed)="menuGroupFormClose()">
     </app-menu-group-form>
 </nz-drawer>
 
@@ -59,7 +59,8 @@
     <app-menu-form
         id="menuForm"
         #menuForm
-        (dataSaved)="applyGridSavedData(programForm, programGrid)"
-        (dataDeleted)="getProgramList(programGrid)">
+        (formSaved)="getMenuList()"
+        (formDeleted)="getMenuList()"
+        (formClosed)="menuFormClose()">
     </app-menu-form>
 </nz-drawer>

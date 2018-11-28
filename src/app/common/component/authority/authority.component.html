@@ -2,57 +2,56 @@
     <div nz-col [nzSpan]="24" style="text-align: right;">
         <button 
             nz-button         
-            (click)="getAuthorityList(authGrid)">
+            (click)="getAuthorityList()">
             <i nz-icon type="search" theme="outline"></i>
             조회
         </button>        
         <nz-divider nzType="vertical"></nz-divider>  
         <button 
             nz-button         
-            (click)="initForm(authForm)">
+            (click)="initForm()">
             <i nz-icon type="form" theme="outline"></i>
             신규
         </button>
-        <nz-divider nzType="vertical"></nz-divider>  
-        <button 
-            nz-button 
-            nzType="primary" 
-            nz-popconfirm 
-            nzTitle="저장하시겠습니까?" 
-            (nzOnConfirm)="saveAuthority(authForm)"
-            (nzOnCancel)="false">
-            <i nz-icon type="save" theme="outline"></i>
-            저장
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
+        <nz-divider nzType="vertical"></nz-divider>          
         <button 
             nz-button 
             nzType="danger" 
             nz-popconfirm 
             nzTitle="삭제하시겠습니까?" 
-            (nzOnConfirm)="deleteAuthority(authForm)" 
+            (nzOnConfirm)="deleteAuthority()" 
             (nzOnCancel)="false">
             <i nz-icon type="delete" theme="outline"></i>
             삭제
         </button>    
     </div>
 </div>
-<div nz-row>
-    <!-- -->
-    <div nz-col nzSpan="14" style="display: grid; grid-template-rows: 30px 76vh;">
-        <h3>권한 목록</h3>
-        <app-authority-grid 
-            id="authGrid"                     
-            #authGrid                           
-            (rowSelected)="selectedItem($event, authForm.authorityForm)">
-        </app-authority-grid>
-    </div>
-    <div nz-col nzSpan="10">
-        <app-authority-form 
-            id="authForm"
-            #authForm
-            (dataSaved)="applyGridSavedData(authForm, authGrid)"
-            (dataDeleted)="getAuthorityList(authGrid)">
-        </app-authority-form>
-    </div>
+
+<h3>권한 목록</h3>
+
+<div class="grid-wrapper">
+    <app-authority-grid 
+        id="authGrid"                     
+        #authGrid                           
+        (rowSelected)="selectedItem($event)"
+        (editButtonClicked)="editDrawOpen($event)"
+        (rowDoubleClicked)="editDrawOpen($event)">
+    </app-authority-grid>
 </div>
+
+
+<nz-drawer
+    [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
+    [nzMaskClosable]="false"
+    [nzWidth]="720"
+    [nzVisible]="drawerVisible"
+    nzTitle="권한 등록"
+    (nzOnClose)="closeDrawer()">
+    <app-authority-form 
+        id="authForm"
+        #authForm
+        (formSaved)="getAuthorityList()"
+        (formDeleted)="getAuthorityList()"
+        (formClosed)="closeDrawer()">
+    </app-authority-form>
+</nz-drawer>
