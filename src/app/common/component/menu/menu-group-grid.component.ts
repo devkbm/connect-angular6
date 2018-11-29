@@ -77,9 +77,9 @@ export class MenuGroupGridComponent extends AggridFunction implements OnInit {
     this.getMenuGroupList();
   }
 
-  public getMenuGroupList(): void {
+  public getMenuGroupList(params?: any): void {
     this.menuService
-        .getMenuGroupList()
+        .getMenuGroupList(params)
         .subscribe(
           (model: ResponseList<MenuGroup>) => {
               if (model.total > 0) {

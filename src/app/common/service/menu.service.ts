@@ -19,10 +19,15 @@ export class MenuService extends DataService {
     super('http://localhost:8090', http);
   }
 
-  getMenuGroupList(): Observable<ResponseList<MenuGroup>> {
+  getMenuGroupList(params?: any): Observable<ResponseList<MenuGroup>> {
     const url = `${this.API_URI}/menugroup`;
+    const options = { 
+      headers: this.getAuthorizedHttpHeaders(),
+      params: params
+    };               
+
     return this.http
-              .get<ResponseList<MenuGroup>>(url, {headers: this.getAuthorizedHttpHeaders()})
+              .get<ResponseList<MenuGroup>>(url, options)
               .pipe(
                 catchError((err) => Observable.throw(err))
               );
@@ -66,10 +71,15 @@ export class MenuService extends DataService {
               );
   }
 
-  getMenuList(menuGroupCode: String): Observable<ResponseList<Menu>> {
+  getMenuList(menuGroupCode: String, params?: any): Observable<ResponseList<Menu>> {
     const url = `${this.API_URI}/menugroup/${menuGroupCode}/menu`;
+    const options = { 
+      headers: this.getAuthorizedHttpHeaders(),
+      params: params
+    };              
+
     return this.http
-              .get<ResponseList<Menu>>(url, {headers: this.getAuthorizedHttpHeaders()})
+              .get<ResponseList<Menu>>(url, options)
               .pipe(
                 catchError((err) => Observable.throw(err))
               );

@@ -12,6 +12,9 @@ export class ProgramComponent implements OnInit {
 
   drawerVisible = false;
 
+  queryKey: string = 'programCode';
+  queryValue: string = '';
+
   @ViewChild('programGrid')
   grid: ProgramGridComponent;
 
@@ -30,10 +33,16 @@ export class ProgramComponent implements OnInit {
   closeDrawer(): void {
     this.drawerVisible = false;
   }
-
+    
   getProgramList() {
+    let params = null;
+    if ( this.queryValue !== '') {
+      params = new Object();
+      params[this.queryKey] = this.queryValue;      
+    }        
+
     this.closeDrawer();
-    this.grid.getProgramList();
+    this.grid.getProgramList(params);
   }
 
   initForm() {

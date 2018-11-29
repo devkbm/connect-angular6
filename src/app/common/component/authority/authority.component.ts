@@ -11,6 +11,9 @@ export class AuthorityComponent implements OnInit {
 
   drawerVisible = false;
 
+  queryKey: string = 'authority';
+  queryValue: string = '';
+
   @ViewChild('authGrid')
   grid: AuthorityGridComponent;
 
@@ -40,8 +43,14 @@ export class AuthorityComponent implements OnInit {
   }
 
   getAuthorityList() {
+    let params = null;
+    if ( this.queryValue !== '') {
+      params = new Object();
+      params[this.queryKey] = this.queryValue;      
+    }        
+
     this.closeDrawer();
-    this.grid.getAuthority();
+    this.grid.getAuthority(params);
   }
 
   deleteAuthority() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
@@ -17,9 +17,14 @@ export class ProgramService extends DataService {
     super('http://localhost:8090/program', http);
   }
 
-  getProgramList(): Observable<ResponseList<Program>> {
+  getProgramList(params?: any): Observable<ResponseList<Program>> {
     const url = `${this.API_URI}`;
-    return this.http.get<ResponseList<Program>>(url, {headers: this.getAuthorizedHttpHeaders()}).pipe(
+    const options = { 
+        headers: this.getAuthorizedHttpHeaders(),
+        params: params
+     };                
+
+    return this.http.get<ResponseList<Program>>(url, options).pipe(
       catchError((err) => Observable.throw(err))
     );
   }

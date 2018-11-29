@@ -1,5 +1,5 @@
 import { MenuGroupFormComponent } from './menu-group-form.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuGroupGridComponent } from './menu-group-grid.component';
 import { MenuGridComponent } from './menu-grid.component';
 import { MenuFormComponent } from './menu-form.component';
@@ -13,47 +13,76 @@ export class MenuComponent implements OnInit {
 
   protected menuGroupFormVisible = false;
   protected menuFormVisible = false;
-
   protected selectedMenuGroupCode: string = null;
+
+  menuGroupQueryKey: string = 'menuGroupCode';
+  menuGroupQueryValue: string = '';  
+  menuQueryKey: string = 'menuCode';
+  menuQueryValue: string = '';
+
+  @ViewChild('menuGroupGrid')
+  menuGroupGrid: MenuGroupGridComponent;
+
+  @ViewChild('menuGroupForm')
+  menuGroupForm: MenuGroupFormComponent;
+
+  @ViewChild('menuGrid')
+  menuGrid: MenuGridComponent;
+
+  @ViewChild('menuForm')
+  menuForm: MenuFormComponent;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  menuGroupFormOpen(item, form: MenuGroupFormComponent): void {
+  menuGroupFormOpen(item): void {
     this.menuGroupFormVisible = true;
 
-    form.menuGroupForm.patchValue(item);
+    this.menuGroupForm.menuGroupForm.patchValue(item);
   }
 
   menuGroupFormClose(): void {
     this.menuGroupFormVisible = false;
   }
 
-  menuFormOpen(item, form: MenuFormComponent): void {
+  menuFormOpen(item): void {
     this.menuFormVisible = true;
 
-    form.getMenu(item.menuGroup.menuGroupCode, item.menuCode);
+    this.menuForm.getMenu(item.menuGroup.menuGroupCode, item.menuCode);
   }
 
   menuFormClose(): void {
     this.menuFormVisible = false;
   }
 
-  getMenuGroupList(grid: MenuGroupGridComponent): void {
+  getMenuGroupList(): void {
+    let params = null;
+    if ( this.menuGroupQueryValue !== '') {
+      params = new Object();
+      params[this.menuGroupQueryKey] = this.menuGroupQueryValue;      
+    }        
+
     this.menuGroupFormClose();
-    grid.getMenuGroupList();
+    this.menuGrid.clearData();
+    this.menuGroupGrid.getMenuGroupList(params);
   }
 
-  getMenuList(grid: MenuGridComponent): void {
+  getMenuList(): void {
+    let params = null;
+    if ( this.menuQueryValue !== '') {
+      params = new Object();
+      params[this.menuQueryKey] = this.menuQueryValue;      
+    }        
+
     this.menuFormClose();
-    grid.getMenuList(this.selectedMenuGroupCode);
+    this.menuGrid.getMenuList(this.selectedMenuGroupCode, params);
   }
 
-  selectMenuGroup(item, grid: MenuGridComponent): void {
+  selectMenuGroup(item): void {
     this.selectedMenuGroupCode = item.menuGroupCode;
-    this.getMenuList(grid);
+    this.getMenuList();
   }
 
 

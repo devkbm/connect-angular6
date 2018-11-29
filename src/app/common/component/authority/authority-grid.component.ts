@@ -74,9 +74,9 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
         this.editButtonClicked.emit(e.rowData);
     }
 
-    public getAuthority(): void {
+    public getAuthority(params?: any): void {
         this.userService
-            .getAuthorityList()
+            .getAuthorityList(params)
             .subscribe(
                 (model: ResponseList<Authority>) => {
                     if (model.total > 0) {

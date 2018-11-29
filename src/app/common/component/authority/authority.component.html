@@ -1,5 +1,20 @@
 <div nz-row class="btn-group">    
-    <div nz-col [nzSpan]="24" style="text-align: right;">
+    <div nz-col [nzSpan]="12">
+        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
+            <input type="text" [(ngModel)]="queryValue" nz-input placeholder="input search text" (keyup.enter)="getAuthorityList()">
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+            <nz-select [(ngModel)]="queryKey">
+                <nz-option [nzLabel]="'권한'" [nzValue]="'authority'"></nz-option>                
+                <nz-option [nzLabel]="'설명'" [nzValue]="'description'"></nz-option>
+            </nz-select>
+            </ng-template>
+        <ng-template #suffixIconSearch>
+            <i nz-icon type="search"></i>
+        </ng-template>
+    </div>
+
+    <div nz-col [nzSpan]="12" style="text-align: right;">
         <button 
             nz-button         
             (click)="getAuthorityList()">

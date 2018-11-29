@@ -1,8 +1,39 @@
 <div nz-row class="btn-group">
-  <div nz-col [nzSpan]="24" style="text-align: right;">
+
+  <div nz-col [nzSpan]="8">
+    <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="menuGroupQueryValue" nz-input placeholder="input search text" (keyup.enter)="getMenuGroupList()">
+    </nz-input-group>
+    <ng-template #addOnBeforeTemplate>
+        <nz-select [(ngModel)]="menuGroupQueryKey">
+          <nz-option [nzLabel]="'메뉴그룹코드'" [nzValue]="'menuGroupCode'"></nz-option>
+          <nz-option [nzLabel]="'메뉴그룹명'" [nzValue]="'menuGroupName'"></nz-option>          
+        </nz-select>
+      </ng-template>
+    <ng-template #suffixIconSearch>
+      <i nz-icon type="search"></i>
+    </ng-template>
+  </div>
+
+  <div nz-col [nzSpan]="8">
+    <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate2" [nzSuffix]="suffixIconSearch2">
+      <input type="text" [(ngModel)]="menuQueryValue" nz-input placeholder="input search text" (keyup.enter)="getMenuList()">
+    </nz-input-group>
+    <ng-template #addOnBeforeTemplate2>
+        <nz-select [(ngModel)]="menuQueryKey">
+          <nz-option [nzLabel]="'메뉴코드'" [nzValue]="'menuCode'"></nz-option>
+          <nz-option [nzLabel]="'메뉴명'" [nzValue]="'menuName'"></nz-option>          
+        </nz-select>
+      </ng-template>
+    <ng-template #suffixIconSearch2>
+      <i nz-icon type="search"></i>
+    </ng-template>
+  </div>
+
+  <div nz-col [nzSpan]="8" style="text-align: right;">
       <button
           nz-button
-          (click)="getMenuGroupList(menuGroupGrid)">
+          (click)="getMenuGroupList()">
           <i nz-icon type="search"></i>
           조회
       </button>
@@ -11,34 +42,22 @@
 </div>
 
 <div class="content">
-  <h3>메뉴 그룹 목록1</h3>
+  <h3>메뉴 그룹 목록</h3>
   <h3>메뉴 목록</h3>
     <app-menu-group-grid
       #menuGroupGrid
       id="menuGroupGrid"
-      (rowSelected)="selectMenuGroup($event, menuGrid)"
-      (editButtonClicked)="menuGroupFormOpen($event, menuGroupForm)">
+      (rowSelected)="selectMenuGroup($event)"
+      (editButtonClicked)="menuGroupFormOpen($event)">
     </app-menu-group-grid>
     <app-menu-grid
     id="menuGrid"
     #menuGrid
     (rowSelected)="true"
-    (editButtonClicked)="menuFormOpen($event, menuForm)">
+    (editButtonClicked)="menuFormOpen($event)">
   </app-menu-grid>
 </div>
 
-
-<!--
-<h3>메뉴 목록</h3>
-<div class="grid-wrapper">
-  <app-menu-grid
-    id="menuGrid"
-    #menuGrid
-    (rowSelected)="true"
-    (editButtonClicked)="menuFormOpen($event, menuForm)">
-  </app-menu-grid>
-</div>
--->
 
 <nz-drawer
     [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
@@ -50,8 +69,8 @@
     <app-menu-group-form
         id="menuGroupForm"
         #menuGroupForm
-        (formSaved)="getMenuGroupList(menuGroupGrid)"
-        (formDeleted)="getMenuGroupList(menuGroupGrid)"
+        (formSaved)="getMenuGroupList()"
+        (formDeleted)="getMenuGroupList()"
         (formClosed)="menuGroupFormClose()">
     </app-menu-group-form>
 </nz-drawer>

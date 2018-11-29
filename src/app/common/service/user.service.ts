@@ -66,10 +66,15 @@ export class UserService extends DataService {
       );
   }
 
-  getAuthorityList(): Observable<ResponseList<Authority>> {
+  getAuthorityList(params?: any): Observable<ResponseList<Authority>> {
     const url = `${this.AUTHORITY_API_URI}`;
+    const options = { 
+      headers: this.getAuthorizedHttpHeaders(),
+      params: params
+    }; 
+
     return this.http
-      .get<ResponseList<Authority>>(url, {headers: this.getAuthorizedHttpHeaders()})
+      .get<ResponseList<Authority>>(url, options)
       .pipe(
         catchError((err) => Observable.throw(err))
       );

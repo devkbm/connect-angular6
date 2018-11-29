@@ -67,9 +67,9 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
     this.editButtonClicked.emit(e.rowData);
   }
 
-  public getProgramList(): void {
+  public getProgramList(params?: any): void {
     this.programService
-        .getProgramList()
+        .getProgramList(params)
         .subscribe(
           (model: ResponseList<Program>) => {
               if (model.total > 0) {
