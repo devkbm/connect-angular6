@@ -17,6 +17,7 @@ import { UserNotFoundError } from '../../error/user-not-found-error';
 import { ResponseList } from '../../model/response-list';
 import { Authority } from '../../model/authority';
 import { MenuGroup } from '../../model/menu-group';
+import { UserDuplicationValidatorDirective, existingUserValidator } from '../../validator/user-duplication-validator.directive';
 
 @Component({
   selector: 'app-user-form',
@@ -46,7 +47,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
 
     this.userForm = this.fb.group({
-      userId          : [ null, [ Validators.required ] ],
+      userId          : [ null, {updateOn: 'blur'}, [ Validators.required ]],
       name            : [ null, [ Validators.required ] ],
       enabled         : [ true ],
       password        : [ null, [ Validators.required ] ],

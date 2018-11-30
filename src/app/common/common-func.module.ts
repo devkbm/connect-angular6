@@ -31,6 +31,7 @@ import { MenuGroupGridComponent } from './component/menu/menu-group-grid.compone
 import { MenuGridComponent } from './component/menu/menu-grid.component';
 import { MenuComponent } from './component/menu/menu.component';
 import { ButtonRendererComponent } from './grid/renderer/button-renderer.component';
+import { UserDuplicationValidatorDirective } from './validator/user-duplication-validator.directive';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ButtonRendererComponent } from './grid/renderer/button-renderer.compone
     BoardModule
   ],
   declarations: [
+    UserDuplicationValidatorDirective,
     LoginComponent,
     ButtonRendererComponent,
     UserFormComponent,

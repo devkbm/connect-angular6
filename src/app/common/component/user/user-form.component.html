@@ -5,8 +5,9 @@
     <nz-form-item>
         <nz-form-label nzFor="userId" nzRequired [nzSm]="2" [nzXs]="24">아이디</nz-form-label>
         <nz-form-control [nzSm]="20" [nzXs]="24">
-            <input nz-input id="userId" formControlName="userId" placeholder="아이디를 입력해주세요.">             
-            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors">The input is Required!</nz-form-explain>
+            <input style="ime-mode: disabled" nz-input id="userId" formControlName="userId" placeholder="아이디를 입력해주세요." validUserDuplication>             
+            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors">The input is Required! + {{userForm.get('userId').errors[0]}}</nz-form-explain>
+            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors?.exists">{{userForm.get('userId').errors.exists}}</nz-form-explain>
         </nz-form-control>
         <button 
             nz-button 
@@ -19,7 +20,7 @@
     <nz-form-item>
         <nz-form-label nzFor="name" [nzSm]="2" [nzXs]="24" nzRequired>이름</nz-form-label>
         <nz-form-control [nzSm]="22" [nzXs]="24">
-            <input id="name" nz-input formControlName="name">
+            <input style="ime-mode: inactive" id="name" nz-input formControlName="name">
             <nz-form-explain *ngIf="userForm.get('name').dirty && userForm.get('name').errors">The input is Required!</nz-form-explain>
         </nz-form-control>
     </nz-form-item>
@@ -27,7 +28,7 @@
     <nz-form-item>
         <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
         <nz-form-control [nzSm]="22" [nzXs]="24">
-            <input nz-input type="password" id="password" formControlName="password">
+            <input style="ime-mode: inactive" nz-input type="password" id="password" formControlName="password">
             <nz-form-explain *ngIf="userForm.get('password').dirty && userForm.get('password').errors">Please input your password!</nz-form-explain>
         </nz-form-control>
     </nz-form-item>
