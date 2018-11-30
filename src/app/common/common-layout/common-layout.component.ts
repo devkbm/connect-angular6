@@ -81,8 +81,8 @@ export class CommonLayoutComponent implements OnInit {
           }
 
           const seledtedMenu = sessionStorage.getItem('selectedMenu');
-          console.log(this.treeCom);
-          this.treeCom.nzSelectedKeys = [seledtedMenu];
+          // console.log(this.treeCom);
+          // this.treeCom.nzSelectedKeys = [seledtedMenu];
         },
         (err) => {
           console.log(err);

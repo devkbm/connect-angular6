@@ -1,13 +1,14 @@
-<ag-grid-angular      
+<ag-grid-angular
     [ngStyle]="style"
     class="ag-theme-balham"
     [rowSelection]="'single'"
-    [rowData]="authorityList" 
+    [rowData]="authorityList"
     [columnDefs]="columnDefs"
     [getRowNodeId]="getRowNodeId"
     [enableSorting]="true"
+    [enableColResize]="true"
     [frameworkComponents]="frameworkComponents"
-    (gridReady)="onGridReady($event)"    
+    (gridReady)="onGridReady($event)"
     (selectionChanged)="selectionChanged($event)"
     (rowDoubleClicked)="rowDbClicked($event)">
 </ag-grid-angular>

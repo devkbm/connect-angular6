@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserGridComponent } from './user-grid.component';
 import { UserFormComponent } from './user-form.component';
 
@@ -9,41 +9,67 @@ import { UserFormComponent } from './user-form.component';
 })
 export class UserComponent implements OnInit {
 
+  drawerVisible = false;
+
+  queryKey = 'userId';
+  queryValue = '';
+
+  @ViewChild('userGrid')
+  grid: UserGridComponent;
+
+  @ViewChild('userForm')
+  form: UserFormComponent;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  selectedItem(item, form) {
-    form.getUser(item.userId);
+  closeDrawer() {
+    this.drawerVisible = false;
   }
 
-  getUserList(grid: UserGridComponent) {
-    grid.getUserList();
+  openDrawer() {
+    this.drawerVisible = true;
   }
 
-  saveUser(form: UserFormComponent) {
-    form.registerUser();
+  editDrawOpen(item) {
+    this.form.getUser(item.userId);
+    this.openDrawer();
   }
 
-  deleteUser(form: UserFormComponent) {
-    form.deleteUser();
+  getUserList() {
+    let params = null;
+    if ( this.queryValue !== '') {
+      params = new Object();
+      params[this.queryKey] = this.queryValue;
+    }
+
+    this.grid.getUserList();
   }
 
-  addRow(form: UserFormComponent, grid: UserGridComponent) {
-    grid.getRowNode(form.userForm.get('authority').value);
+  saveUser() {
+    this.form.registerUser();
   }
 
-  initForm(form: UserFormComponent) {
-    form.userForm.reset();
+  deleteUser() {
+    this.form.deleteUser();
   }
 
-  applyGridSavedData(form: UserFormComponent, grid: UserGridComponent) {
-    const node = grid.getRowNode(form.userForm.get('userId').value);
+  addRow() {
+    this.grid.getRowNode(this.form.userForm.get('authority').value);
+  }
+
+  initForm() {
+    this.form.userForm.reset();
+  }
+
+  applyGridSavedData() {
+    const node = this.grid.getRowNode(this.form.userForm.get('userId').value);
     if ( node != null ) {
-      grid.setRowData(node, form.userForm.value);
+      this.grid.setRowData(node, this.form.userForm.value);
     } else {
-      grid.getUserList();
+      this.grid.getUserList();
     }
   }
 

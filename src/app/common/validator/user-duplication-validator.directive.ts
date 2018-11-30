@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { NG_ASYNC_VALIDATORS, AbstractControl, ValidationErrors, Validator, FormControl, AsyncValidator, AsyncValidatorFn } from '@angular/forms';
+import { NG_ASYNC_VALIDATORS, AbstractControl, ValidationErrors, AsyncValidator, AsyncValidatorFn } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { User } from '../model/user-info';
 import { ResponseObject } from '../model/response-object';
@@ -11,12 +11,12 @@ export function existingUserValidator(userService: UserService): AsyncValidatorF
   return (control: AbstractControl):  Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
     return control.value ? userService
               .checkUser(control.value)
-              .pipe( 
-                map( users => {                    
+              .pipe(
+                map( users => {
                   return {'exists': users.message};
                 } )
               ) : new Observable<null>();
-  }
+  };
 }
 
 @Directive({
@@ -26,18 +26,18 @@ export function existingUserValidator(userService: UserService): AsyncValidatorF
   ]
 })
 export class UserDuplicationValidatorDirective implements AsyncValidator {
-  
+
   constructor(private userService: UserService) { }
 
-  validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {        
+  validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     /*return this.userService
               .checkUser(control.value)
-              .pipe( 
-                map( users => {                    
+              .pipe(
+                map( users => {
                 return users.data ? {'exists': users.message} : null;
                 } )
               );*/
     return existingUserValidator(this.userService)(control);
-    
-  }      
+
+  }
 }

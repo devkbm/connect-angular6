@@ -47,17 +47,17 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
                 valueGetter: 'node.rowIndex + 1',
                 width: 70,
                 cellStyle: {'text-align': 'center'}
-            },            
-            {
-                headerName: '권한',    
-                field: 'authority',     
-                width: 100 
             },
             {
-                headerName: '설명',    
-                field: 'description',   
+                headerName: '권한',
+                field: 'authority',
+                width: 100
+            },
+            {
+                headerName: '설명',
+                field: 'description',
                 width: 500,
-                autoHeight: true 
+                autoHeight: true
             }
         ];
 
@@ -67,7 +67,7 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
     }
 
     ngOnInit() {
-        this.getAuthority();       
+        this.getAuthority();
     }
 
     private onEditButtonClick(e) {
@@ -99,7 +99,7 @@ export class AuthorityGridComponent extends AggridFunction implements OnInit {
         this.rowSelected.emit(selectedRows[0]);
     }
 
-    private rowDbClicked(event) {    
+    private rowDbClicked(event) {
         this.rowDoubleClicked.emit(event.data);
     }
 

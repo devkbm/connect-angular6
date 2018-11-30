@@ -47,7 +47,11 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
 
     this.userForm = this.fb.group({
-      userId          : [ null, {updateOn: 'blur'}, [ Validators.required ]],
+      userId          : new FormControl(null, {
+                                                validators: Validators.required,
+                                                asyncValidators: [existingUserValidator(this.userService)],
+                                                updateOn: 'blur'
+                                              }),
       name            : [ null, [ Validators.required ] ],
       enabled         : [ true ],
       password        : [ null, [ Validators.required ] ],
@@ -124,6 +128,7 @@ export class UserFormComponent implements OnInit {
   }
 
   protected checkUser() {
+    console.log(this.userForm);
     const userId: string = this.userForm.get('userId').value;
 
     this.userForm.get('userId').markAsDirty();

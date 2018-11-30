@@ -20,17 +20,41 @@ export class UserGridComponent extends AggridFunction implements OnInit {
   @Output()
   rowSelected = new EventEmitter();
 
+  @Output()
+  rowDoubleClicked = new EventEmitter();
+
+  @Output()
+  editButtonClicked = new EventEmitter();
+
   constructor(private userService: UserService,
               private appAlarmService: AppAlarmService) {
 
-    super([
-      {headerName: 'No',            valueGetter: 'node.rowIndex + 1', width: 80 },
+    super([]);
+
+    this.columnDefs = [
+        {
+          headerName: '',
+          width: 34,
+          cellStyle: {'text-align': 'center', 'padding': '0px'},
+          cellRenderer: 'buttonRenderer',
+          cellRendererParams: {
+            onClick: this.onEditButtonClick.bind(this),
+            label: '',
+            iconType: 'form'
+          }
+      },
+      {
+        headerName: 'No',
+        valueGetter: 'node.rowIndex + 1',
+        width: 70,
+        cellStyle: {'text-align': 'center'}
+      },
       {headerName: '아이디',        field: 'userId',  width: 100 },
       {headerName: '이름',          field: 'name',    width: 100 },
       {headerName: '계정잠금여부',  field: 'accountNonLocked',      width: 120 },
       {headerName: '계정만료여부',  field: 'accountNonExpired',     width: 120 },
       {headerName: '비번만료여부',  field: 'credentialsNonExpired', width: 120 }
-    ]);
+    ];
 
     this.getRowNodeId = function(data) {
       return data.userId;
@@ -39,6 +63,10 @@ export class UserGridComponent extends AggridFunction implements OnInit {
 
   ngOnInit() {
     this.getUserList();
+  }
+
+  private onEditButtonClick(e) {
+    this.editButtonClicked.emit(e.rowData);
   }
 
   public getUserList(): void {
@@ -64,6 +92,10 @@ export class UserGridComponent extends AggridFunction implements OnInit {
     const selectedRows = this.gridApi.getSelectedRows();
 
     this.rowSelected.emit(selectedRows[0]);
+  }
+
+  private rowDbClicked(event) {
+    this.rowDoubleClicked.emit(event.data);
   }
 
 }

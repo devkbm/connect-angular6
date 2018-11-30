@@ -1,16 +1,16 @@
 {{userForm.value | json}}
 
-<form nz-form [formGroup]="userForm">    
+<form nz-form [formGroup]="userForm">
 
     <nz-form-item>
         <nz-form-label nzFor="userId" nzRequired [nzSm]="2" [nzXs]="24">아이디</nz-form-label>
         <nz-form-control [nzSm]="20" [nzXs]="24">
-            <input style="ime-mode: disabled" nz-input id="userId" formControlName="userId" placeholder="아이디를 입력해주세요." validUserDuplication>             
-            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors">The input is Required! + {{userForm.get('userId').errors[0]}}</nz-form-explain>
+            <input style="ime-mode: disabled" nz-input id="userId" formControlName="userId" placeholder="아이디를 입력해주세요.">
+            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors?.required">The input is Required!</nz-form-explain>
             <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors?.exists">{{userForm.get('userId').errors.exists}}</nz-form-explain>
         </nz-form-control>
-        <button 
-            nz-button 
+        <button
+            nz-button
             nzType="primary"
             (click)="checkUser()">
             중복확인
@@ -35,21 +35,21 @@
 
     <nz-form-item>
         <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="enabled">사용여부</nz-form-label>
-        <label nz-checkbox formControlName="enabled"></label>
+        <label id="enabled" nz-checkbox formControlName="enabled"></label>
     </nz-form-item>
-    
+
     <nz-form-item>
         <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="enabled">권한</nz-form-label>
         <nz-select formControlName="authorityList" [nzSize]="'default'" nzMode="multiple" nzPlaceHolder="Please select" style="width: 90%">
             <nz-option *ngFor="let option of authList" [nzLabel]="option.description" [nzValue]="option.authority"></nz-option>
          </nz-select>
     </nz-form-item>
-    
+
     <nz-form-item>
         <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="enabled">메뉴그룹</nz-form-label>
         <nz-select formControlName="menuGroupList" [nzSize]="'default'" nzMode="multiple" nzPlaceHolder="Please select" style="width: 90%">
             <nz-option *ngFor="let option of menuGroupList" [nzLabel]="option.menuGroupName" [nzValue]="option.menuGroupCode"></nz-option>
          </nz-select>
     </nz-form-item>
-    
+
 </form>
