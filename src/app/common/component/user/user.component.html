@@ -74,7 +74,8 @@
     <app-user-form
         id="userForm"
         #userForm
-        (dataSaved)="applyGridSavedData()"
-        (dataDeleted)="getUserList()">
+        (formSaved)="getUserList()"
+        (formDeleted)="getUserList()"
+        (formClosed)="closeDrawer()">
     </app-user-form>
 </nz-drawer>

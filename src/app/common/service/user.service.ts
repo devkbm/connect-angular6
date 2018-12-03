@@ -39,10 +39,15 @@ export class UserService extends DataService {
         catchError((err) => Observable.throw(err)));
   }
 
-  getUserList(): Observable<ResponseList<User>> {
+  getUserList(params?: any): Observable<ResponseList<User>> {
     const url = `${this.API_URI}`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      params: params
+    };
+
     return this.http
-      .get<ResponseList<User>>(url, {headers: this.getAuthorizedHttpHeaders()}).pipe(
+      .get<ResponseList<User>>(url, options).pipe(
         catchError((err) => Observable.throw(err)));
   }
 
@@ -68,10 +73,10 @@ export class UserService extends DataService {
 
   getAuthorityList(params?: any): Observable<ResponseList<Authority>> {
     const url = `${this.AUTHORITY_API_URI}`;
-    const options = { 
+    const options = {
       headers: this.getAuthorizedHttpHeaders(),
       params: params
-    }; 
+    };
 
     return this.http
       .get<ResponseList<Authority>>(url, options)

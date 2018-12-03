@@ -69,9 +69,9 @@ export class UserGridComponent extends AggridFunction implements OnInit {
     this.editButtonClicked.emit(e.rowData);
   }
 
-  public getUserList(): void {
+  public getUserList(params?: any): void {
     this.userService
-        .getUserList()
+        .getUserList(params)
         .subscribe(
           (model: ResponseList<User>) => {
               if (model.total > 0) {

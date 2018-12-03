@@ -19,10 +19,10 @@ export class ProgramService extends DataService {
 
   getProgramList(params?: any): Observable<ResponseList<Program>> {
     const url = `${this.API_URI}`;
-    const options = { 
+    const options = {
         headers: this.getAuthorizedHttpHeaders(),
         params: params
-     };                
+     };
 
     return this.http.get<ResponseList<Program>>(url, options).pipe(
       catchError((err) => Observable.throw(err))

@@ -45,7 +45,7 @@ export class UserComponent implements OnInit {
       params[this.queryKey] = this.queryValue;
     }
 
-    this.grid.getUserList();
+    this.grid.getUserList(params);
   }
 
   saveUser() {
@@ -56,21 +56,9 @@ export class UserComponent implements OnInit {
     this.form.deleteUser();
   }
 
-  addRow() {
-    this.grid.getRowNode(this.form.userForm.get('authority').value);
-  }
-
   initForm() {
     this.form.userForm.reset();
-  }
-
-  applyGridSavedData() {
-    const node = this.grid.getRowNode(this.form.userForm.get('userId').value);
-    if ( node != null ) {
-      this.grid.setRowData(node, this.form.userForm.value);
-    } else {
-      this.grid.getUserList();
-    }
+    this.openDrawer();
   }
 
 }

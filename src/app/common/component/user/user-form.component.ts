@@ -35,10 +35,13 @@ export class UserFormComponent implements OnInit {
   popup: boolean;
 
   @Output()
-  dataSaved = new EventEmitter();
+  formSaved = new EventEmitter();
 
   @Output()
-  dataDeleted = new EventEmitter();
+  formDeleted = new EventEmitter();
+
+  @Output()
+  formClosed = new EventEmitter();
 
   constructor(private fb: FormBuilder,
               private userService: UserService,
@@ -99,7 +102,7 @@ export class UserFormComponent implements OnInit {
       .subscribe(
         (model: ResponseObject<User>) => {
           this.appAlarmService.changeMessage(model.message);
-          this.dataSaved.emit(this.userForm.value);
+          this.formSaved.emit(this.userForm.value);
         },
         (err) => {
           console.log(err);
@@ -116,7 +119,7 @@ export class UserFormComponent implements OnInit {
       .subscribe(
         (model: ResponseObject<User>) => {
           this.appAlarmService.changeMessage(model.message);
-          this.dataDeleted.emit(this.userForm.value);
+          this.formDeleted.emit(this.userForm.value);
         },
         (err) => {
           console.log(err);
@@ -195,6 +198,10 @@ export class UserFormComponent implements OnInit {
           console.log('완료');
         }
       );
+  }
+
+  public closeForm() {
+    this.formClosed.emit(this.userForm.value);
   }
 
 }
