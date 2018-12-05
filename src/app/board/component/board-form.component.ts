@@ -24,6 +24,8 @@ export class BoardFormComponent implements OnInit {
 
   parentBoardItems: BoardHierarchy[];
 
+  boardTypeList;
+
   constructor(private fb: FormBuilder,
               private boardService: BoardService) { }
 
@@ -40,7 +42,23 @@ export class BoardFormComponent implements OnInit {
     });
 
     this.getboardHierarchy();
+    this.getBoardTypeList();
+  }
 
+  getBoardTypeList() {
+    this.boardService
+        .getBoardTypeList()
+        .subscribe(
+          (model: ResponseObject<any>) => {
+            if (model.data) {
+              this.boardTypeList = model.data;
+            } else {
+              this.boardTypeList = null;
+            }
+          },
+          (err) => {},
+          () => {}
+        )
   }
 
   getBoard() {

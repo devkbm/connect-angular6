@@ -44,7 +44,7 @@ export class MenuFormComponent implements OnInit {
   formDeleted = new EventEmitter();
 
   @Output()
-  formClosed = new EventEmitter();  
+  formClosed = new EventEmitter();
 
   constructor(private fb: FormBuilder,
               private menuService: MenuService,

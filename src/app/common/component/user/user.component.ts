@@ -45,6 +45,7 @@ export class UserComponent implements OnInit {
       params[this.queryKey] = this.queryValue;
     }
 
+    this.closeDrawer();
     this.grid.getUserList(params);
   }
 

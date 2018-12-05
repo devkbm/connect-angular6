@@ -15,9 +15,17 @@ import { BoardHierarchy } from '../model/board-hierarchy';
 @Injectable()
 export class BoardService extends DataService {
 
-    constructor(http: HttpClient) {
-        super('http://localhost:8090/grw', http);
-    }
+  constructor(http: HttpClient) {
+      super('http://localhost:8090/grw', http);
+  }
+
+  getBoardTypeList(): Observable<ResponseList<any>> {
+    const url = `${this.API_URI}/boards/boardType`;
+    return this.http.get<ResponseList<any>>(url, {headers: this.getAuthorizedHttpHeaders()}).pipe(
+        map(this.responseMap),
+        catchError((err) => Observable.throw(err))
+    );
+  }
 
     getBoardList(): Observable<ResponseList<Board>> {
         const url = `${this.API_URI}/boards`;
