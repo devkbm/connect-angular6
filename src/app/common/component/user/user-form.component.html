@@ -1,20 +1,13 @@
 {{userForm.value | json}}
 
-<form nz-form [formGroup]="userForm">
-
+<form nz-form [formGroup]="userForm">    
     <nz-form-item>
         <nz-form-label nzFor="userId" nzRequired [nzSm]="2" [nzXs]="24">아이디</nz-form-label>
-        <nz-form-control [nzSm]="20" [nzXs]="24">
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzHasFeedback>
             <input style="ime-mode: disabled" nz-input id="userId" formControlName="userId" placeholder="아이디를 입력해주세요.">
-            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors?.required">The input is Required!</nz-form-explain>
-            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').errors?.exists">{{userForm.get('userId').errors.exists}}</nz-form-explain>
-        </nz-form-control>
-        <button
-            nz-button
-            nzType="primary"
-            (click)="checkUser()">
-            중복확인
-        </button>
+            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').hasError('required')">The input is Required!</nz-form-explain>
+            <nz-form-explain *ngIf="userForm.get('userId').dirty && userForm.get('userId').hasError('exists')">{{userForm.get('userId').errors?.exists}}</nz-form-explain>
+        </nz-form-control>        
     </nz-form-item>
 
     <nz-form-item>

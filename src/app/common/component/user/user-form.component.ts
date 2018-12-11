@@ -131,7 +131,6 @@ export class UserFormComponent implements OnInit {
   }
 
   protected checkUser() {
-    console.log(this.userForm);
     const userId: string = this.userForm.get('userId').value;
 
     this.userForm.get('userId').markAsDirty();

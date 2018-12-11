@@ -13,7 +13,11 @@ export function existingUserValidator(userService: UserService): AsyncValidatorF
               .checkUser(control.value)
               .pipe(
                 map( users => {
-                  return {'exists': users.message};
+                  if ( users.total > 0 ) {
+                    return {'exists': users.message};
+                  } else {
+                    return null;
+                  }
                 } )
               ) : new Observable<null>();
   };
