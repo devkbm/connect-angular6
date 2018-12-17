@@ -74,7 +74,7 @@ export class BoardService extends DataService {
     }
 
     getArticleList(fkBoard: string, title?: string, contents?: string): Observable<ResponseList<Article>> {
-        let url = `${this.API_URI}/boards/${fkBoard}/articles`;
+        let url = `${this.API_URI}/boards/articles?fkBoard=${fkBoard}`;
 
         if ( title !== undefined ) {
             url = url + '&title=' + title;
@@ -113,8 +113,8 @@ export class BoardService extends DataService {
         formData.append('contents',     article.contents);
         formData.append('pwd',          article.pwd);
         formData.append('hitCnt',       article.hitCnt);
-        formData.append('fromdDt',      article.fromdDt);
-        formData.append('toDt',         article.toDt);
+        formData.append('fromdDt',      article.fromDate);
+        formData.append('toDt',         article.toDate);
         // formData.append('seq',          String(article.seq));
         // formData.append('depth',        String(article.depth));
         if ( article.file !== undefined ) {

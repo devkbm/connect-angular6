@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticleGridComponent } from './article-grid.component';
 
 @Component({
   selector: 'app-board',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
+  selectedBoard;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setBoardSelect(item, grid: ArticleGridComponent) {
+    this.selectedBoard = item;
+    grid.getArticleList(item);
   }
 
 }

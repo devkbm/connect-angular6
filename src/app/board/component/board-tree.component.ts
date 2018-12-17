@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BoardService } from '../service/board.service';
 import { ResponseList } from '../../common/model/response-list';
 import { BoardHierarchy } from '../model/board-hierarchy';
@@ -15,7 +15,10 @@ export class BoardTreeComponent implements OnInit {
   @ViewChild('treeCom') treeCom;
 
   boardItems: BoardHierarchy[];
-  
+
+  @Output()
+  itemSelected = new EventEmitter();
+
   constructor(private boardService: BoardService) { }
 
   ngOnInit() {
@@ -48,9 +51,12 @@ export class BoardTreeComponent implements OnInit {
   }
 
   nzClick(event: NzFormatEmitEvent): void {
-    const node = event.nodes[0].origin;
+     const node = event.nodes[0].origin;
     // console.log(event, event.selectedKeys, event.keys, event.nodes);
-    console.log(node);
+     console.log(node);
+    //console.log(event.nodes[0]);
+
+    this.itemSelected.emit(node.key);
   }
 
 }

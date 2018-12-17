@@ -9,8 +9,8 @@ export class Article {
     contents: string;
     pwd: string;
     hitCnt: string;
-    fromdDt: string;
-    toDt: string;
+    fromDate: string;
+    toDate: string;
     seq: number;
     depth: number;
     articleChecks: ArticleCheck[];

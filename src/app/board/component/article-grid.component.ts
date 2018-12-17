@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AggridFunction } from 'src/app/common/grid/aggrid-function';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
-import { Authority } from 'src/app/common/model/authority';
+import { Article } from '../model/article';
+import { BoardService } from '../service/board.service';
+import { ResponseList } from 'src/app/common/model/response-list';
 
 @Component({
   selector: 'app-article-grid',
@@ -10,8 +12,7 @@ import { Authority } from 'src/app/common/model/authority';
 })
 export class ArticleGridComponent extends AggridFunction implements OnInit {
 
-  protected authorityList: Authority[];
-  
+  protected articleList: Article[];
 
   @Output()
   rowSelected = new EventEmitter();
@@ -22,7 +23,8 @@ export class ArticleGridComponent extends AggridFunction implements OnInit {
   @Output()
   editButtonClicked = new EventEmitter();
 
-  constructor(private appAlarmService: AppAlarmService) { 
+  constructor(private appAlarmService: AppAlarmService,
+              private boardService: BoardService) {
     super([]);
 
     this.columnDefs = [
@@ -33,15 +35,19 @@ export class ArticleGridComponent extends AggridFunction implements OnInit {
           cellStyle: {'text-align': 'center'}
       },
       {
-          headerName: '권한',
-          field: 'authority',
+          headerName: '제목',
+          field: 'title',
+          width: 500
+      },
+      {
+          headerName: '등록일자',
+          field: 'createdDt',
           width: 100
       },
       {
-          headerName: '설명',
-          field: 'description',
-          width: 500,
-          autoHeight: true
+          headerName: '수정일자',
+          field: 'modifiedDt',
+          width: 100
       }
     ];
 
@@ -51,6 +57,26 @@ export class ArticleGridComponent extends AggridFunction implements OnInit {
   }
 
   ngOnInit() {
+    this.setWidthAndHeight('100%', '600px');
+  }
+
+  getArticleList(fkBoard): void {
+    this.boardService
+        .getArticleList(fkBoard)
+        .subscribe(
+          (model: ResponseList<Article>) => {
+              if (model.total > 0) {
+                  this.articleList = model.data;
+              } else {
+                  this.articleList = null;
+              }
+              this.appAlarmService.changeMessage(model.message);
+          },
+          (err) => {
+              console.log(err);
+          },
+          () => {}
+        );
   }
 
 }
