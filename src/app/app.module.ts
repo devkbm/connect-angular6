@@ -13,10 +13,10 @@ import en from '@angular/common/locales/en';
 import { CommonFuncModule } from './common/common-func.module';
 import { BoardModule } from './board/board.module';
 import { AppRoutingModule } from './app-routing.module';
-import { CommonLayoutModule } from './common/common-layout/common-layout.module';
+import { CommonLayoutModule } from './common-layout/common-layout.module';
 
 registerLocaleData(en);
-const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
+// const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
 
 @NgModule({
   imports: [

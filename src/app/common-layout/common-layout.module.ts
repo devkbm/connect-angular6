@@ -5,16 +5,19 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { CommonLayoutRoutingModule } from './common-layout-routing.module';
 
 import { CommonLayoutComponent } from './common-layout.component';
-import { AppAlarmService } from '../service/app-alarm.service';
-import { MenuService } from '../service/menu.service';
-import { ProgramService } from '../service/program.service';
+
+import { MenuService } from '../common/service/menu.service';
+import { ProgramService } from '../common/service/program.service';
+import { AppAlarmService } from '../common/service/app-alarm.service';
+import { CommonFuncModule } from '../common/common-func.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    CommonLayoutRoutingModule,
+    CommonModule,    
     NgZorroAntdModule,
-    FormsModule
+    FormsModule,
+    CommonFuncModule,
+    CommonLayoutRoutingModule
   ],
   declarations: [
     CommonLayoutComponent

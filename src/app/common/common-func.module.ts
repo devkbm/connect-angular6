@@ -43,8 +43,7 @@ import { UserDuplicationValidatorDirective } from './validator/user-duplication-
     HttpClientModule,
     NgZorroAntdModule,
     AgGridModule.withComponents([ButtonRendererComponent]),
-    AppRoutingModule,
-    BoardModule
+    AppRoutingModule
   ],
   declarations: [
     UserDuplicationValidatorDirective,

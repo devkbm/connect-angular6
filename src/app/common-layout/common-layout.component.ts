@@ -7,12 +7,13 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzFormatEmitEvent, NzTreeNode, NzTreeNodeOptions } from 'ng-zorro-antd';
 
-import { AppAlarmService } from '../service/app-alarm.service';
-import { MenuService } from '../service/menu.service';
+import { AppAlarmService } from '../common/service/app-alarm.service';
+import { MenuService } from '../common/service/menu.service';
 
-import { MenuGroup } from '../model/menu-group';
-import { MenuHierarchy } from '../model/menu-hierarchy';
-import { ResponseList } from '../model/response-list';
+import { MenuGroup } from '../common/model/menu-group';
+import { MenuHierarchy } from '../common/model/menu-hierarchy';
+import { ResponseList } from '../common/model/response-list';
+
 
 @Component({
   selector: 'app-common-layout',
@@ -99,13 +100,13 @@ export class CommonLayoutComponent implements OnInit {
     const node = event.nodes[0].origin;
     sessionStorage.setItem('selectedMenu', node.key);
 
-    this.router.navigate(['/home/' + node.url]);
+    this.router.navigate([node.url]);
   }
 
   selectMenuItem(url: string): void {
     sessionStorage.setItem('selectedMenu', url);
-
-    this.router.navigate(['/home/' + url]);
+    // '/home/' + 
+    this.router.navigate([url]);
   }
 
 }
