@@ -21,6 +21,7 @@ import { MenuGroupGridComponent } from '../common/component/menu/menu-group-grid
 import { MenuComponent } from '../common/component/menu/menu.component';
 import { MenuFormComponent } from '../common/component/menu/menu-form.component';
 import { BoardComponent } from '../board/component/board.component';
+import { TermComponent } from '../common/component/terms/term.component';
 
 
 const layoutroutes: Routes = [
@@ -42,7 +43,8 @@ const layoutroutes: Routes = [
       {path: 'program',       component: ProgramComponent},
       {path: 'authForm',      component: AuthorityFormComponent},
       {path: 'authGrid',      component: AuthorityGridComponent},
-      {path: 'auth',          component: AuthorityComponent}
+      {path: 'auth',          component: AuthorityComponent},
+      {path: 'term',          component: TermComponent}
     ]
   }
 ];

@@ -32,6 +32,9 @@ import { MenuGridComponent } from './component/menu/menu-grid.component';
 import { MenuComponent } from './component/menu/menu.component';
 import { ButtonRendererComponent } from './grid/renderer/button-renderer.component';
 import { UserDuplicationValidatorDirective } from './validator/user-duplication-validator.directive';
+import { TermComponent } from './component/terms/term.component';
+import { TermGridComponent } from './component/terms/term-grid.component';
+import { TermFormComponent } from './component/terms/term-form.component';
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import { UserDuplicationValidatorDirective } from './validator/user-duplication-
     ProgramComponent,
     AuthorityFormComponent,
     AuthorityGridComponent,
-    AuthorityComponent
+    AuthorityComponent,
+    TermGridComponent,
+    TermFormComponent,
+    TermComponent
   ],
   exports: [
     LoginComponent,
@@ -76,7 +82,8 @@ import { UserDuplicationValidatorDirective } from './validator/user-duplication-
     ProgramComponent,
     AuthorityFormComponent,
     AuthorityGridComponent,
-    AuthorityComponent
+    AuthorityComponent,
+    TermComponent
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
